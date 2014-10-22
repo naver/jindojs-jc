@@ -1,0 +1,24 @@
+{
+  "name": "jindojs-jc",
+  "version": "1.14.0",
+  "description": "JindoJS Component",
+  "main": "dist/jindo-component.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jindo",
+    "jindojs",
+    "library",
+    "component",
+    "ui"
+  ],
+  "authors": [
+    "NAVER Corp."
+  ],
+  "license": "LGPL v2",
+  "homepage": "http://jindo.dev.naver.com/jindo_home/Component.html",
+  "dependencies": {
+    "jindojs-jindo": "*"
+  }
+}
