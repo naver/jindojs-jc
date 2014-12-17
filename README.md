@@ -70,9 +70,8 @@ $ grunt test:*
 
 if you want to test a specific component, put the module's name as a parameter of the test. Here are some example that you might consider.
 ```bash
-$ grunt test:SlideFlicking  #test "jindo.m.SlideFlicking"
-$ grunt test:m  #test "jindo.m"
-$ grunt test:Touch  #test "jindo.m.Touch"
+$ grunt test:DragArea  #test "jindo.DragArea"
+$ grunt test:FileUploader  #test "jindo.FileUploader"
 ```
 
 ## **Issues**
