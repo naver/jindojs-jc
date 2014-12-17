@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+/* Common */ 
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,pre,input,textarea,button,select{margin:0;padding:0}
+body,input,textarea,select,button,table{font-family:'돋움',dotum,applegothic,sans-serif;font-size:12px}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{text-decoration:none}
+a:hover,a:active{}
+
+div.demo { margin:10px; position:relative; }
+
+.bg_blue { background-color:#0075c8; }
+.bc_darkgray { background-color:#999; }
+.bc_gray { background-color:#ccc; }
+.bg_lightgray { background-color:#eee; }
+
+.demo-body { position:static; }

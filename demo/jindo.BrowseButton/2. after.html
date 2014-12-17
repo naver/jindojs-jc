@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>Text Input 에 선택된 파일을 표시</title>
+<meta name="class-lists" content="jindo.BrowseButton"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="이벤트를 통해서 파일명을 받아 별도의 영역에 표시해 주는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	* { font-family:나눔고딕; font-size:12px;}
+	.browsebutton { position:relative; height:23px; }
+	.browsebutton .browse-output { position:absolute; display:block; width:180px; height:21px; border:1px solid #aaa; margin-right:5px; padding:0 5px; overflow:hidden; }
+	.browsebutton .browse-box {position:absolute; left:200px; width:69px; height:23px; overflow:hidden; background-color:gray; opacity:0 !important; -ms-opacity:0 !important; filter:alpha(opacity=0) !important; -ms-filter:alpha(opacity=0) !important; z-index:32000;}
+	.browsebutton .browse-file-input {position:absolute; margin:0; padding:0; border:0 none;}
+	.browsebutton .browse-button { position:absolute; left:200px; width:69px; height:23px; background:url('img/BrowseButton.button.gif') 0px 0px; text-indent:-99em; overflow:hidden; display:none; }
+	.browsebutton .browse-applied { display:block; }
+	.browsebutton .browse-over { background:url('img/BrowseButton.button.gif') 0px -25px; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+
+<div class="demo">
+	<div id="browsebutton" class="browsebutton">
+		<span class="browse-output"></span>
+		<div class="browse-box">
+			<input class="browse-file-input" type="file" name="browse" />
+		</div>
+	
+		<a class="browse-button" href="#" onclick="return false;">찾아보기</a>
+	</div>
+	
+	<noscript> <!-- 자바스크립트가 지원되지 않는 경우의 표현 -->
+		<style type="text/css">
+			.browsebutton {display:none;}
+			.browse-file-input {width:250px; height:21px; border:1px solid #999;}
+		</style>
+	   <input class="browse-file-input" type="file" name="browse" />
+	</noscript>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.BrowseButton.js"></script>
+<script type="text/javascript">
+	
+var oBrowseButton = new jindo.BrowseButton(jindo.$('browsebutton')).attach({
+	sourceChange : function() {
+		jindo.$$.getSingle('.browse-output').innerHTML = this.getFileSelect().value;
+	}
+});
+
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

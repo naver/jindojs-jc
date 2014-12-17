@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>템플릿을 이용한 다양한 Pagination</title>
+<meta name="class-lists" content="jindo.Pagination"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="템플릿을 변경 적용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	ul, ol, li {
+		margin:0;
+		padding:0;
+		color:#000000;
+		text-align: left;
+	}
+	.paginate {font-size:93%; font:13px/1.231 arial,helvetica,clean,sans-serif;}
+	.paginate li {padding:0 0 0 5px;}
+	.paginate .previous {pading:0 5px 0 0;}
+	.paginate .next {padding-left:10px;}
+	.paginate .active a {color: #000000; text-decoration:none;}
+	.paginate li {display:inline; list-style:none outside none;} 
+	.paginate a {font-weight:bold; text-decoration: underline; color:#0058A6;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<h4>sPageTemplate과 sCurrentPageTemplate을 사용한 옵션</h4>
+	<ul id="pagination" class="paginate">
+		<li class="previous"><a href="/top-stories-all?page=1">« Prev</a></li>
+		<li class="next"><a href="/top-stories-all?page=3">Next »</a></li>
+	</ul>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Pagination.js"></script>
+<script type="text/javascript">
+	var elBase = jindo.$("pagination");
+	var oMovePerPage = new jindo.Pagination(elBase, {
+		nItem : 1000,
+		nItemPerPage : 10,
+		nPagePerPageList : 10,
+		nPage : 12,
+		sPageTemplate: '<li><a href="#">{=page}</a></li>',
+		sCurrentPageTemplate: '<li class="active"><a href="#">{=page}</a></li>',
+		elPrevPageLinkOn: jindo.$$.getSingle(".previous", elBase),
+		elNextPageLinkOn: jindo.$$.getSingle(".next", elBase)
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>
+

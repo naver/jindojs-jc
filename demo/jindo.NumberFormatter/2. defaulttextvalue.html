@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>DefaultTextValue와 동시 적용</title>
+<meta name="class-lists" content="jindo.NumberFormatter"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="jindo.DefaultTextValue 컴포넌트와 동시에 적용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	input { width:400px; font-size:15px; text-align:right; padding:5px; margin:5px 0; ime-mode:disabled; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div>
+    	<input type="text" size="20" id="foo" value="입력해주세요.(숫자만 입력가능)"/>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.TextRange.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Formatter.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.NumberFormatter.js"></script>
+<script type="text/javascript">
+	var sDefaultValue = "입력해주세요.(숫자만 입력가능)";
+	var oNumberFormatter = new jindo.NumberFormatter(jindo.$('foo'), {
+		bPaintOnload : false
+	}).attach({
+		focus : function(oCustomEvent){
+			if (oCustomEvent.elInput.value == sDefaultValue) {
+				oCustomEvent.elInput.value = "";
+			} 
+		},
+		blur : function(oCustomEvent){
+			if (oCustomEvent.elInput.value == "") {
+				oCustomEvent.elInput.value = sDefaultValue;
+			} 
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>fAdjustValue 옵션 사용</title>
+<meta name="class-lists" content="jindo.Slider"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="fAdjustValue 옵션을 사용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.slider {
+		position:relative;
+		background-color:skyblue;
+		width:40px; height:175px;
+		padding:0 10px;
+	}
+	
+	.slider .slider-thumb {
+		background-color:#888;
+		position:absolute; width:40px; height:20px; overflow:hidden;
+		cursor:default;
+	}
+	
+	.min {
+		margin-left : 55px;
+	}
+	
+	.max {
+		position:relative;
+		margin-left : 55px;
+		top : 140px;
+	}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div class="slider" id="sample">
+		<div class="slider-thumb">&nbsp;</div>
+		<label class = "min">100</label>
+		<label class="max">200</label>
+		
+	</div>
+	<br>
+	<button onclick="alert(oSlider.positions()); return false;">position</button>
+	<button onclick="alert(oSlider.values()); return false;">value</button>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Slider.js"></script>
+<script type="text/javascript">
+	var oSlider = new jindo.Slider(jindo.$('sample'), {
+		bVertical : true, 
+		nMinValue : 100, 
+		nMaxValue : 200, 
+		fAdjustValue : function(nValue) { 
+			return Math.round(nValue / 10) * 10; 
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

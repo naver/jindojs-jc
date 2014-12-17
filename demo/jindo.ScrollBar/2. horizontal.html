@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>가로 스크롤</title>
+<meta name="class-lists" content="jindo.ScrollBar"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가로 스크롤을 적용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#scroll {background-color:#ccc; position:relative; width:400px; height:215px;}
+	.scrollbar-box {position:absolute; overflow:hidden; top:0px; left:0px; width:400px; height:200px; background-color:#f4f4f4;}
+	.scrollbar-content {position:absolute; top:0px; left:0px; height:200px; width:2500px;}			
+	.scrollbar-h {position:absolute; top:200px; width:400px; left:0px; height:15px;}
+	.scrollbar-track {background-color:#eee; position:absolute; left:15px; width:370px; height:15px;}
+	.scrollbar-track-hold {background-color:#ddd;}
+	.scrollbar-thumb {background-color:skyblue; position:absolute; left:0; width:30px; height:15px; overflow:hidden;}
+	.scrollbar-thumb-hold {background-color:blue;}
+	.scrollbar-button-left {background-color:orange; position:absolute; left:0; width:15px;height:15px; overflow:hidden;}
+	.scrollbar-button-left-hold {background-color:red;}
+	.scrollbar-button-right {background-color:orange; position:absolute; right:0;width:15px;height:15px; overflow:hidden;}
+	.scrollbar-button-right-hold {background-color:red;}
+	
+	.scrollbar-noscript .scrollbar-box {height:215px; overflow-x:auto;}
+	.scrollbar-noscript .scrollbar-h {display:none;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="scroll" class="scrollbar-noscript">
+		<div class="scrollbar-box">
+			<div class="scrollbar-content">
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+			</div>
+		</div>
+		
+		<div class="scrollbar-h">
+			<div class="scrollbar-button-left"></div>
+			<div class="scrollbar-track">
+				<div class="scrollbar-thumb"></div>
+			</div>
+			<div class="scrollbar-button-right"></div>
+		</div>
+	</div>
+	
+	<button onclick="oScrollBar.activate();return false;">activate</button>
+	<button onclick="oScrollBar.deactivate();return false;">deactivate</button>
+	
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Slider.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.ScrollBar.js"></script>
+<script type="text/javascript">
+	var oScrollBar = new jindo.ScrollBar("scroll");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

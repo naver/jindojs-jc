@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.Foggy"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="4개의 레이어를 겹쳐놓고 상황별로 가려보는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.layer { border:1px solid #000; padding:30px; }
+	#one { position:static; background-color:pink; }
+	#two { position:relative; left:20px; top:-20px; width:100px; background-color:skyblue; }
+	#three { position:absolute; left:200px; top:20px; width:300px; background-color:yellowgreen; }
+	#four { position:absolute; background-color:violet; }
+	.fog { position:absolute; left:0; top:0; padding:0; margin:0; border:0;	width:100px; height:100px; background-color:#000; opacity:0; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+<div class="demo" style="position:static;">
+	<!-- 화면 싹 다 가리기 -->
+	<button onClick="oFoggy.show();">싹 다 가리기</button>
+
+	<!-- 이 레이어만 빼고 싹 다 가리기 -->
+	<div id="one" class="layer" onClick="oFoggy.show(this);">position:static</div>
+
+	<!-- 이 레이어만 빼고 싹 다 가리기 -->
+	<div id="two" class="layer" onClick="oFoggy.show(this);">position:relative</div>
+
+	<!-- 이 레이어만 빼고 싹 다 가리기 -->
+	<div id="three" class="layer" onClick="oFoggy.show(this);">position:absolute</div>
+
+	<!-- 이 레이어만 빼고 싹 다 가리기 -->
+	<div id="four" class="layer" onClick="oFoggy.show(this);">position:absolute</div>
+	
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Foggy.js"></script>
+<script type="text/javascript">
+	var oFoggy = new jindo.Foggy()
+	oFoggy.getFog().onclick = function() { oFoggy.hide(); };
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>테스트</title>
+<meta name="class-lists" content="jindo.Canvas"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="Canvas 컴퍼넌트를 이용해서 여러가지 도형을 그리는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#canvas {
+		border:1px solid black;
+		left:10px;
+		top:10px;
+		width:500px;
+		height:300px;
+	}
+	
+	#command {
+		font-family:verdana;
+		font-size:12px;
+		width:100%;
+		height:100px;
+		margin-bottom:5px;		
+	}
+
+	#error { color:#f00; margin-bottom:.5em; font-size:1.2em; font-weight:bold; }
+
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo" style="position:relative">
+	
+	<div id="console">
+	</div>
+	<textarea id="command"> //jindo.Canvas객체는 oCanvas로 참조가능
+oCanvas.drawLine([[60, 20], [80, 20]], { strokeStyle : "red", lineWidth:1 });
+oCanvas.drawLine([[40, 60], [40, 80]], { lineWidth:1 });
+oCanvas.drawLine([[60, 60], [80, 60], [80, 80], [60, 80]], { lineWidth:1 });
+oCanvas.drawFace([[20, 20], [40, 20], [40, 40]], { fillStyle : "rgb(10, 10, 200)", strokeStyle:"rgb(10, 200, 200)"});
+oCanvas.drawRect(20, 100, 100, 100, {fillStyle : "rgb(200, 200, 200)", strokeStyle:"rgb(10, 10, 10)", lineWidth:1}, true);
+
+//컨텍스트객체는 ctx로 참조가능
+ctx.beginPath();
+ctx.moveTo(150, 20);
+ctx.lineTo(150, 40);
+ctx.stroke();
+ctx.closePath();
+	</textarea>
+	<div id="error"></div>
+	<div class="canvas" id="canvas">
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Canvas.js"></script>
+
+<script type="text/javascript">
+
+	var elCanvas, ctx, oCanvas;
+
+	/* canvas */
+	elCanvas = jindo.Canvas.create(400, 400, jindo.$("canvas"));
+	oCanvas = new jindo.Canvas(elCanvas);
+	ctx = oCanvas.getContext(elCanvas);
+
+	var elCommand = jindo.$("command");
+	var onChange = function(weEvent) {
+
+		var sText = elCommand.value;
+
+		try {
+			oCanvas.clear();
+			eval(sText);
+			jindo.$Element("error").hide();
+		} catch (e) {
+			jindo.$Element("error").text(e.message).show();
+		}
+
+	};
+
+	var agent = jindo.$Agent().navigator();
+
+	jindo.$Fn(onChange).attach(elCommand, agent.ie && agent.version < 9 ? 'keyup' : 'input');
+	onChange();
+	
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

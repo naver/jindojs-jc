@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+		</style>
+		<style type="text/css">
+			.calendar {position:absolute; width:195px; z-index:99999;display:none;}
+			.calendar {width:195px;padding-bottom:9px;border:1px solid #777;background:#ffffff;}
+			.calendar div{margin-bottom:5px;padding:7px 0 9px 0px;text-align:center;background:#f6f6f6;}
+			.calendar div a.rollover img{border:0;display:inline; vertical-align:text-bottom; vertical-align:middle;}
+			.calendar div a.rollover img.over{display:none;}
+			.calendar div a.rollover:hover{border:0}
+			.calendar div a.rollover:hover img{display:none;}
+			.calendar div a.rollover:hover img.over{display:inline;}
+			.calendar div .calendar-title{float:none !important;font-family:verdana;font-size:12px;color:#383838; margin:0 7px;}
+			.calendar table{width:175px;margin:0 auto;text-align:center;}
+			.calendar table *{font-family:tahoma !important;font-size:10px;}
+			.calendar table td{width:25px;height:16px;text-align:center;color:#000000;}
+			.calendar table td a{display:block;height:15px;padding-top:1px;color:#000000;}
+			.calendar table td a:hover{background:#edf4fe;color:#6d6d6d;text-decoration:none !important;font-family:tahoma !important;}
+			.calendar table td a:visited,
+			.calendar table td a:active{color:#000000;text-decoration:none !important;}
+			.calendar table .calendar-selected{background:#edf4fe;color:#6d6d6d;}
+			.calendar table .calendar-selected a{color:#6d6d6d;text-decoration:none;}
+			.calendar table .calendar-sat{color:#2828e8;}
+			.calendar table .calendar-sat a,
+			.calendar table .calendar-sat a:visited,
+			.calendar table .calendar-sat a:hover,
+			.calendar table .calendar-sat a:active{color:#2828e8 !important;}
+			.calendar table .calendar-sun{color:#e82828;}
+			.calendar table .calendar-sun a,
+			.calendar table .calendar-sun a:visited,
+			.calendar table .calendar-sun a:hover,
+			.calendar table .calendar-sun a:active{color:#e82828 !important;}
+			.calendar table .calendar-today{background:#6595db;color:#ffffff;}
+			.calendar table .calendar-today a{font-weight:bold;text-decoration:none;color:#fff}
+			.calendar table .calendar-today a:hover,
+			.calendar table .calendar-today a:visited,
+			.calendar table .calendar-today a:active{background:#6595db;color:#fff}
+			.calendar table .calendar-prev-mon .calendar-date,
+			.calendar table .calendar-next-mon .calendar-date {display:none}
+			.calendar table .calendar-unselectable a:hover,
+			.calendar table .calendar-unselectable a:visited,
+			.calendar table .calendar-unselectable a:active,
+			.calendar table .calendar-unselectable a {background:none !important;color:#ccc !important; cursor:default;}	
+		</style>		
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+		
+			<input type="text" id="date_input" class="text" />
+			<div id="calendar_layer" class="calendar">
+				<div>
+					<a href="#" class="rollover calendar-btn-prev-year"><img src="img/Calendar.btn_calendar_first.gif" alt="이전년" width="14" height="13"><img src="img/Calendar.btn_calendar_first_on.gif" alt="이전년" width="14" height="13" class="over"></a>
+					<a href="#" class="rollover calendar-btn-prev-mon"><img src="img/Calendar.btn_calendar_prev.gif" alt="이전달" width="13" height="13" class="pre"><img src="img/Calendar.btn_calendar_prev_on.gif" alt="이전달" width="13" height="13" class="over pre"></a>
+					<strong class="calendar-title"></strong>  
+					<a href="#" class="rollover calendar-btn-next-mon"><img src="img/Calendar.btn_calendar_next.gif" alt="다음달" width="13" height="13" class="next"><img src="img/Calendar.btn_calendar_next_on.gif" alt="다음달" width="13" height="13" class="over next"></a>
+					<a href="#" class="rollover calendar-btn-next-year"><img src="img/Calendar.btn_calendar_last.gif" alt="다음년" width="14" height="13"><img src="img/Calendar.btn_calendar_last_on.gif" alt="다음년" width="14" height="13" class="over"></a>
+				</div>
+				<table cellspacing="0" cellpadding="0">
+					<tbody>
+			
+						<tr class="calendar-week">
+							<td><a href="#" class="calendar-date"></a></td>
+							<td><a href="#" class="calendar-date"></a></td>
+							<td><a href="#" class="calendar-date"></a></td>
+							<td><a href="#" class="calendar-date"></a></td>
+							<td><a href="#" class="calendar-date"></a></td>
+							<td><a href="#" class="calendar-date"></a></td>
+							<td><a href="#" class="calendar-date"></a></td>
+						</tr>
+			
+					</tbody>
+				</table>
+			</div>
+		
+		</div>
+		
+		<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Timer.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.LayerManager.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.LayerPosition.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Calendar.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.DatePicker.js"></script>
+		<script type="text/javascript" src="js/jindo.DatePicker.test.js"></script>
+	</body>
+</html>

@@ -1,0 +1,1 @@
+jindo.TextRange 컴포넌트는 Text Input/Textarea에서 Caret Position을 컨트롤합니다.

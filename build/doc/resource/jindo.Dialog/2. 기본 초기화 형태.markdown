@@ -1,0 +1,56 @@
+#### CSS
+
+	.dialog-layer {display:none;background:#CCCCCC none repeat scroll 0 0;border:2px solid #777777; position:absolute;z-index:2;width:200px;height:200px;}
+	.dialog-close {position:absolute;right:7px;top:3px;}
+	.dialog2-layer {display:none;background:#EEE none repeat scroll 0 0;border:3px solid #777777;position:absolute;z-index:2;width:300px;height:130px;}
+	.dialog-inner {position:absolute;background: #FFF none repeat scroll 0 0;border:1px solid #777777;width:85%;height:60%;top:13%;left:5%;padding:5px;}
+	.title{position:absolute;top:5px;left:10px;}
+
+#### Javascript
+	var oDialog = new jindo.Dialog({ sClassPrefix : "dialog-" }); 
+	         
+	//다이얼로그의 템플릿을 설정하는 예제 
+	var sTemplate = ['<div>',
+	                     '<a href="#" class="dialog-close">',
+	                        '<img width="15" height="14" alt="레이어닫기" src="http://static.naver.com/common/btn/btn_close2.gif"/>',
+	                     '</a>',
+	                  '</div>',
+	                  '<div style="position:absolute;top:30px;left:10px;">{=text}</div>',
+	                  '<div style="position:absolute;bottom:10px;right:10px;">',
+	                    '<button type="button" class="dialog-confirm">확인</button>',
+	                    '<button type="button" class="dialog-cancel">취소</button>',
+	                  '</div>',
+	               ].join(""); 
+	 
+	oDialog.setLayerTemplate(sTemplate); 
+	 
+	//템플릿의 {=text}부분을 "확인하시겠습니까?"로 치환하여 다이얼로그 레이어 노출 
+	oDialog.show({ text : "확인하시겠습니까?" }, { 
+	 
+	     close : function(e) { 
+	        // 닫기 버튼(dialog-close)이 눌렸을 경우 호출되는 함수
+	     },
+	     cancel : function(e) { 
+	        // 취소 버튼(dialog-cancel)이 눌렸을 경우 호출되는 함수
+	     },
+	     confirm : function(e) { 
+	        // 확인 버튼(dialog-confirm)이 눌렸을 경우 호출되는 함수
+	     } 
+	 
+	});  
+
+	다이얼 로그 레이어는 "layer"클래스명을 가진다.
+	다이얼 로그 레이어 내부의 닫기 버튼은 "close" 클래스명을 가진다.
+	다이얼 로그 레이어의 내부의 확인 버튼은 "confirm"클래스 명을 가진다.
+	다이얼 로그 레이어 내부의 추소 버튼은 "cancel" 클래스 명을 가진다.
+
+위와 같이 다이얼로그를 띄우게 되면 아래와 같은 HTMLElement가 BODY에 추가됩니다.
+
+	<div class="dialog-layer" style="left: 503px; top: 225.5px; display: block;">
+	   <div><a href="#" class="dialog-close"><img width="15" height="14" alt="레이어닫기" src="http://static.naver.com/common/btn/btn_close2.gif"/></a></div>
+	   <div style="position: absolute; top: 30px; left: 10px;">확인하시겠습니까?</div>
+	   <div style="position: absolute; bottom: 10px; left: 20%;">
+	     <button class="dialog-confirm" type="button">확인</button>
+	     <button class="dialog-cancel" type="button">취소</button>
+	   </div>
+	</div>

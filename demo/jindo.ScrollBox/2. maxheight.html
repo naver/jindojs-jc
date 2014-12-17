@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>내용의 세로크기가 달라질 경우</title>
+<meta name="class-lists" content="jindo.ScrollBox"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="세로 크기가 달라지는 엘리먼트에 적용하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#scroll { background-color:#ccc; position:relative; width:300px; height:150px; line-height:130%; }
+	.scrollbar-box { position:absolute; overflow:hidden; top:0px; left:0px; width:300px; height:150px; }
+	.scrollbar-content { position:absolute; top:0px; left:0px; width:300px; } /* 요 내용부분의 크기만 설정해주면 됨.*/
+	
+	.scrollbar-v { position:absolute; top:0px; right:0px; width:15px; display:none; }
+	.scrollbar-v .scrollbar-track { background-color:#eee; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-v .scrollbar-thumb { display:block; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-v .scrollbar-thumb-head { width:15px; height:6px; background:url(img/bar_vtop.gif) no-repeat; }
+	.scrollbar-v .scrollbar-thumb-body { width:15px; height:18px; background:url(img/bar_vmid.gif) no-repeat left center; }
+	.scrollbar-v .scrollbar-thumb-foot { width:15px; height:6px; background:url(img/bar_vbot.gif) no-repeat; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-head { background-position:-15px top; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-body { background-position:-15px center; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-foot { background-position:-15px bottom; }
+	.scrollbar-v .scrollbar-button-up { width:15px;height:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ background:url(img/btn_vtop_off.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-up-hold { background:url(img/btn_vtop_on.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-down { width:15px;height:15px; position:relative; overflow:hidden; /*ie6 height*/ background:url(img/btn_vbot_off.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-down-hold { background:url(img/btn_vbot_on.gif) no-repeat; }
+	.scrollbar-show { display:block; }
+	
+	.scrollbar-noscript .scrollbar-box {overflow:auto;}
+	.scrollbar-noscript .scrollbar-v {display:none;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<button id="r1">1줄 입력</button>
+	<button id="r2">3줄 입력</button>
+	<button id="r3">모두삭제</button>
+	<button onclick="oScrollBox.activate();return false;">activate</button>
+	<button onclick="oScrollBox.deactivate();return false;">deactivate</button>
+	<div id="scroll" class="scrollbar-noscript">
+		<div class="scrollbar-box">
+			<div class="scrollbar-content">
+				기본 최소 사이즈는 150px
+				<br/>버튼을 눌러 내용이 추가되면 
+				<br/>300px 까지만 자동으로 늘어나고 
+				<br/>이후부터 세로 스크롤이 생김.
+			</div>
+		</div>
+		
+		<div class="scrollbar-v">
+			<div class="scrollbar-button-up"></div>
+			<div class="scrollbar-track">
+				<div class="scrollbar-thumb"><img src="img/blank.gif" class="scrollbar-thumb-head" /><img src="img/blank.gif" class="scrollbar-thumb-body" /><img src="img/blank.gif" class="scrollbar-thumb-foot" /></div>
+			</div>
+			<div class="scrollbar-button-down"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Slider.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.ScrollBar.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.ScrollBox.js"></script>
+<script type="text/javascript">
+	var oScrollBox = new jindo.ScrollBox("scroll", {
+		bAdjustThumbSize : true, 
+		sOverflowX : "hidden",
+		sOverflowY : "auto",
+		bAutoContentResize : true, //todo
+		nMaxContentHeight : 500
+	});
+
+	jindo.$Fn(function(e){
+		e.stop();
+		oScrollBox.getContent().innerHTML += "<br/>테스트";
+		limit();
+	}).attach("r1", "click");
+	jindo.$Fn(function(e){
+		e.stop();
+		oScrollBox.getContent().innerHTML += "<br/>1<br/>2<br/>3";
+		limit();
+	}).attach("r2", "click");
+	jindo.$Fn(function(e){
+		e.stop();
+		oScrollBox.getContent().innerHTML = "Cleared!";
+		limit();
+	}).attach("r3", "click");
+	
+	
+	function limit(){
+		var oSize = oScrollBox.getContentSize();
+		
+		if (oSize.nHeight < 300) {
+			var nHeight = oSize.nHeight;	
+		}
+		else {
+			var nHeight = 300;
+		}
+		
+		if (oSize.nHeight < 150) {
+			var nHeight = 150;	
+		}
+		
+		oScrollBox.setSize(300,nHeight);
+	}
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

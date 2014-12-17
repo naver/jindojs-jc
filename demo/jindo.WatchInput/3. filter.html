@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>숫자 입력만 허용하는 입력창 예제</title>
+<meta name="class-lists" content="jindo.WatchInput"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="change 이벤트를 사용해서 숫자만 입력 할 수 있도록 제어하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<input type="text" id="watch" name="watch" />
+	<br /><br />
+	<strong id="status">숫자를 입력해 주세요</strong>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.WatchInput.js"></script>
+<script type="text/javascript">
+	
+	var welStatus = jindo.$Element('status');
+	var bStatus = false;
+	var oWatchInput = new jindo.WatchInput(jindo.$('watch'));
+	oWatchInput.attach({
+		change : function(oCustomEvent){
+			var rxNotNumber = /[^0-9]/g;
+			var sText = oCustomEvent.sText;
+
+			if(!sText){
+				welStatus.text('숫자를 입력해 주세요');
+			}else if(sText.match(rxNotNumber)){
+				sText = sText.replace(rxNotNumber, '');
+				welStatus.text('숫자만 입력해 주세요');
+				bStatus = true;
+			}else if(!bStatus){
+				welStatus.text('');
+			}else{
+				bStatus = false;
+			}
+
+			oCustomEvent.elInput.value = sText;
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

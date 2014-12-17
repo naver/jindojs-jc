@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>그리드 형태의 다중 선택 (드래그 선택)</title>
+<meta name="class-lists" content="jindo.SelectArea"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="그리드 형태의 UI 을 가진 항목을 여러개 선택 할 수 있도록 한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#select { width:300px; height:300px; position:relative; border:1px solid gray; background-color:pink; }
+	#select ol { padding:0px; margin:0; list-style:none; width:298px; }
+	#select li { margin:10px; border:1px solid black; width:70px; height:70px; float:none; display:inline-block; _display:inline; *display:inline; zoom:1; background:#fff; }
+	#select li.selected { background:skyblue; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="select" style="position:relative; overflow-x:hidden; overflow-y:auto">
+		<ol>
+			<li class="selectable">1</li>
+			<li class="selectable">2</li>
+			<li class="selectable">3</li>
+			<li class="selectable">4</li>
+			<li class="selectable">5</li>
+			<li class="selectable">6</li>
+			<li class="selectable">7</li>
+			<li class="selectable">8</li>
+			<li class="selectable">9</li>
+			<li class="selectable">10</li>
+			<li class="selectable">11</li>
+			<li class="selectable">12</li>
+			<li class="selectable">13</li>
+			<li class="selectable">14</li>
+			<li class="selectable">15</li>
+			<li class="selectable">16</li>
+			<li class="selectable">17</li>
+			<li class="selectable">18</li>
+			<li class="selectable">19</li>
+			<li class="selectable">20</li>
+			<li class="selectable">21</li>
+			<li class="selectable">22</li>
+			<li class="selectable">23</li>
+			<li class="selectable">24</li>
+			<li class="selectable">25</li>
+		</ul>
+	</div>
+	<div id="text">not selected</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.SelectArea.js"></script>
+<script type="text/javascript">
+	var oSelectArea = new jindo.SelectArea(jindo.$("select"), {
+		bActivateOnload : true, //(Boolean) 초기화시 활성여부
+		sClassName : "selectable",
+		htStatus : {
+			sSelected : "selected"
+		},
+		bMultiSelection : true, //다중 선택 가능 여부
+		bDragSelect : true, //다중 선택 가능한 경우, 드래그하여 선택 가능 여부. (bMultiSelection 옵션값이 true일때만 사용가능)
+		nThreshold : 5,
+		bDeselectAllOutside : true, //다중 선택 가능한 경우, 셀렉트가능한 객체가 아닌 곳을 클릭하면 모두 선택해제 할지 여부 (bMultiSelection 옵션값이 true일때만 true로 지정가능)
+		bRemainOne : false, //단일 선택만 가능한 경우, 최소 하나는 선택이 되어있도록 함. (bMultiSelection 옵션값이 false일때만 true로 지정가능)
+		bToggleSelected : false // 단일 선택만 가능하고, 전체 선택해제가능할경우, 선택된 객체를 다시 클릭했을때 선택해제 할지 여부. (bMultiSelection 옵션값이 false, bRemainOne이 false인 경우에만 true로 지정가능)
+	}).attach({
+		selectStart : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		beforeSelect : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		select : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		beforeDeselect : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		deselect : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		change : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+			var aSelected = [];
+			jindo.$A(this.getSelectableElement()).forEach(function(el){
+				if (this.isSelected(el)) {
+					aSelected.push(el.innerHTML);
+				}
+			}, this);
+			jindo.$("text").innerHTML = aSelected.join(", ");
+		},
+		selectEnd : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		
+		dragStart : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		dragSelecting : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		},
+		dragEnd : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>접고 펼치는 효과 옵션</title>
+<meta name="class-lists" content="jindo.Accordion"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="접고 펼쳐질 때 다양한 효과를 테스트 해 볼 수 있는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.accordion-block { height:30px; width:200px; overflow:hidden; margin:0}
+	.accordion-block dt { height:20px; padding:5px; cursor:pointer;}
+	.accordion-block dd { padding:5px; background-color:#eeeeee; overflow:auto; margin:0;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	nFPS : <select id="fps" onchange="oAccordion.getTransition().fps(this.value)">
+		<option value="30">30</option>
+		<option value="15">15</option>
+		<option value="45">45</option>
+		<option value="60">60</option>
+	</select>
+	
+	nDuration : 
+	<select id="duration" onchange="oAccordion.option('nDuration', this.value)">
+		<option value="300">300</option>
+		<option value="500">500</option>
+		<option value="1000">1000</option>
+	</select>
+	
+	fExpandEffect : 
+	<select onchange="oAccordion.option('fExpandEffect', jindo.Effect[this.value])">
+		<option value="cubicEaseOut">jindo.Effect.cubicEaseOut</option>
+		<option value="cubicEaseIn">jindo.Effect.cubicEaseIn</option>
+		<option value="linear">jindo.Effect.linear</option>
+		<option value="bounce">jindo.Effect.bounce</option>
+	</select>
+	
+	fContractEffect : 
+	<select onchange="oAccordion.option('fContractEffect', jindo.Effect[this.value])">
+		<option value="cubicEaseIn">jindo.Effect.cubicEaseIn</option>
+		<option value="cubicEaseOut">jindo.Effect.cubicEaseOut</option>
+		<option value="linear">jindo.Effect.linear</option>
+		<option value="bounce">jindo.Effect.bounce</option>
+	</select>
+	<div id="panel">
+		<dl class="accordion-block" style="background-color:lawngreen;">
+			<dt>1</dt>
+			<dd>내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br /></dd>
+		</dl>		
+		<dl class="accordion-block" style="background-color:greenyellow;">
+			<dt>2</dt>
+			<dd>내용2</dd>
+		</dl>
+		<dl class="accordion-block" style="background-color:chartreuse;">
+			<dt>3</dt>
+			<dd>내용3</dd>
+		</dl>
+		<dl class="accordion-block" style="background-color:lime;">
+			<dt>4</dt>
+			<dd>내용4</dd>
+		</dl>
+		<dl class="accordion-block accordion-handler" style="background-color:limegreen;">
+			<dt>5</dt>
+			<dd>내용5</dd>
+		</dl>
+	</div>
+	
+	<div style="clear:both;">
+		<a href="#" onclick="oAccordion.contractAll()">전체축소</a>
+	</div>
+</div>
+		
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Accordion.js"></script>
+<script type="text/javascript">
+	var oAccordion = new jindo.Accordion("panel");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

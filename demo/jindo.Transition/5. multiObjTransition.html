@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>여러 객체의 값을 변경</title>
+<meta name="class-lists" content="jindo.Transition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="여러 객체의 값을 동시에 변경하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.box { border:1px solid black; width:100px; height:100px; margin:0; padding:0; overflow:auto; }
+	
+	#foo { position:absolute; left:150px; top:150px; }
+	#bar { position:absolute; left:10px; top:50px;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<button onclick="start(); return false;">테스트 시작</button>
+	<div class="box" id="foo"></div>
+	<div class="box" id="bar">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc enim, iaculis quis pellentesque ac, molestie sit amet lorem. Nam a diam eget neque fringilla ultrices. Vestibulum mauris nibh, sollicitudin et molestie nec, sagittis ut neque. Fusce dictum nulla blandit dui aliquet eu vehicula ligula facilisis. Nulla varius ipsum et lorem posuere porta. Praesent porta fermentum sem id fringilla. Quisque sit amet mauris quis risus adipiscing mattis vitae non magna. Vestibulum laoreet vestibulum quam, bibendum laoreet turpis tincidunt et. Fusce in tortor eu erat egestas interdum ac a urna. Pellentesque aliquam, dui at faucibus gravida, diam magna interdum dui, tempus aliquet augue sem ac ligula. Duis tempor suscipit pulvinar. Ut nec quam libero, vitae mollis erat.
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript">
+
+var oTransition = new jindo.Transition();
+			
+function start() {
+	oTransition.abort().start(1000,
+		jindo.$('foo'), {
+			'@left' : ['150px', '200px'],
+			'@top' : ['150px', '50px'],
+			'@width' : ['100px', '200px'],
+			'@height' : ['100px', '200px'],
+			'@backgroundColor' : [ 'rgb(255, 255, 255)', '#0075c8' ]
+		},
+		jindo.$('bar'), {
+			'scrollTop' : jindo.Effect.bounce(0, 600),
+			'@borderWidth' : [ '1px', '30px' ]
+		}
+	).sleep(100).start(500,
+		{
+			getter : function(sKey) {
+				return jindo.$Element("foo")[sKey]();
+			},
+			
+			setter : function(sKey, sValue) {
+				jindo.$Element("foo")[sKey](parseFloat(sValue));
+			}
+		}, {
+			'height' : jindo.Effect.easeIn(100)
+		}
+	);
+}
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

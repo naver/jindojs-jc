@@ -1,0 +1,67 @@
+#### nItemPerPage
+
+아래의 이미지는 100개의 아이템에서 nItemPerPage를 10으로 설정한 경우이다.
+
+![](nItemPerPage10.png "")
+
+아래의 이미지는 100개의 아이템에서 nItemPerPage를 20으로 설정한 경우이다.
+
+![](nItemPerPage20.png "")
+
+#### nPagePerPageList
+
+아래의 이미지는 5로 설정한 경우이다.
+
+![](nPagePerPageList5.png "")
+
+아래의 이미지는 7로 설정한 경우이다.
+
+![](nPagePerPageList7.png "")
+
+#### bAlignCenter
+
+bAlignCenter 옵션을 true 로 설정하면 아래와 같이 보여지며 동작한다.
+
+![](bAlignCenter.png "")
+
+#### sInsertTextNode
+
+sInsertTextNode 에 내용에 따라 아래와 마크업이 변경 반영된다.
+
+![](sInsertTextNode.png "")
+
+#### sPageTemplate
+
+아래 이미지는 sPageTemplate을 &lt;li&gt;&lt;a href="#"&gt;{=page}&lt;/a&gt;&lt;/li&gt;로 설정한 경우의 마크업이다.
+
+![](sPageTemplate.png "")
+
+#### sCurrentPageTemplate
+
+아래 이미지는 sCurrentPageTemplate을 &lt;li class="active"&gt;&lt;a href="#"&gt;{=page}&lt;/a&gt;&lt;/li&gt;로 설정한 경우의 마크업이다.
+
+![](sCurrentPageTemplate.png "")
+
+#### elFirstPageLinkOn
+![](elFirstPageLinkOn.png "")
+
+#### elPrevPageLinkOn
+![](elPrevPageLinkOn.png "")
+
+#### elNextPageLinkOn
+![](elNextPageLinkOn.png "")
+
+#### elLastPageLinkOn
+![](elLastPageLinkOn.png "")
+
+#### elFirstPageLinkOff
+![](elFirstPageLinkOff.png "")
+
+#### elPrevPageLinkOff
+![](elPrevPageLinkOff.png "")
+
+#### elNextPageLinkOff
+![](elNextPageLinkOff.png "")
+
+#### elLastPageLinkOff
+![](elLastPageLinkOff.png "")

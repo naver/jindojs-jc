@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>리스트 순서를 변경</title>
+<meta name="class-lists" content="jindo.DropArea"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="리스트 목록 사이사이를 indicate 영역으로 표시하면서 원하는 위치로 이동시는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+			
+	li {
+		list-style:none;
+		margin-bottom:10px;
+		padding:10px;
+		width:200px;
+		height:20px;
+		cursor:move;
+		background-color:#ccc;
+	}
+	
+	#phantom {
+		position:absolute;
+		cursor:move;
+		padding:10px;
+		width:200px;
+		height:20px;
+		background-color:#0075c8;
+		display:none;
+	}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<ul class="dropable">
+		<li class="dragable">1</li>
+		<li class="dragable">2</li>
+		<li class="dragable">3</li>
+		<li class="dragable">4</li>
+		<li class="dragable">5</li>
+	</ul>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DropArea.js"></script>
+<script type="text/javascript">
+	var welPhantom = jindo.$Element(jindo.$("<div id='phantom'>"));
+	var welSelected = null;
+	var elList = jindo.$$.getSingle("ul");
+	var aItem = jindo.$$("ul.dropable > li.dragable");
+	
+	var nSelectedIndex, nTargetIndex = null;
+	
+	var oDragArea = new jindo.DragArea(document.body, { 
+		sClassName : 'dragable',
+		bFlowOut : false,
+		nThreshold : 20
+	}).attach({
+		dragStart : function(oCustomEvent) {
+			/* 드래그하기위해 선택된 엘리먼트를 저장 */
+			welSelected = jindo.$Element(oCustomEvent.elDrag);
+			
+			/* 선택된 엘리먼트의 index저장 */
+			nSelectedIndex = jindo.$A(aItem).indexOf(welSelected.$value());
+			
+			/* 저장한 엘리먼트를 복사해 실제 드래그될 임시 엘리먼트에 복제 */ 
+			welPhantom.appendTo(document.body);
+			welPhantom.empty().html(oCustomEvent.elDrag.innerHTML).show();
+			
+			/* 임시 엘리먼트의 최초 위치 설정 */					
+			var htPos = welSelected.offset();
+			welPhantom.offset(htPos.top, htPos.left);
+			
+			/* 임시 엘리먼트가 실제로 이동되도록 설정 */
+			oCustomEvent.elDrag = welPhantom.$value();
+		},
+		beforeDrag : function(oCustomEvent) {
+			/* 드래그시 x좌표를 고정 */
+			oCustomEvent.nX = jindo.$Element(oCustomEvent.elDrag).offset().left;
+		},
+		dragEnd : function(oCustomEvent) {
+			/* 임시 드래그 엘리먼트를 비우고 제거 */
+			welPhantom.empty().leave();
+		}
+	});
+	var oDropArea = new jindo.DropArea(document, { 
+		sClassName : 'dropable', 
+		oDragInstance : oDragArea 
+	}).attach({
+		move : function(oCustomEvent) {
+			/* 픽셀을 계산하여 드랍될 목표 index를 설정 */
+			var nPixel = oCustomEvent.nRatioY * jindo.$Element(oCustomEvent.elDrop).height();
+			
+			nTargetIndex = Math.floor(nPixel / 50);
+			Math.min(Math.max(nTargetIndex, 0), aItem.length - 1);
+		},
+		drop : function(oCustomEvent) {
+			
+			/* nTargetIndex에 맞게 순서 재배치 */
+			if (nTargetIndex > nSelectedIndex) {
+				jindo.$Element(aItem[nTargetIndex]).after(aItem[nSelectedIndex]);
+			} else {
+				jindo.$Element(aItem[nTargetIndex]).before(aItem[nSelectedIndex]);
+			}
+			aItem = jindo.$$("ul.dropable > li.dragable");
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

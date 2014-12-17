@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>단계별 선택</title>
+<meta name="class-lists" content="jindo.SelectBox"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="단계별로 선택하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body {font-family: "나눔고딕", Dotum, Helvetica, AppleGothic; font-size: 15px;}
+	.selectbox-noscript * { display:none; }
+	.selectbox-noscript .selectbox-source { display:inline; position:relative; left:0;}
+	.selectbox-noscript .selectbox-source * { display:block; }
+
+	#s, #s2 { float:left; }
+	.selectbox-source, .selectbox-source-option-group { position:absolute; left:-9999px;}
+	.selectbox-focused .selectbox-box { border-color:green; }
+	.selectbox-disabled .selectbox-box { border-color:gray; }
+
+	.selectbox-box { border:3px solid yellowgreen; width:150px; cursor:default; }
+	.selectbox-label { padding:3px; }
+	.selectbox-layer { display:none; position:absolute; border:3px solid blue; width:150px; background-color:#eee; z-index:2; }
+	.selectbox-list ul { list-style:none; margin:0; padding:0; }
+
+	.selectbox-list ul li { padding:3px; cursor:default; color:#888; background-color:#eee; zoom:1; }
+	.selectbox-list ul li.selectbox-item-selected { color:#000; font-weight:bold; }
+	.selectbox-list ul li.selectbox-item-over { background-color:#aaa !important; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="s" class="selectbox-noscript">
+		<select class="selectbox-source">
+			<option class="selectbox-default">종류를 선택하세요</option>
+			<option value="1">한글</option>
+			<option value="2">영어</option>
+	   </select>
+		<div class="selectbox-box">
+			<div class="selectbox-label"></div>
+		</div>
+		<div class="selectbox-layer">
+			<div class="selectbox-list"></div>
+		</div>
+	</div>
+	<div id="s2" class="selectbox-noscript">
+		<select class="selectbox-source">
+			<option class="selectbox-default" value="0">선택하세요</option>
+		</select>
+		<select class="selectbox-source-option-group">
+			<option class="selectbox-option-group-1" value="1">가</option>
+			<option class="selectbox-option-group-1" value="2">나</option>
+			<option class="selectbox-option-group-1" value="3">다</option>
+			<option class="selectbox-option-group-1" value="4">라</option>
+			<option class="selectbox-option-group-2" value="5">A</option>
+			<option class="selectbox-option-group-2" value="6">B</option>
+			<option class="selectbox-option-group-2" value="7">C</option>
+		</select>
+		<div class="selectbox-box">
+			<div class="selectbox-label"></div>
+		</div>
+		<div class="selectbox-layer">
+			<div class="selectbox-list"></div>
+		</div>
+	</div>
+
+	<button onclick="oSelectBox1.setDefault();oSelectBox2.setDefault();oSelectBox2.disable();return false;">default</button>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.HTMLComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverClick.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.SelectBox.js"></script>
+<script type="text/javascript">
+	var oSelectBox1 = new jindo.SelectBox(jindo.$("s"), { nHeight : 200 }).attach({
+			change : function(e) {//선택한 아이템이 바뀌었을때 발생
+				oSelectBox2.setDefault();
+				oSelectBox2.enable();
+				oSelectBox2.setOptionGroup(this.getValue(e.index));
+				jindo.$Element(oSelectBox2.getLayerElement()).css("height", "");
+			}
+		});
+	var oSelectBox2 = new jindo.SelectBox(jindo.$("s2"));
+	oSelectBox2.disable();
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

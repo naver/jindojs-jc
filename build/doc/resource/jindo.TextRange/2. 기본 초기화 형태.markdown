@@ -1,0 +1,5 @@
+#### HTML
+	<input type="text" id="input" />
+	
+#### Javascript
+	var oTextRange = new jindo.TextRange(jindo.$("input"));

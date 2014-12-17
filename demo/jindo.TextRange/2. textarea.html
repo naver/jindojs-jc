@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>TEXTAREA 예제</title>
+<meta name="class-lists" content="jindo.TextRange"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="TEXTAREA 태그를 사용 한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	textarea { width:200px; height:100px; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<textarea id="foo">hello
+world
+안녕하세요
+하하하하
+foo bar</textarea>
+	<div id="DEBUG"></div>
+	<a href="#" onmousedown="getS();" onclick="return false;">getSelection</a>
+	<a href="#" onclick="setS(4,5); return false;">setSelection</a>
+	<a href="#" onmousedown="jindo.$('DEBUG').innerHTML = oTextRange.copy()" onclick="return false;">getText</a>
+	<a href="#" onmousedown="oTextRange.paste('done')" onclick="return false;">setText</a>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.TextRange.js"></script>
+<script type="text/javascript">
+	var oTextRange = new jindo.TextRange('foo');
+	
+	function getS() {
+		var rgn = oTextRange.getSelection();
+		if (rgn) {
+			jindo.$('DEBUG').innerHTML = ("from : "+rgn[0]+" to : " +rgn[1]);
+		}
+	}
+	
+	function setS(a, b) {
+		jindo.$('foo').focus();
+		oTextRange.setSelection(a, b);
+	}
+
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

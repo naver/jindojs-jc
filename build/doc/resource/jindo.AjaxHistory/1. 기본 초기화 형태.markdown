@@ -1,0 +1,18 @@
+#### Javascript
+
+	var oAjaxHistoryInstance = new jindo.AjaxHistory({
+	    sIFrameUrl : "history.html"
+	}).attach({
+	    load : function(oCustomEvent) {
+	        /* ... */
+	    },
+	    change : function(oCustomEvent) {
+	        /* ... */
+	    }
+	});
+	 
+	jindo.$Fn(function(){
+	    oAjaxHistoryInstance.initialize();
+	}).attach(window, "load");
+
+iframe을 통해 로딩할 웹페이지가 같은 경로에 있으며, 파일명이 history.html일 경우 sIframeUrl 옵션 생략 가능

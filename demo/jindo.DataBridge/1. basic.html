@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.DataBridge"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가장 기본적인 사용 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	
+</style>
+</head>
+<body ondragstart="return false;">
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+     
+<div class="demo">
+	<h3>테스트 방법</h3>
+	<pre>
+* 문자열 전달 테스트
+1. 로컬 PC에서 IE, FF, Chrome 등등 여러 개의 브라우저를 실행 시켜서, 이 페이지를 연다.
+2. 아래의 인풋 박스에 전달할 메시지를 적고, "Send data to another client" 버튼을 누른다.
+3. 버튼을 누른 브라우저 외의 브라우저의 텍스트에어리어의 로그 메시지를 확인한다.
+
+* 드래그 앤 드랍을 통한 객체 전달 테스트
+1. 상단의 빨간색 레이어를 드래그 하여 위치를 변경한다.
+2. 드래그 한 브라우저 외의 브라우저에서 레이어 위치가 변경된 것을 확인한다.
+	</pre>
+	<textarea id="debug" rows="20" style="width:100%;font-size:10pt"></textarea>
+	Client Id : <span id="client_id"></span><br/>
+	<input type="text" id="send_message"></input>
+	<input type="button" value="Send data to another client" onClick="sendData()"></input>
+	<div id="elDragLayer" style="opacity:0.7;filter:alpha(opacity=70);z-index:100;position:absolute;top:0px;left:0px;width:200px;height:200px;background:red">
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DataBridge.js"></script>
+<script type="text/javascript">
+	
+	var goDataBridge;
+	var gaList = [];
+	function onReceive(oCustomEvent){
+		gaList.push("Received data from "+oCustomEvent.sSenderId+" -> "+oCustomEvent.vData+"\n");
+		if(oCustomEvent.vData.left && oCustomEvent.vData.top){
+			jindo.$Element("elDragLayer").offset(oCustomEvent.vData.top, oCustomEvent.vData.left);
+		}
+		jindo.$("debug").value = gaList.join("");
+		jindo.$("debug").scrollTop = 5000;
+	}
+	
+	function onLog(oCustomEvent){
+		if(!jindo.$("client_id").innerHTML) jindo.$("client_id").innerHTML = this.getClientId();
+		gaList.push("LogMessage -> "+oCustomEvent.sMessage+"\n"); 
+		jindo.$("debug").value = gaList.join("");
+		jindo.$("debug").scrollTop = 5000;
+	}
+	
+	function sendData(){
+		if(jindo.$("send_message").value){
+			goDataBridge.send(jindo.$("send_message").value);
+			jindo.$("send_message").value = "";
+		}
+	}
+	
+	var a, b, c, d;
+	function onMouseDown(e){
+		a = jindo.$Fn(onMouseMove).attach(document, "mousemove");
+		b = jindo.$Fn(onMouseUp).attach(document, "mouseup");
+		var htPos = e.pos();
+		c = htPos.layerY;
+		d = htPos.layerX;
+	}
+	
+	function onMouseMove(e){
+		var htPos = e.pos();
+		jindo.$Element("elDragLayer").offset(htPos.pageY - c, htPos.pageX - d);
+		//goDataBridge.send({"left" : htPos.pageX, "top" : htPos.pageY});
+	}
+	
+	function onMouseUp(e){
+		a.detach(document, "mousemove");
+		b.detach(document, "mouseup");
+		var htPos = jindo.$Element("elDragLayer").offset();
+		goDataBridge.send({"left" : htPos.left, "top" : htPos.top});
+	}
+	
+	jindo.$Fn(function(){
+		jindo.$("debug").value = "";
+		jindo.$Fn(function(weKeyDown){
+			if(weKeyDown.key().keyCode == 13){
+				sendData();
+			}
+		}).attach(jindo.$("send_message"), "keydown");
+	
+		jindo.$Fn(onMouseDown).attach(jindo.$("elDragLayer"), "mousedown");
+		
+		goDataBridge = new jindo.DataBridge({
+			sServiceId : "calendar",
+			htCustomEventHandler : {
+				"receive" : onReceive,
+				"log" : onLog
+			}
+		});
+	
+		
+	}).attach(window, "load");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

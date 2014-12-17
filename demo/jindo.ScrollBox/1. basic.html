@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.ScrollBox"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가장 기본적인 사용 예제입니다.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#scrollbox { background-color:#ccc; position:relative;	width:200px; height:200px; }
+	.scrollbar-box { position:absolute; overflow:hidden; top:0px; left:0px; width:200px; height:200px; }
+	.scrollbar-content { position:absolute; top:0px; left:0px; width:785px; font-size:12px; line-height:14px;} /* 요 내용부분의 크기만 설정해주면 됨.*/
+	
+	.scrollbar-h { position:absolute; /*top:185px; top값은 자동으로 조절*/ /*width:200px;*/ left:0px; 	height:15px; display:none; }
+	.scrollbar-h .scrollbar-track { background-color:#eee; position:absolute; /*left:15px;*/ height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-thumb { display:block; position:absolute; height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-thumb-head { width:6px; height:15px; background:url(img/bar_hleft.gif) no-repeat; }
+	.scrollbar-h .scrollbar-thumb-body { width:18px; height:15px; background:url(img/bar_hmid.gif) no-repeat center top; } 
+	.scrollbar-h .scrollbar-thumb-foot { width:6px; height:15px; background:url(img/bar_hright.gif) no-repeat; }
+	.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-head { background-position:0 -15px;}
+	.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-body { background-position:center -15px;}
+	.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-foot { background-position:right -15px;}
+	.scrollbar-h .scrollbar-button-left { background:url(img/btn_hleft_off.gif) no-repeat; position:absolute; left:0; width:15px; height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-button-left-hold { background:url(img/btn_hleft_on.gif) no-repeat; }
+	.scrollbar-h .scrollbar-button-right { background:url(img/btn_hright_off.gif) no-repeat; position:absolute; right:0px; width:15px; height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-button-right-hold { background:url(img/btn_hright_on.gif) no-repeat; }
+	.scrollbar-show { display:block; }
+	.scrollbar-disabled .scrollbar-track { background-color:#bbb; }
+	.scrollbar-disabled .scrollbar-thumb { display:none; }
+	.scrollbar-disabled .scrollbar-button-left { }
+	.scrollbar-disabled .scrollbar-button-right { }
+	
+	.scrollbar-v { position:absolute; top:0px; right:0px; width:15px; display:none; }
+	.scrollbar-v .scrollbar-track { background-color:#eee; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-v .scrollbar-thumb { display:block; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-v .scrollbar-thumb-head { width:15px; height:6px; background:url(img/bar_vtop.gif) no-repeat; }
+	.scrollbar-v .scrollbar-thumb-body { width:15px; height:18px; background:url(img/bar_vmid.gif) no-repeat left center; }
+	.scrollbar-v .scrollbar-thumb-foot { width:15px; height:6px; background:url(img/bar_vbot.gif) no-repeat; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-head { background-position:-15px top; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-body { background-position:-15px center; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-foot { background-position:-15px bottom; }
+	.scrollbar-v .scrollbar-button-up { width:15px;height:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ background:url(img/btn_vtop_off.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-up-hold { background:url(img/btn_vtop_on.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-down { width:15px;height:15px; position:relative; overflow:hidden; /*ie6 height*/ background:url(img/btn_vbot_off.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-down-hold { background:url(img/btn_vbot_on.gif) no-repeat; }
+	.scrollbar-show { display:block; }
+	.scrollbar-disabled .scrollbar-track { background-color:#bbb;}
+	.scrollbar-disabled .scrollbar-thumb { display:none; }
+	.scrollbar-disabled .scrollbar-button-up { }
+	.scrollbar-disabled .scrollbar-button-down { }
+	
+	.scrollbar-noscript .scrollbar-box {overflow:auto;}
+	.scrollbar-noscript .scrollbar-h, .scrollbar-noscript .scrollbar-v, scrollbar-noscript .scrollbar-disabled {display:none;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<select id="mode">
+		<option value="1">vertical & horizontal : auto</option>
+		<option value="2">vertical & horizontal : scroll</option>
+		<option value="3">vertical : auto, horizontal : hidden</option>
+		<option value="4">vertical : hidden, horizontal : auto</option>
+		<option value="5">vertical : scroll, horizontal : hidden</option>
+		<option value="6">vertical : hidden, horizontal : scroll</option>
+		<option value="7">vertical : hidden, horizontal : hidden</option>
+	</select>
+	<button onclick="oScrollBox.activate();return false;">activate</button>
+	<button onclick="oScrollBox.deactivate();return false;">deactivate</button>
+	<button id="r1">resize 200x200</button>
+	<button id="r2">resize 400x400</button>
+	<button id="r3">resize 600x600</button>
+	<button id="r4">resize 800x800</button>
+	<div id="scrollbox" class="scrollbar-noscript">
+		<div class="scrollbar-box">
+			<div class="scrollbar-content">
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+
+JindoJS Component는 JindoJS 를 기반으로 개발된
+재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+			</div>
+		</div>
+		
+		<div class="scrollbar-v">
+			<div class="scrollbar-button-up"></div>
+			<div class="scrollbar-track">
+				<div class="scrollbar-thumb"><img src="img/blank.gif" class="scrollbar-thumb-head" /><img src="img/blank.gif" class="scrollbar-thumb-body" /><img src="img/blank.gif" class="scrollbar-thumb-foot" /></div>
+			</div>
+			<div class="scrollbar-button-down"></div>
+		</div>
+		
+		<div class="scrollbar-h">
+			<div class="scrollbar-button-left"></div>
+			<div class="scrollbar-track">
+				<div class="scrollbar-thumb"><img src="img/blank.gif" class="scrollbar-thumb-head" /><img src="img/blank.gif" class="scrollbar-thumb-body" /><img src="img/blank.gif" class="scrollbar-thumb-foot" /></div>
+			</div>
+			<div class="scrollbar-button-right"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Slider.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.ScrollBar.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.ScrollBox.js"></script>
+<script type="text/javascript">
+	var oScrollBox = new jindo.ScrollBox("scrollbox", {
+		bAdjustThumbSize : true, 
+		sOverflowX : "auto",
+		sOverflowY : "auto"
+	});
+	
+	jindo.$("mode").onchange = function(){
+		switch (parseInt(jindo.$("mode").value)) {
+			case 1: 
+				oScrollBox.option({
+					sOverflowX : "auto",
+					sOverflowY : "auto"
+				})
+			break;
+			
+			case 2: 
+				oScrollBox.option({
+					sOverflowX : "scroll",
+					sOverflowY : "scroll"
+				})
+			break;
+			
+			case 3: 
+				oScrollBox.option({
+					sOverflowX : "hidden",
+					sOverflowY : "auto"
+				})
+			break;
+			
+			case 4: 
+				oScrollBox.option({
+					sOverflowX : "auto",
+					sOverflowY : "hidden"
+				})
+			break;
+			
+			case 5: 
+				oScrollBox.option({
+					sOverflowX : "hidden",
+					sOverflowY : "scroll"
+				})
+			break;
+			
+			case 6: 
+				oScrollBox.option({
+					sOverflowX : "scroll",
+					sOverflowY : "hidden"
+				})
+			break;
+			case 7: 
+				oScrollBox.option({
+					sOverflowX : "hidden",
+					sOverflowY : "hidden"
+				})
+			break;
+		}
+		oScrollBox.reset();
+	};
+	
+
+	jindo.$Fn(function(e){
+		e.stop();
+		oScrollBox.setSize(200,200);
+	}).attach("r1", "click");
+
+	jindo.$Fn(function(e){
+		e.stop();
+		oScrollBox.setSize(400,400);
+	}).attach("r2", "click");
+	
+	jindo.$Fn(function(e){
+		e.stop();
+		oScrollBox.setSize(600,600);
+	}).attach("r3", "click");
+	
+	jindo.$Fn(function(e){
+		e.stop();
+		oScrollBox.setSize(800,800);
+	}).attach("r4", "click");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

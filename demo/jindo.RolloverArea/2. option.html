@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>mousedown 은 처리하지 않는 예제</title>
+<meta name="class-lists" content="jindo.RolloverArea"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="mousedown 이벤트는 별도로 처리하지 않는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	ul { list-style: none; position:relative;float:left;padding-left:10px;}
+	ul li { font-size:14px; width:120px; border:1px solid black; margin:1px 0 0 0;}
+	ul li a{ color:white; display:block; font-weight:bold; text-decoration: none; padding:10px; }
+	
+	.rollover, ._rollover {background:#0075c8;}
+	.rollover-over{ background:#FFFFFF;}
+	.rollover-over a{ color:#0075c8;}
+	.rollover-down{ background:#DDDDDD;}
+	.rollover-down a{ color:#0075c8;}
+	
+	.rollover .default{display:block}
+	.rollover-over .default{display:none}
+	.rollover .cOver{display:none}
+	.rollover-over .cOver{display:block}
+	.rollover-down .cOver{display:none}
+	.rollover .cDown{display:none}
+	.rollover-down .cDown{display:block}
+	
+	.sample{ border:0px; font-size:13px; }
+	.sample a{color:black; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<ul>
+	    <li class="rollover ddd"><a class="default" href="#">menu1</a><a class="cOver" href="#">MouseOver</a><a class="cDown" href="#">MouseDown</a></li>
+	    <li class="rollover"><a class="default" href="#">menu2</a><a class="cOver" href="#">MouseOver</a><a class="cDown" href="#">MouseDown</a></li>
+	    <li class="rollover"><a class="default" href="#">menu3</a><a class="cOver" href="#">MouseOver</a><a class="cDown" href="#">MouseDown</a></li>
+	    <li class="rollover"><a class="default" href="#">menu4</a><a class="cOver" href="#">MouseOver</a><a class="cDown" href="#">MouseDown</a></li>
+	</ul>
+	<ul>
+	    <li class="sample"><a href="#">CSS 적용 샘플</a></li>
+	    <li class="_rollover"><a href="#">Default Style</a></li>
+	    <li class="_rollover rollover-over"><a href="#">MouseOver</a></li>
+	</ul>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript">
+	var oRolloverArea = new jindo.RolloverArea(document.body, {
+		sClassName : 'rollover', // (String) 컴포넌트가 적용될 엘리먼트의 class 명. 상위 기준 엘리먼트의 자식 중 해당 클래스명을 가진 모든 엘리먼트에 Rollover 컴포넌트가 적용된다.
+		bCheckMouseDown : false,
+		htStatus : {
+			sOver : "over",
+			sDown : "down"
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

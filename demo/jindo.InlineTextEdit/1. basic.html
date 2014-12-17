@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.InlineTextEdit"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가장 기본적인 사용 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	p { cursor:pointer; padding:5px 0; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<p onclick="oInlineTextEdit.edit(this)">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Duis odio leo, iaculis in mollis nec, pulvinar non nunc.</p>
+	<p onclick="oInlineTextEdit.edit(this)">In hac habitasse platea dictumst.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Praesent et orci ipsum, at adipiscing massa.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Ut condimentum pharetra arcu ut ultrices.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Nulla facilisi.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Praesent eget est non tellus sagittis ultricies.</p> 
+	<p onclick="oInlineTextEdit.edit(this)">Ut tellus nulla, gravida ac cursus a, varius eu lacus.</p> 
+	<p onclick="oInlineTextEdit.edit(this)">Phasellus a erat dolor.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Donec urna mi, tempus eget pharetra at, rhoncus vel odio.</p> 
+	<p onclick="oInlineTextEdit.edit(this)">Morbi varius felis a tellus aliquam cursus.</p>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.InlineTextEdit.js"></script>
+<script type="text/javascript">
+	var oInlineTextEdit = new jindo.InlineTextEdit();
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

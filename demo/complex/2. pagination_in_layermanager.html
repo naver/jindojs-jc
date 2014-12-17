@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>레이어 안에 페이징</title>
+<meta name="class-lists" content="jindo.Pagination, jindo.LayerManager"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="레이어 안에 페이징을 구현한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.paginate1{ padding:15px 0; text-align:center; display:none;}
+	.paginate1 *{ margin:0; padding:0;}
+	.paginate1 a,
+	.paginate1 strong{ _position:relative; margin-left:-1px; font-weight:bold; display:inline-block; padding:3px 8px 1px 7px; color:#313031; border-left:1px solid #ccc; border-right:1px solid #ccc; text-decoration:none; line-height:normal; font:bold 12px 돋움, Dotum, 굴림, Gulim, AppleGothic, Sans-serif; background:#fff;}
+	.paginate1 strong{ color:#ff8600 !important;}
+	.paginate1 a:hover{ background:#F7F7F7; }
+	.paginate1 a.pre{ padding:3px 8px 1px 16px; background:url(img/Pagination.bu_pg1_l1.gif) no-repeat 8px 6px !important; border:none; font-weight:normal; }
+	.paginate1 a.pre_end{ padding:3px 8px 1px 16px; background:url(img/Pagination.bu_pg1_l2.gif) no-repeat 4px 6px !important; border:none; border-right:1px solid #ccc; font-weight:normal;}
+	.paginate1 a.next{ padding:3px 16px 1px 8px; background:url(img/Pagination.bu_pg1_r1.gif) no-repeat 37px 6px !important; border:none; font-weight:normal; }
+	.paginate1 a.next_end{ padding:3px 16px 1px 8px; background:url(img/Pagination.bu_pg1_r2.gif) no-repeat 37px 6px !important; border:none; border-left:1px solid #ccc; font-weight:normal;}
+	.paginate1.loaded { display:block;}
+	.paginate1.only-one { display:block;}
+	.paginate1.no-result { display:none;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<button id='button' onclick='oLayerManager.show();'>레이어를 컨트롤하는 버튼</button>				
+	<div id='layer' style='display:none; border:1px solid #aaa; width:400px; position:absolute; box-shadow:2px 2px 5px #000;'>	
+		<div id="divide_1" class="paginate1"> 
+			<a href="#" class="pre">이전</a> 
+			<a href="#" class="next">다음</a> 
+		</div>
+	</div>
+	<div id="divide_2" class="paginate1"> 
+		<a href="#" class="pre">이전</a> 
+		<a href="#" class="next">다음</a> 
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Pagination.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript">
+
+	new jindo.Pagination("divide_1", {
+		nItem : 200,
+		nItemPerPage : 10,
+		nPagePerPageList : 10,
+		nPage : 1
+	});
+	
+	new jindo.Pagination("divide_2", {
+		nItem : 200,
+		nItemPerPage : 10,
+		nPagePerPageList : 10,
+		nPage : 1
+	});
+	
+	var oLayerManager = new jindo.LayerManager('layer', {
+		sCheckEvent : 'mousedown',
+		nCheckDelay : 0
+	}).link('button').link('layer');
+	
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

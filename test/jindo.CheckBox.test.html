@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			*{margin:0; padding:0;}
+			body{margin:20px; font-size:12px;}
+			
+			/* checkbox-applied */
+			.checkbox-applied{display:-moz-inline-block; display:-moz-inline-box; display:inline-block; overflow:hidden; position:relative; width:24px; height:24px; vertical-align:middle;}
+			.checkbox-applied span.checkbox-mark{display:-moz-inline-block; display:-moz-inline-box; display:inline-block; position:absolute; left:1px; top:1px; z-index:1; width:22px; height:22px; background:url(radio_check.gif) no-repeat -32px 0;}
+			.checkbox-applied span.checkbox-mark.checkbox-checked{background:url(radio_check.gif) no-repeat -32px -31px;}
+			.checkbox-disabled span.checkbox-mark{background-position:-32px -62px;}
+			.checkbox-disabled span.checkbox-mark.checkbox-checked{background:url(radio_check.gif) no-repeat -32px -93px;}
+			.checkbox-focused{background:url(radio_check.gif) no-repeat 0 -123px;}
+			.checkbox-applied input{position:absolute; left:50%; top:50%; width:12px; height:12px; margin:-6px 0 0 -6px;}
+			.checkbox-applied span.checkbox-mark, x:-moz-any-link{position:relative; margin-left:-17px;}
+			.checkbox-applied span.checkbox-mark, x:-moz-any-link, x:default{position:absolute; margin-left:0;}
+			
+			/* radio-applied */
+			.radio-applied{display:-moz-inline-block; display:-moz-inline-box; display:inline-block; overflow:hidden; position:relative; width:24px; height:24px; vertical-align:middle;}
+			.radio-applied span.radio-mark{display:-moz-inline-block; display:-moz-inline-box; display:inline-block; position:absolute; left:1px; top:1px; z-index:1; width:22px; height:22px; background:url(radio_check.gif) no-repeat 0 0;}
+			.radio-applied span.radio-mark.radio-checked{background:url(radio_check.gif) no-repeat 0 -31px;}
+			.radio-disabled span.radio-mark{background-position:0 -62px;}
+			.radio-disabled span.radio-mark.radio-checked{background:url(radio_check.gif) no-repeat 0 -93px;}
+			.radio-focused{background:url(radio_check.gif) no-repeat 0 -123px;}
+			.radio-applied input{position:absolute; left:50%; top:50%; width:12px; height:12px; margin:-6px 0 0 -6px;}
+			.radio-applied span.radio-mark, x:-moz-any-link{position:relative; margin-left:-17px;}
+			.radio-applied span.radio-mark, x:-moz-any-link, x:default{position:absolute; margin-left:0;}
+		</style>
+		<script type="text/javascript" src="./asset/qunit/qunit.js"></script>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+		
+		<div id="ui">
+		<span class="ajax_checkbox"><span class="checkbox-mark"></span><input type="checkbox" name="c" id="c1" /></span> <label for="c1">첫번째</label>
+		<span class="ajax_checkbox"><span class="checkbox-mark"></span><input type="checkbox" name="c" id="c2" /></span> <label for="c2">두번째</label>
+		<span class="ajax_checkbox"><span class="checkbox-mark"></span><input type="checkbox" name="c" id="c3" checked="checked" /></span> <label for="c3">세번째(해제할 수 없음)</label>
+		<span class="ajax_checkbox"><span class="checkbox-mark"></span><input type="checkbox" name="c" id="c4" checked="checked" /></span> <label for="c4">네번째</label>
+		<br />
+		<span id="testText"></span>
+		<br />
+		<span class="ajax_checkbox"><span class="checkbox-mark"></span><input type="checkbox" name="d" id="c5" disabled="disabled" /></span> <label for="c5">비활성 첫번째</label>
+		<span class="ajax_checkbox"><span class="checkbox-mark"></span><input type="checkbox" name="d" id="c6" disabled="disabled" checked="checked" /></span> <label for="c6">비활성 두번째</label>
+		<br />
+		<br /><br />
+		<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r1" /></span> <label for="r1">첫번째</label>
+		<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r2" checked="checked" /></span> <label for="r2">두번째</label>
+		<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r3" /></span> <label for="r3">세번째</label>
+		<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r4" /></span> <label for="r4">네번째</label>
+		<br /><br />
+		<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="b" id="r5" disabled="disabled" /></span> <label for="r5">비활성 첫번째</label>
+		<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="b" id="r6" disabled="disabled" checked="checked" /></span> <label for="r6">비활성 두번째</label>
+		</div>
+		
+		<script type="text/javascript" src="./asset/jindo.js"></script>
+		<script type="text/javascript" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" src="../src/jindo.HTMLComponent.js"></script>
+		<script type="text/javascript" src="../src/jindo.CheckBox.js"></script>
+		<script type="text/javascript" src="js/jindo.CheckBox.test.js"></script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>다양한 방식 혼용</title>
+<meta name="class-lists" content="jindo.MultipleAjaxRequest"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="XHR, JSONP, FLASH방식을 혼용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.start { color:blue; }
+	.end { color:red; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="log">
+		</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript">
+	jindo.$Ajax.SWFRequest.write("../../asset/ajax_1.4.2.swf");
+</script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.MultipleAjaxRequest.js"></script>
+<script type="text/javascript">
+
+	jindo.$Fn(function(){
+			
+		var htAjax1 = {
+			sUrl: "1.js",
+			htOption: {
+				type: "flash",
+				sendheader: false
+			},
+			htParameter: null
+		};
+		
+		var htAjax2 = {
+			sUrl: "2.js",
+			htOption: {
+				type: "xhr",
+				method: "get"
+			},
+			htParameter: null
+		};
+		
+		var htAjax3 = {
+			sUrl: "../asset/server/DynamicTree.php",
+			htOption: {
+				type: "jsonp",
+				method: "get"
+			},
+			htParameter: {
+				foo: "bar"
+			}
+		};
+		
+		var htAjax4 = {
+			sUrl: "3.js",
+			htOption: {
+				type: "xhr",
+				method: "post"
+			},
+			htParameter: null
+		};
+		
+		var nStart = jindo.$Date().time();
+		var oMultipleAjaxRequest = new jindo.MultipleAjaxRequest({
+			sMode : "parallel"
+		}).attach({
+			start: function(oCustomEvent) {
+				//console.log(oCustomEvent);
+				jindo.$Element("log").append(jindo.$Element("<h5>").html((jindo.$Date().time() - nStart) + "ms, " + oCustomEvent.aAjax.length + "개의 요청 시작"));
+			},
+			beforeEachRequest: function(oCustomEvent){
+				//console.log(oCustomEvent);
+				jindo.$Element("log").append(jindo.$Element("<p>").html(jindo.$Date().time() - nStart + "ms, " + oCustomEvent.nIndex + "번째 <span class='start'>요청시작</span> (" + oCustomEvent.oAjax._url + ")"));
+			},
+			afterEachResponse: function(oCustomEvent){
+				//console.log(oCustomEvent);
+				jindo.$Element("log").append(jindo.$Element("<p>").html(jindo.$Date().time() - nStart + "ms, " + oCustomEvent.nIndex + "번째<span class='end'> 응답완료</span> (" + oCustomEvent.oAjax._url + ")"));
+			},
+			complete: function(oCustomEvent){
+				//console.log(oCustomEvent);
+				jindo.$Element("log").append(jindo.$Element("<h5>").html("Total : " + (jindo.$Date().time() - nStart) + "ms, " + oCustomEvent.aResponse.length + "개의 응답완료"));
+			}
+		});
+		
+		setTimeout(function(){
+			oMultipleAjaxRequest.request([htAjax1, htAjax2, htAjax3, htAjax4], { sRequestName : "various" });
+		}, 1000)
+	}).attach(document, "domready");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>메소드와 커스텀 이벤트</title>
+<meta name="class-lists" content="jindo.Timer"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="각 메서드를 직접 사용하며 테스트 해 볼 수 있는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body {font-family: "나눔고딕", Dotum, Helvetica, AppleGothic; font-size: 12px; }
+	div.log_pane {width: 350px; height: 250px; overflow: auto; margin:10px 0; padding: 5px; border: 1px solid; }	
+	span.time {font-style: italic; font-family: arial; font-size: 9px;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+<div class="demo">
+	<div class="log_app">
+		<a href="#" class="start">start()</a> / <a href="#" class="pause">pause()</a> / <a href="#" class="resume">resume()</a> / <a href="#" class="abort">abort()</a>
+		<div class="log_pane"></div>
+		<div id="watch"></div>
+	</div>
+</div>
+	
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" src="./js/TimerLog.js"></script>
+<script type="text/javascript"> 
+	var oApp = new TimerLog();
+</script> 
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body> 
+</html> 

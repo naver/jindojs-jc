@@ -1,0 +1,280 @@
+﻿/* 
+    Document   : default
+    Created on : 25-Sep-2010, 08:33:58
+    Author     : phil
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body {
+    font: 0.8em/1em "trebuchet MS", arial, sans-serif;
+    color: #777;
+}
+
+h1 {
+    font-size: 1.6em;
+    margin: 30px 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 1.4em;
+    padding: 0 0 6px 0;
+    margin: 0;
+    border-bottom: solid 1px #ccc;
+}
+
+h3 {
+    font-size: 1.1em;
+    margin: 0 0 5px 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    padding: 0 0 30px 0;
+}
+
+#wrap {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.fileDrop {
+    width: 560px;
+    border: dashed 2px #ccc;
+    background-color: #fefefe;
+    float: right;
+    color: #ccc;
+    position:relative;
+    z-index:2;
+}
+
+    .fileDrop p {
+        text-align: center;
+        padding: 25px 0;
+        font-size: 1.6em;
+    }
+    
+.fileDrop.over {
+	background-color: #F0FCF0;
+	border-color: #3DD13F;
+	color: #3DD13F;
+}
+
+#files {
+	clear:both;
+    padding: 20px 20px 10px 20px;
+    margin:10px 0 30px 0;
+    border: solid 2px #ccc;
+    background: #fefefe;
+    position: relative;
+}
+
+.fileDrop,
+#files {
+    -moz-box-shadow: 0 0 20px #ccc;
+}
+
+#fileList {
+    list-style: none;
+    padding: 5px 0;
+    clear:both;
+    margin: 0;
+    overflow:hidden;
+}
+
+    #fileList li {
+        float:left;
+        font-size:.9em;
+        margin: 0;
+        width:220px;
+        height:100px;
+        padding: 10px;
+        margin: 5px;
+        overflow: hidden;
+        border: solid 1px #ccc;
+        position: relative;
+    }
+    
+        #fileList li img {
+            width: 120px;
+            border: solid 1px #999;
+            padding: 6px;
+            margin: 0 10px 0 0;
+            background-color: #eee;
+            display: block;
+            float: left;
+        }
+        
+        #fileList li .buttons {
+        	position:absolute;
+        	right:10px;
+        	bottom:10px;	
+        }
+
+#upload, #abort, #remove, #reset {
+    color: #fff;
+    display: block;
+    width: auto;
+    float:right;
+    background-color: #777;
+    padding: 10px;
+    margin:10px 0 0 10px;
+    font-size:1.5em;
+    text-decoration: none;
+    -moz-border-radius: 6px;
+}
+
+#upload:hover, #abort:hover, #remove:hover {
+    background-color: #333;
+}
+
+.loader {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    color: orange;
+}
+
+.loadingIndicator {
+    width: 0%;
+    height: 2px;
+    background-color: orange;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.imagePreview {
+    width: 300px;
+    padding: 10px;
+    border: solid 1px #ccc;
+    position: absolute;
+    background-color: white;
+}
+
+    .imagePreview img {
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+* { font-family:나눔고딕, "맑은 고딕"; }
+.browsebutton {
+	width:216px; height:68px;
+	position:relative;
+}
+
+.browsebutton .browse-box {
+	position:absolute; width:216px; height:68px; overflow:hidden;
+	background-color:gray;
+	opacity:0 !important; -ms-opacity:0 !important; filter:alpha(opacity=0) !important; -ms-filter:alpha(opacity=0) !important;
+}
+
+.browsebutton .browse-file-input {position:absolute; margin:0; padding:0; border:0 none;}
+
+.browsebutton .browse-button {
+	/*display:none;*/
+	display:block;
+	font-size:1.5em;
+	padding:25px 55px; margin:5px 0;
+	border:3px solid #aaa; width:100px;
+	background-color:#888; color:#fff;
+	text-align:center; text-decoration:none;
+}
+
+.fileButton.over .browse-button {
+	background-color:#333;
+}
+
+.browsebutton .browse-applied { display:block; }
+.browsebutton .browse-over { }
+
+#files li {
+
+}
+
+#files li.wait {
+	background-color:#ddd;
+}
+
+#files li.progress {
+	background-color:#ffc;
+}
+
+#files li.load {
+	background-color:#cfc;
+}
+
+#files li.error {
+	background-color:#fcc;
+}
+
+#fileList li.load .loadingIndicator {
+	background-color:green;
+}
+
+#fileList li.none .loadingIndicator {
+	display:none;
+}
+
+#fileList li button {
+	border:1px solid #ddd;
+	background-color:#bbb;
+	color:#fff;
+	margin-top:10px;
+	padding:5px 10px;
+}
+
+#fileList li button.abort {
+	display:none;
+}
+
+#fileList li.wait button.abort,
+#fileList li.progress button.abort {
+	display:inline-block;
+}
+
+#fileList li.wait button.upload,
+#fileList li.progress button.upload,
+#fileList li.load button.upload,
+#fileList li.error button.upload {
+	display:none;
+}
+
+#fileList li button.reset {
+	display:none;
+}
+
+#fileList li.load button.reset,
+#fileList li.error button.reset {
+	display:inline-block;
+}
+
+#progress {
+	background-color:green;
+	height:10px;
+	width:0;
+}
+
+ul.category {
+	list-style:none;
+	margin:0; padding:0;
+	overflow:hidden;
+}
+
+ul.category li {
+	padding:10px 5px; width:179px;
+	text-align:center;
+	float:left;
+}

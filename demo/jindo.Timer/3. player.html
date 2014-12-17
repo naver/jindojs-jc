@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>진행 막대</title>
+<meta name="class-lists" content="jindo.Timer"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="진행 막대의 UI 을 구현한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.player {position: absolute;}
+	.player div {position: absolute;}
+	.foreground {width: 0px; height: 12px; background-color:#0075c8; top: 0px; left: 0px;}
+	.background {width: 320px; height: 12px; background-color:#ccc; top: 0px; left: 0px;}
+	.buttons {width:12px; height: 12px; background: url("img/Timer.buttons.png") no-repeat 0px 0px; top: 0px; left: 325px; cursor: pointer;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div class="player">
+		<div class="background"></div>
+		<div class="foreground"></div>
+		<div class="buttons"></div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" src="./js/TimerPlayer.js"></script>
+<script type="text/javascript">
+	var oPlayer = new TimerPlayer();
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.LazyLoading"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="버튼을 클릭하여 js 파일을 로드하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<button onclick="test1(); return false;">Load "alert.js"</button>
+	<button onclick="test2(); return false;">Load "function.js"</button>
+	<button onclick="test3(); return false;">Load "function.js" and "function2.js"</button>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LazyLoading.js"></script>
+<script type="text/javascript">
+
+	function test1() {
+		jindo.LazyLoading.load("alert.js");
+	}
+
+	function test2() {
+		jindo.LazyLoading.load("function.js", function(){
+			a("success!");
+		});
+	}
+
+	function test3() {
+		jindo.LazyLoading.load([ "function.js", "function2.js" ], function() {
+			a("sum(2+3) : " + sum(2, 3));
+		});
+	}
+
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+			
+			.tc-panel { display:none; }
+
+			.tabs {
+				padding:0; margin:0; list-style:none; position:relative; z-index:1;
+				_zoom:1; /* 이걸 안 넣으면 IE 에서 clear:both 했을때 공백이 들어감-_- */
+			}
+			
+			.tabs li {
+				float:left; border:1px solid #aaa; border-bottom:0; padding:5px; margin-right:2px;
+				background-color:#fff; cursor:pointer; _cursor:hand; color:#aaa; position:relative;
+			}
+			
+			.tabs li.tc-selected {
+				padding-bottom:6px;
+				border-color:#000; cursor:default; font-weight:bold; color:#000;
+			}
+			
+			.panels {
+				padding:0; margin:0; list-style:none; border:1px solid #000; padding:20px;
+				position:relative; top:-1px; clear:both;
+				background-color:#fff;
+			}
+			
+			.panels .tc-panel.tc-selected { display:block; }
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+			
+			<div id="test" class="tabcontrol">
+				<ul class="tabs">
+					<li class="tc-tab">tab 1</li>
+					<li class="tc-tab">tab 2</li>
+					<li class="tc-tab">tab 3</li>
+				</ul>
+				<div class="panels">
+					<div class="tc-panel">panel 1</div>
+					<div class="tc-panel">panel 2</div>
+					<div class="tc-panel">panel 3</div>
+				</div>
+			</div>			
+				
+			</div>
+
+			<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+			<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+			<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+			<script type="text/javascript" charset="utf-8" src="../src/jindo.TabControl.js"></script>
+			<script type="text/javascript" src="js/jindo.TabControl.test.js"></script>
+	</body>
+</html>

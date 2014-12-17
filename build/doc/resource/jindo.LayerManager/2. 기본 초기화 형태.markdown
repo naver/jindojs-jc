@@ -1,0 +1,12 @@
+#### HTML
+
+	<button id='button' onclick='oLayerManager.show();'>레이어를 컨트롤하는 버튼</button>
+	<div id='layer' style='display:none;'>보여지고 감춰지는 레이어</div>
+
+#### JavaScript
+
+	//include jindo.Componenet.js
+	//include jindo.UIComponent.js
+	//include jindo.Timer.js
+	//include jindo.LayerManager.js
+	var oLayerManager = new jindo.LayerManager('layer').link('button').link('layer');

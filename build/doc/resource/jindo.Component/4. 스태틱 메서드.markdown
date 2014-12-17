@@ -1,0 +1,26 @@
+#### factory()
+
+진도 컴포넌트의 생성자는 일반적으로 엘리먼트, 옵션객체를 인자로 받는다.
+
+	var oCheckBox = new jindo.CheckBox(jindo.$("cb"), { sClassName : "checkbox-" });
+
+여러개의 엘리먼트에 동일한 옵션으로 컴포넌트를 초기화할때 다음과 같이 factory 스태틱메소드를 사용할 수 있다.
+
+	//각각 인스턴스 생성
+	var oCheckBox1 = new jindo.CheckBox(jindo.$("cb1"), { sClassName : "checkbox-" });
+	var oCheckBox2 = new jindo.CheckBox(jindo.$("cb2"), { sClassName : "checkbox-" });
+	var oCheckBox3 = new jindo.CheckBox(jindo.$("cb3"), { sClassName : "checkbox-" });
+	 
+	//factory 스태틱 메소드로 일괄생성 (위와 동일)
+	var aCheckBox = jindo.CheckBox.factory([jindo.$("cb1"), jindo.$("cb2"), jindo.$("cb3")], { sClassName : "checkbox-" });
+
+#### getInstance()
+
+getInstance() 스태틱메소드는 해당 컴포넌트의 모든 인스턴스를 배열로 리턴한다.
+
+	new jindo.CheckBox(jindo.$("cb1"));
+	new jindo.CheckBox(jindo.$("cb2"));
+	new jindo.CheckBox(jindo.$("cb3"));
+	 
+	//getInstance()로 인스턴스배열 구하기
+	var aCheckBox = jindo.CheckBox.getInstance(); //[인스턴스1, 인스턴스2, 인스턴스3]

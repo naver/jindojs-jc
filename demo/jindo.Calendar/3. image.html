@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>이미지 적용</title>
+<meta name="class-lists" content="jindo.Calendar"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="달력의 디자인에 이미지를 적용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+.layer { display:none; }
+.layer-show { display:block; }
+/* 롤오버 */
+a.rollover img{border:0;display:inline;}
+a.rollover img.over{display:none;}
+a.rollover:hover{border:0}
+a.rollover:hover img{display:none;}
+a.rollover:hover img.over{display:inline;}
+
+#calendar_layer {position:absolute;z-index:99;}
+#calendar_layer .calendar_body {position:relative;width:183px;border:1px solid #777;text-align:center; background:#ffffff;z-index:2}
+#calendar_layer iframe {position:absolute;bottom:0px;left:0;width:185px;height:100px;}
+#calendar_layer strong {color:#393939; font-size:12px; font-family:tahoma;}
+#calendar_layer .calendar-title-year {overflow:hidden;display:block;height:11px;padding-top:10px}
+#calendar_layer .calendar-title-year span {display:inline-block;width:7px;height:7px;background:url(img/Calendar.img_nums.gif) no-repeat;vertical-align:top}
+#calendar_layer .calendar-title-year .hidden {position:absolute;overflow:hidden;width:0;height:0;font-size:0;line-height:0;}
+#calendar_layer .calendar-title-month {display:inline-block;width:70px;height:26px;background:url(img/Calendar.img_nums.gif) no-repeat;}
+#calendar_layer .calendar-title-month span {position:absolute;overflow:hidden;width:0;height:0;font-size:0;line-height:0;}
+#calendar_layer .y0 {background-position:0 0 !important;}
+#calendar_layer .y1 {background-position:-10px 0 !important;}
+#calendar_layer .y2 {background-position:-20px 0 !important;}
+#calendar_layer .y3 {background-position:-30px 0 !important;}
+#calendar_layer .y4 {background-position:-40px 0 !important;}
+#calendar_layer .y5 {background-position:-50px 0 !important;}
+#calendar_layer .y6 {background-position:-60px 0 !important;}
+#calendar_layer .y7 {background-position:-70px 0 !important;}
+#calendar_layer .y8 {background-position:-80px 0 !important;}
+#calendar_layer .y9 {background-position:-90px 0 !important;}
+#calendar_layer .m01 {background-position:0 -9px;}
+#calendar_layer .m02 {background-position:-73px -9px;}
+#calendar_layer .m03 {background-position:-146px -9px;}
+#calendar_layer .m04 {background-position:-219px -9px;}
+#calendar_layer .m05 {background-position:-292px -9px;}
+#calendar_layer .m06 {background-position:-365px -9px;}
+#calendar_layer .m07 {background-position:0px -38px;}
+#calendar_layer .m08 {background-position:-73px -38px;}
+#calendar_layer .m09 {background-position:-146px -38px;}
+#calendar_layer .m10 {background-position:-219px -38px;}
+#calendar_layer .m11 {background-position:-292px -38px;}
+#calendar_layer .m12 {background-position:-365px -38px;}
+#calendar_layer img {margin:1px 0 0 0 !important; vertical-align:top;}
+#calendar_layer table {width:154px; margin:2px auto 9px auto !important; border-collapse:collapse;}
+#calendar_layer table th {width:22px;height:15px;padding:0;text-align:center; font-size:10px;border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;background:none;vertical-align:middle;}
+#calendar_layer table th.calendar-sat {color:#0000ff;}
+#calendar_layer table th.calendar-sun {color:#ff0000;}
+#calendar_layer table td {width:22px; margin:0; padding:0 0 1px 0; font-size:10px; font-family:tahoma; text-align:center; vertical-align:top;border:0}
+#calendar_layer table td {padding:1px 0 1px 0; color:#6c6c6c;line-height:14px;}
+#calendar_layer table td.calendar-prev-mon {opacity:0.2; filter:alpha(opacity=20);}
+#calendar_layer table td.calendar-next-mon {opacity:0.2; filter:alpha(opacity=20);}
+#calendar_layer table td.calendar-sat {color:#0000ff;}
+#calendar_layer table td.calendar-sun,
+#calendar_layer table td.calendar-holiday {color:#f4050b;}
+#calendar_layer table td.calendar-today {color:#383838; background-color:#6894db;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="calendar_layer" class="layer">
+		<div class="calendar_body">
+		<strong class="calendar-title-year">
+			<!--
+			<span class="y2"><span class="hidden">2</span></span><span class="y0"><span class="hidden">0</span></span><span class="y0"><span class="hidden">0</span></span><span class="y9"><span class="hidden">9</span></span>
+			-->
+		</strong>
+
+		<div>
+			<a class="rollover calendar-btn-prev-mon" href="#"><img width="16" height="26" class="pre" alt="이전달" src="img/Calendar.btn_calendar_prev.gif"/><img width="16" height="26" class="over pre" alt="이전달" src="img/Calendar.btn_calendar_prev_on.gif"/></a>
+			<strong class="calendar-title-month m01"><!--<span>10</span>--></strong>  
+			<a class="rollover calendar-btn-next-mon" href="#"><img width="16" height="26" class="next" alt="다음달" src="img/Calendar.btn_calendar_next.gif"/><img width="16" height="26" class="over next" alt="다음달" src="img/Calendar.btn_calendar_next_on.gif"/></a>
+		</div>
+
+		<table cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th class="sun"><img width="7" height="9" alt="일" src="img/Calendar.txt_sun.gif"/></th><th><img width="7" height="9" alt="월" src="img/Calendar.txt_mon.gif"/></th><th><img width="9" height="9" alt="화" src="img/Calendar.txt_tue.gif"/></th><th><img width="8" height="9" alt="수" src="img/Calendar.txt_wed.gif"/></th><th><img width="8" height="9" alt="목" src="img/Calendar.txt_thu.gif"/></th><th><img width="8" height="9" alt="금" src="img/Calendar.txt_fri.gif"/></th><th class="sat"><img width="8" height="9" alt="토" src="img/Calendar.txt_sat.gif"/></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="calendar-week">
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Calendar.js"></script>
+<script type="text/javascript">
+	var oCalendar = new jindo.Calendar(jindo.$("calendar_layer"), {
+		htCustomEventHandler : {
+			afterDraw : function(oCustomEvent) {
+				var elTitleOfYear = jindo.$$.getSingle(".calendar-title-year", this.getBaseElement());
+				var elTitleOfMonth = jindo.$$.getSingle(".calendar-title-month", this.getBaseElement());
+				var oTemplate = jindo.$Template('<span class="y{=year1}"><span class="hidden">{=year1}</span></span><span class="y{=year2}"><span class="hidden">{=year2}</span></span><span class="y{=year3}"><span class="hidden">{=year3}</span></span><span class="y{=year4}"><span class="hidden">{=year4}</span></span>');
+				var sYear = oCustomEvent.nYear.toString();
+				var sMonth = oCustomEvent.nMonth.toString();
+				if (sMonth < 10) {
+					sMonth = "0" + sMonth;
+				}
+				elTitleOfYear.innerHTML = oTemplate.process({
+					"year1" : sYear.charAt(0), 
+					"year2" : sYear.charAt(1),
+					"year3" : sYear.charAt(2),
+					"year4" : sYear.charAt(3)
+				}); 
+				elTitleOfMonth.className = "calendar-title-month m" + sMonth;
+				elTitleOfMonth.innerHTML = "";
+			}
+		}
+	});
+	
+	jindo.$Element(oCalendar.getBaseElement()).addClass('layer-show');
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+#### HTML
+	<div class="selectbox-noscript"> <!-- 기준 엘리먼트 -->
+	    <select class="selectbox-source"> <!-- HTML Select 엘리먼트 -->
+	        <option class="selectbox-default">선택하세요</option> <!-- 디폴트 선택항목 (다시 선택할 수 없음) -->
+	        <option value="1">1</option> <!-- 일반적인 선택항목 -->
+	        <option value="2">2</option>
+	        <option value="3">3</option>
+	        <option value="4">4</option>
+	        <option value="5" class="selectbox-invisible">이건안보여요</option> <!-- 선택목록에 노출되지 않는 항목 -->
+	        <option disabled="disabled">------------------</option> <!-- 선택목록에는 노출되지만 선택할 수 없는 항목 -->
+	        <option value="6">6</option>
+	        <option value="7">7</option>
+	        <option value="8">8</option>
+	        <option value="9">9</option>
+	        <option value="10" class="selectbox-notclose">10</option> <!-- 선택되어도 선택목록이 닫히지 않는 항목 -->
+	    </select>
+	    <div class="selectbox-box"> <!-- 박스 엘리먼트 -->
+	        <div class="selectbox-label"></div> <!-- 레이블 엘리먼트 -->
+	    </div>
+	    <div class="selectbox-layer"> <!-- 레이어 엘리먼트 -->
+	        <div class="selectbox-list"></div> <!-- 목록 엘리먼트 -->
+	    </div>
+	</div>
+
+* 기준 엘리먼트 div는 로드되기전 [prefix]noscript 클래스명을 갖는다.
+* 기준 엘리먼트는 [prefix]source 클래스명을 가지는 select 엘리먼트를 포함한다.
+* select 엘리먼트의 option 엘리먼트중 기본으로 보이고 싶은 엘리먼트에 [prefix]default 클래스명을 선언한다.
+* select 엘리먼트의 option 엘리먼트중 보이고 싶지 않은 엘리먼트에 [prefix]invisible 클래스명을 선언한다.
+* select 엘리먼트의 option 엘리먼트중 보이지만 선택할 수 없는 엘리먼트에 속성 disabled="disabled"을 선언한다.
+* select 엘리먼트의 option 엘리먼트중 선택할 수 있지만 클릭하여도 목록 레이어가 닫히지 않게 하려면 엘리먼트에 [prefix]notclose 클래스명을 선언한다.
+* 모든 option 엘리먼트는 default, disabled를 제외하고는 모두 유일한 value 값을 가져야 한다.
+* 기준 엘리먼트는 [prefix]box 클래스명을 가지는 박스엘리먼트를 포함한다.
+* 박스 엘리먼트 내에 기본으로 보여질 텍스트 영역이 될 [prefix]label 클래스명을 가지는 레이블 엘리먼트를 포함한다.
+* 기준 엘리먼트는 레이어가 그려질 [prefix]layer 클래스명을 가지는 레이어 엘리먼트를 포함한다.
+* 레이어 엘리먼트는 목록이 그려질 [prefix]list 클래스명을 가지는 목록엘리먼트를 포함한다.
+
+#### CSS
+	.selectbox-noscript * { display:none; }
+	.selectbox-noscript .selectbox-source { display:inline; position:relative; left:0;}
+	.selectbox-noscript .selectbox-source * { display:block; }
+	 
+	.selectbox-source { position:absolute; left:-9999px;}
+	.selectbox-focused .selectbox-box { border-color:green; }
+	.selectbox-disabled .selectbox-box { border-color:gray; }
+	 
+	.selectbox-box { border:3px solid yellowgreen; width:200px; cursor:default; }
+	.selectbox-label { padding:3px; }
+	.selectbox-layer { display:none; position:absolute; border:3px solid blue; width:200px; background-color:#eee;  }
+	.selectbox-list ul { list-style:none; margin:0; padding:0; }
+	 
+	.selectbox-list ul li { padding:3px; cursor:default; color:#888; background-color:#eee; zoom:1; }
+	.selectbox-list ul li.selectbox-item-selected { color:#000; font-weight:bold; }
+	.selectbox-list ul li.selectbox-item-over { background-color:#aaa !important; }
+                
+#### JavaScript
+	//include jindo.Componenet.js
+	//include jindo.UIComponent.js
+	//include jindo.HTMLComponent.js
+	//include jindo.RolloverArea.js
+	//include jindo.RolloverClick.js
+	//include jindo.Timer.js
+	//include jindo.LayerManager.js
+	//include jindo.LayerPosition.js
+	//include jindo.SelectBox.js
+	 
+	var oSelectBox = new jindo.SelectBox(jindo.$("select"));

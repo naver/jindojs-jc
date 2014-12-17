@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			div { border:1px solid #000; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			.dragable { padding:10px;position:absolute; background-color:#ffd; cursor:move; }
+			
+			#bar { width:300px; height:200px; left:300px; top:100px; padding:10px; overflow:scroll; }
+			
+			#bar_sub1 { width:50px; height:50px; background-color:#dd0; left:50px; top:50px; }
+			#bar_sub2 { width:50px; height:50px; background-color:#0dd; left:300px; top:70px; }
+			#bar_sub3 { width:50px; height:50px; background-color:#d0d; left:200px; top:70px; }
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div class="dragable" id="bar">
+			<div class="dragable" id="bar_sub1"> </div>
+			<div class="dragable" id="bar_sub2"></div>
+			<div class="dragable" id="bar_sub3"> </div>
+			input[type=text]<br/>
+			<input type="text" value="input의 내용" /><br/><br/>
+			textarea<br/>
+			<textarea size=150 height="50">input, textarea안에서는 drag되지 않아야합니다.</textarea><br/>
+			<select>
+				<option>select가 선택되어야 합니다</option>
+			</select>
+			그가 미소지어도
+			내 눈은 그대 그대가 웃고있죠
+			그와 손을 잡아도
+			내 손은 그대 그대 손을 느끼죠
+			
+			내 맘은 그댈 지웠는데
+			심장은 그댈 비웠는데
+			분명히 그댈 지웠는데 아직까지도 안돼
+			
+			이젠 시간이 그대의 모습을 지우고
+			그대로 가득했던 내 맘을 비워도
+			내 몸이 그댈 내 몸이 그댈 기억해
+			(난 기억해 아직까지도 난 그대와)
+		</div>
+
+		<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.DragArea.js"></script>
+		<script type="text/javascript" src="js/jindo.DragArea.test.js"></script>
+	</body>
+</html>

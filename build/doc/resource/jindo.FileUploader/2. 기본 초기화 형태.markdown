@@ -1,0 +1,15 @@
+#### HTML
+	<form method="POST" enctype="multipart/form-data">
+	    <input type="file" id="file_select">
+	</form>
+
+* 전송할 input[type=file]은 반드시 부모엘리먼트로 form 엘리먼트를 가져야 한다.
+* form의 속성값으로 method는 "post", enctype은 "multipart/form-data" 이어야 한다.
+
+#### Javascript
+
+	var oFileUploader = new jindo.FileUploader(jindo.$("file_select"), {
+	    sUrl  : 'http://ajaxui.jindodesign.com/docs/components/samples/response/FileUpload.php', //업로드할 서버의 url (Form 전송의 대상)
+	    sCallback : 'http://ajaxui.jindodesign.com/svnview/Jindo_Component/FileUploader/trunk/Spec/callback.html', //업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+	    htData : {} //post할 데이터 셋 예 { blogId : "testid" }
+	});

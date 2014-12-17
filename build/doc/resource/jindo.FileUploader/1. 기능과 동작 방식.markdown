@@ -1,0 +1,66 @@
+#### Feature
+
+* 선택가능한 파일확장자를 지정할 수 있다.
+* 파일이 선택됨과 동시에 전송이 가능하다.
+* 파일전송의 성공 실패에 따른 예외 처리가 가능하다.
+* 파일 선택은 1개만 가능하고 여러개 동시선택이 불가능하다.
+
+#### 요청 수행 과정
+
+* 요청이 수행되면 Form 내부에 보이지 않는 iframe 생성한다.
+* 생성된 iframe은 지정된 option의 url로 선택된 파일과 함께 callback의 주소와 callback함수명 전달한다. ex) FileUpload.php?callback=callback.html&callback_func=tmpFrame_84101_func
+* 파일은 전송받은 서버에서는 callback함수명과 함께 callback 주소로 리다이렉트하도록 설정한다.
+* 이 때, 전송이 실패하였을 경우에 쿼리스트링으로 errstr=error을 추가한다.
+* 전달할 추가적인 정보가 있으면 쿼리스트링으로 추가한다.
+* callback주소로 리다이렉트된 iframe은 부모의 파일업로더 객체에 콜백함수를 실행시키고 자신을 제거한다.
+
+#### 서버측 예시 FileUpload.php
+
+	//기본 리다이렉트
+	$url = $_REQUEST["callback"] .'?callback_func='. $_REQUEST["callback_func"];
+	 
+	if (is_uploaded_file($_FILES['Filedata']['tmp_name'])) { //성공시 사이즈와 url 전송
+	$tmp_name = $_FILES['Filedata']['tmp_name'];
+	$name = $_FILES['Filedata']['name'];
+	$new_path = "upload/".$name;
+	@move_uploaded_file($tmp_name, $new_path);
+	$url .= "&size=". $_FILES['Filedata']['size'];
+	$url .= "&url=".rawurlencode("http://ajaxui.nhndesign.com/svnview/components/samples/response/upload/".rawurlencode($name));
+	} else { //실패시 errstr=error 전송
+	$url .= '&errstr=error';
+	}
+	 
+	header('Location: '. $url);
+        
+#### callback.html의 내용
+
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<html lang="ko">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>FileUploader Callback</title>
+	</head>
+	<body>
+	<script type="text/javascript">
+	   // document.domain 설정
+	    document.domain = "nhncorp.com";
+	     
+        // execute callback script
+        var sUrl = document.location.search.substr(1);
+		if (sUrl != "blank") {
+	        var oParameter = {}; // query array
+	        
+	        sUrl.replace(/([^=]+)=([^&]*)(&|$)/g, function(){
+				oParameter[decodeURIComponent(arguments[1])] = decodeURIComponent(arguments[2]);
+	            return "";
+	        });
+	        
+	        if ((oParameter.errstr || '').length) { // on error
+	            (parent.jindo.FileUploader._oCallback[oParameter.callback_func+'_error'])(oParameter);
+	        } else {
+	            (parent.jindo.FileUploader._oCallback[oParameter.callback_func+'_success'])(oParameter);
+	        }
+		}
+	</script>
+	</body>
+	</html>

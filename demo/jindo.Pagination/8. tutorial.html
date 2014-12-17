@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+<head>
+<title>튜토리얼</title>
+<meta name="class-lists" content="jindo.Pagination"/>
+<meta name="screenshots" content=""/> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+	<meta name="description" content="Step By Step 으로 따라하며 확인 해 볼 수 있는 튜토리얼 입니다.">
+	<link rel="stylesheet" type="text/css" href="../asset/doc.css" />
+	<link type="text/css" rel="stylesheet" href="../../asset/syntaxhighlighter/styles/shCore.css"/>
+	<link type="text/css" rel="stylesheet" href="../../asset/syntaxhighlighter/styles/shThemeEclipse.css"/>
+	<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../src/jindo.Pagination.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../asset/syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../asset/syntaxhighlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../asset/syntaxhighlighter/scripts/shBrushDiff.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../asset/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../asset/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../asset/syntaxhighlighter/scripts/shBrushPlain.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../asset/syntaxhighlighter/scripts/shBrushXml.js"></script>
+	
+	
+	<style type="text/css"> 
+	/* Paginate */
+	.paginate{ padding:15px 0; display:none;}
+	.paginate *{ margin:0; padding:0;}
+	.paginate a,
+	.paginate strong{ position:relative; margin-left:-1px; font-weight:bold; display:inline-block; padding:3px 8px 1px 7px; color:#313031; border-left:1px solid #ccc; border-right:1px solid #ccc; text-decoration:none; line-height:normal; font:bold 12px 돋움, Dotum, 굴림, Gulim, AppleGothic, Sans-serif; background:#fff;}
+	.paginate strong{ color:#ff8600 !important;}
+	.paginate a:hover{ background:#F7F7F7; }
+	.paginate a.pre{ padding:3px 8px 1px 16px; background:url(img/Pagination.bu_pg1_l1.gif) no-repeat 8px 6px !important; border:none; font-weight:normal; }
+	.paginate a.pre_end{ padding:3px 8px 1px 16px; background:url(img/Pagination.bu_pg1_l2.gif) no-repeat 4px 6px !important; border:none; border-right:1px solid #ccc; font-weight:normal;}
+	.paginate a.next{ padding:3px 16px 1px 8px; background:url(img/Pagination.bu_pg1_r1.gif) no-repeat 37px 6px !important; border:none; font-weight:normal; }
+	.paginate a.next_end{ padding:3px 16px 1px 8px; background:url(img/Pagination.bu_pg1_r2.gif) no-repeat 37px 6px !important; border:none; border-left:1px solid #ccc; font-weight:normal;}
+	.paginate.loaded { display:block;}
+	.paginate.only-one { display:block;}
+	.paginate.no-result { display:none;}
+	
+	body {font:12px 돋움, Dotum, 굴림, Gulim, AppleGothic, Sans-serif;}
+	h5 {font-size: 13px; font-style: bold;}
+	p {margin: 5px 5px 5px 20px; width: 500px;}
+	p.example_image {text-align: center;}
+	ul.desc, ol.desc {margin-left: 20px; width: 480px;}
+	</style>
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.tagName = 'textarea';
+		SyntaxHighlighter.config.clipboardSwf = '../../asset/syntaxhighlighter/scripts/clipboard.swf';
+		SyntaxHighlighter.all();
+	</script>
+</head> 
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script> 
+	<h5>jindo.Pagination을 이용한 간단한 튜토리얼</h5>
+	<p>이번 샘플에서는 간단한 jindo.Paginantion을 만들어본다.</p>
+	
+	<h5>1. jindo.Pagination 생성하기</h5>
+	<p>jindo.Pagination을 만들 엘리먼트와 페이지 형태로 보여줄 항목 10개를 jindo.Pagination에 
+	파라미터로 넘겨줍니다.</p>
+	<textarea class="brush: javascript;">
+		var oPagination = new jindo.Pagination("idOfElement", {
+			nItem:10
+		});
+	</textarea>
+	<div>
+		<div id="example_1" class="paginate" style="margin-left: 200px;">
+			<a href="#" class="pre">이전</a>
+			<a href="#" class="next">다음</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+	<!--
+		(function() {
+			var oPagination = new jindo.Pagination("example_1", {
+				nItem:10
+			});
+		})();
+	//-->
+	</script>
+
+	<h5>2. 옵션변경하기</h5>
+	<p>한 페이지에 1개의 항목을 보여주고 한 페이지에 페이지 목록은 3개의 페이지 목록이 
+	보이도록 설정합니다.</p>
+	<textarea class="brush: javascript;">
+		var oPagination = new jindo.Pagination("idOfElement", {
+			nItem:10,
+			nItemPerPage: 1,
+			nPagePerPageList: 3
+		});
+	</textarea>
+	<div>
+		<div id="example_2" class="paginate" style="margin-left: 200px;">
+			<a href="#" class="pre">이전</a>
+			<a href="#" class="next">다음</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+	<!--
+		(function() {
+			var oPagination = new jindo.Pagination("example_2", {
+				nItem:10,
+				nItemPerPage: 1,
+				nPagePerPageList: 3
+			});
+		})();
+	//-->
+	</script>
+
+	<h5>3. 이벤트 연동하기</h5>
+	<p>페이지가 변경되는 경우마다 화면에 노출되는 상품 이미지가 변경되는 코드를 
+	추가합니다. 상품이미지는 N_000.jpg, N_001.jpg에서 N_009.jpg까지 총 10개의 
+	이미지를 가지고 있습니다.</p>
+	<p>jindo.Pagination의 move 이벤트에 페이지가 변경되었을 때의 동작을 추가합니다. </p>
+	<ol class="desc">
+		<li>jindo.Pagination().attach() 함수에 move 이벤트를 어떻게 처리할 지를 정의한 
+		함수를 넘겨줍니다. 
+			<textarea class="brush: javascript;">
+				jindo.Pagination(...).attach({move: function() {}});
+			</textarea>
+		</li>
+		<li>페이지 변경 시에 넘겨주는 페이지 번호를 받기 위해서 파라미터에 oCustomEvent
+		를 추가합니다. 
+			<textarea class="brush: javascript;">
+				jindo.Pagination(...).attach({move: function(oCustomEvent) {
+				}});
+			</textarea>
+		</li>
+		<li>넘겨주는 페이지 값이 1부터 시작하나 상품 이미지는 0부터 시작하므로 1을 빼주는
+		코드를 추가합니다. 
+			<textarea class="brush: javascript;">
+				jindo.Pagination(...).attach({move: function(oCustomEvent) {
+					var nPage = oCustomEvent.nPage -1;
+				}});
+			</textarea>
+		</li>
+		<li>이미지 태그의 src를 해당 페이지의 상품 이미지로 교체해줍니다.
+			<textarea class="brush: javascript;">
+				jindo.Pagination(...).attach({move: function(oCustomEvent) {
+					var nPage = oCustomEvent.nPage -1;
+					jindo.$("image").src = "img/N_00"+ nPage +".jpg";
+				}});
+			</textarea>
+		</li>
+	</ol>
+	
+	<p> 최종 작성한 코드는 다음의 형태가 됩니다.</p>
+	<textarea class="brush: javascript;">
+		var oPagination = new jindo.Pagination("idOfElement", {
+			nItem:10,
+			nItemPerPage: 1,
+			nPagePerPageList: 3
+		}).attach({
+			move: function(oCustomEvent) {
+				var nPage = oCustomEvent.nPage -1;
+				jindo.$("image").src = "img/N_00"+ nPage +".jpg";
+			}
+		});
+	</textarea>
+	<div  style="margin-left: 50px; width: 370px;">
+		<div style="padding:15px 0;">
+			<img id="img_in_example_3" alt="" src="img/N_000.jpg" 
+				style="border: 1px solid #dedede; display:block; width:360px; height:268px;">
+		</div>
+		<div id="example_3" class="paginate" style="text-align: center;">
+			<a href="#" class="pre">이전</a>
+			<a href="#" class="next">다음</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+	<!--
+		(function() {
+			var oPagination = new jindo.Pagination("example_3", {
+				nItem:10,
+				nItemPerPage: 1,
+				nPagePerPageList: 3
+			}).attach({
+				move: function(oCustomEvent) {
+					var nPage = oCustomEvent.nPage -1;
+					jindo.$("img_in_example_3").src = "img/N_00"+ nPage +".jpg";
+				}
+			});
+		})();
+	//-->
+	</script>
+	
+
+<h5>기타</h5>
+<p>위 튜토리얼에서 jindo.Pagination에 사용한 css는 아래의 css를 사용하였다.</p>
+<textarea class="brush: css;">	
+	.paginate{ padding:15px 0; display:none; margin-left: 20px;}
+	.paginate *{ margin:0; padding:0;}
+	.paginate a,
+	.paginate strong{ position:relative; margin-left:-1px; font-weight:bold; 
+		display:inline-block; padding:3px 8px 1px 7px; color:#313031; 
+		border-left:1px solid #ccc; border-right:1px solid #ccc; 
+		text-decoration:none; line-height:normal; background:#fff;
+		font:bold 12px 돋움, Dotum, 굴림, Gulim, AppleGothic, Sans-serif; }
+	.paginate strong{ color:#ff8600 !important;}
+	.paginate a:hover{ background:#F7F7F7; }
+	.paginate a.pre{ padding:3px 8px 1px 16px; border:none; font-weight:normal; 
+		background:url(img/Pagination.bu_pg1_l1.gif) 
+			no-repeat 8px 6px !important;  }
+	.paginate a.pre_end{ padding:3px 8px 1px 16px; border:none;  
+		border-right:1px solid #ccc; font-weight:normal;
+		background:url(img/Pagination.bu_pg1_l2.gif) 
+			no-repeat 4px 6px !important; }
+	.paginate a.next{ padding:3px 16px 1px 8px; border:none; font-weight:normal; 
+		background:url(img/Pagination.bu_pg1_r1.gif) 
+			no-repeat 37px 6px !important; }
+	.paginate a.next_end{ padding:3px 16px 1px 8px; border:none; 
+		border-left:1px solid #ccc; font-weight:normal;
+		background:url(img/Pagination.bu_pg1_r2.gif) 
+			no-repeat 37px 6px !important; }
+	.paginate.loaded { display:block;}
+	.paginate.only-one { display:block;}
+	.paginate.no-result { display:none;}
+</textarea>	
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body> 
+</html> 

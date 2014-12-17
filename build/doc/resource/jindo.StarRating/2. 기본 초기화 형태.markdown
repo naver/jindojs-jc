@@ -1,0 +1,35 @@
+#### HTML
+
+	<div class="starrating-background" id="star_rating">
+	    <span><em>평점 4점</em></span>
+	</div>
+	                
+* 기준 엘리먼트에 배경이미지를 지정해 전체 입력가능한 점수를 표현한다.
+* 기준 엘리먼트 하위에 설정된 점수를 표현하기 위한 span 엘리먼트가 존재해야한다.
+* CSS가 정상 동작하지 않을 경우(선형화 되었을 때) 별점정보를 표현할 대체 텍스트를 위해 span 엘리먼트의 자식으로 em 엘리먼트가 존재해야한다.
+
+#### CSS
+
+	.starrating-background {
+	    background:transparent url(w_03.gif) repeat-x scroll 0 0;
+	    cursor:pointer;
+	    display:inline-block;
+	    height:19px;
+	    margin:0;
+	    width:90px;
+	    vertical-align:middle;
+	}
+	 
+	.starrating-background span {
+	    background:transparent url(w_01.gif) repeat-x scroll 0 0;
+	    cursor:pointer;
+	    display:inline-block;
+	    height:19px !important;
+	}
+	 
+	/* 대체텍스트 숨기기 */
+	.starrating-background em {position:absolute; top:0; left:0; width:0; height:0; overflow:hidden; visibility:hidden; font-size:0; line-height:0;}
+	                
+#### Javascript
+
+	var oStarRating = new jindo.StarRating(jindo.$("star_rating"));

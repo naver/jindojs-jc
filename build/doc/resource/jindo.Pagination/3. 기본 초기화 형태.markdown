@@ -1,0 +1,46 @@
+#### HTML
+
+	<!-- 로드되기 전의 구조 (기본 구조) -->
+	<div id="pagination">
+	    <a href="#" class="pre_end">맨앞</a>
+	    <a href="#" class="pre">이전</a>
+	    <a href="#" class="next">다음</a>
+	    <a href="#" class="next_end">맨뒤</a>
+	</div>
+	<!-- 로드되기 전의 구조 (맨앞/맨뒤 버튼 없음) -->
+	<div id="pagination">
+	    <a href="#" class="pre">이전</a>
+	    <a href="#" class="next">다음</a>
+	</div>
+	<!-- 로드되기 전의 구조 (이전/다음페이지 버튼은 클릭할수 없어도 항상 보임) -->
+	<div id="pagination">
+	    <span class="pre">이전페이지</span>
+	    <span class="next">다음페이지</span>
+	    <a href="#" class="pre">이전페이지</a>
+	    <a href="#" class="next">다음페이지</a>
+	</div>
+	<!-- 로드된 이후 페이지가 생성된 결과 -->
+	<div id="pagination" class="loaded">
+	    <!-- 이전/다음/맨앞/맨뒤 버튼을 추가하였고 5개의 페이지를 목록에서 보도록 설정한 경우 -->
+	    <!-- 클릭할 수 없는 경우 노출되지 않거나 span으로 대체됨 -->
+	    <a class="pre_end" href="#">맨앞</a>
+	    <a class="pre" href="#">이전</a>
+	    <strong class="first-child">1</strong>
+	    <a href="#">2</a>
+	    <a href="#">3</a>
+	    <a href="#">4</a>
+	    <a href="#" class="last-child">5</a>
+	    <a class="next" href="#">다음</a>
+	    <a class="next_end" href="#">맨뒤</a>
+	</div>
+	
+추가하고 싶은 엘리먼트 요소들을 jindo.Pagination으로 생성할 엘리먼트 안에 정의하면 해당하는 엘리먼트가 생성된다.
+
+#### Javascript
+
+	//200개의 항목들을 10개씩, 한 페이지에는 5개의 페이지 목록씩 보여주는 페이지네이션 생성
+	var oPagination = new jindo.Pagination(jindo.$("pagination"), {
+	    nItem: 200,
+	    nItemPerPage: 10,
+	    nPagePerPageList: 5
+	});

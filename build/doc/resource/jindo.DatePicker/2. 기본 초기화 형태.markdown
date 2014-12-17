@@ -1,0 +1,90 @@
+#### HTML
+	<div id="datepicker-calendar" class="calendar"> <!-- 기준 엘리먼트 -->
+	    <div>
+	        <a href="#" class="rollover calendar-btn-prev-year"><img src="../../resource/img/Calendar.btn_calendar_first.gif" alt="이전년" width="14" height="13"><img src="../../resource/img/Calendar.btn_calendar_first_on.gif" alt="이전년" width="14" height="13" class="over"></a> <!-- 이전년 버튼 (생략가능) -->
+	        <a href="#" class="rollover calendar-btn-prev-mon"><img src="../../resource/img/Calendar.btn_calendar_prev.gif" alt="이전달" width="13" height="13" class="pre"><img src="../../resource/img/Calendar.btn_calendar_prev_on.gif" alt="이전달" width="13" height="13" class="over pre"></a> <!-- 이전달 버튼 (생략가능) -->
+	        <strong class="calendar-title"></strong> <!-- 달력의 타이틀 (생략가능) -->
+	        <a href="#" class="rollover calendar-btn-next-mon"><img src="../../resource/img/Calendar.btn_calendar_next.gif" alt="다음달" width="13" height="13" class="next"><img src="../../resource/img/Calendar.btn_calendar_next_on.gif" alt="다음달" width="13" height="13" class="over next"></a> <!-- 다음달 버튼 (생략가능) -->
+	        <a href="#" class="rollover calendar-btn-next-year"><img src="../../resource/img/Calendar.btn_calendar_last.gif" alt="다음년" width="14" height="13"><img src="../../resource/img/Calendar.btn_calendar_last_on.gif" alt="다음년" width="14" height="13" class="over"></a> <!-- 다음년 버튼 (생략가능) -->
+	    </div>
+	    <table cellspacing="0" cellpadding="0">
+	        <thead>
+	            <tr>
+	                <th class="sun">S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th class="sat">S</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
+	                <td class="calendar-date"></td> <!-- 날짜가 표시될 엘리먼트 -->
+	                <td class="calendar-date"></td>
+	                <td class="calendar-date"></td>
+	                <td class="calendar-date"></td>
+	                <td class="calendar-date"></td>
+	                <td class="calendar-date"></td>
+	                <td class="calendar-date"></td>
+	            </tr>
+	        </tbody>
+	    </table>
+	    </div>
+	</div>
+	<input type="text" id="datepicker-input" />
+
+jindo.Calendar를 표현하기 위한 마크업을 정의하고, 날짜가 지정될 Text Input을 선언한다.
+
+#### CSS
+
+	.calendar {position:absolute; width:195px; z-index:99999;display:none;}
+	.calendar {width:195px;padding-bottom:9px;border:1px solid #777;background:#ffffff;}
+	.calendar div{margin-bottom:5px;padding:7px 0 9px 0px;text-align:center;background:#f6f6f6;}
+	.calendar div a.rollover img{border:0;display:inline; vertical-align:text-bottom; vertical-align:middle;}
+	.calendar div a.rollover img.over{display:none;}
+	.calendar div a.rollover:hover{border:0}
+	.calendar div a.rollover:hover img{display:none;}
+	.calendar div a.rollover:hover img.over{display:inline;}
+	.calendar div .calendar-title{float:none !important;font-family:verdana;font-size:12px;color:#383838; margin:0 7px;}
+	.calendar table{width:175px;margin:0 auto;text-align:center;}
+	.calendar table *{font-family:tahoma !important;font-size:10px;}
+	.calendar table td{width:25px;height:16px;text-align:center;color:#000000;}
+	.calendar table td a{display:block;height:15px;padding-top:1px;color:#000000;}
+	.calendar table td a:hover{background:#edf4fe;color:#6d6d6d;text-decoration:none !important;font-family:tahoma !important;}
+	.calendar table td a:visited,
+	.calendar table td a:active{color:#000000;text-decoration:none !important;}
+	.calendar table .calendar-selected{background:#edf4fe;color:#6d6d6d;}
+	.calendar table .calendar-selected a{color:#6d6d6d;text-decoration:none;}
+	.calendar table .calendar-sat{color:#2828e8;}
+	.calendar table .calendar-sat a,
+	.calendar table .calendar-sat a:visited,
+	.calendar table .calendar-sat a:hover,
+	.calendar table .calendar-sat a:active{color:#2828e8 !important;}
+	.calendar table .calendar-sun{color:#e82828;}
+	.calendar table .calendar-sun a,
+	.calendar table .calendar-sun a:visited,
+	.calendar table .calendar-sun a:hover,
+	.calendar table .calendar-sun a:active{color:#e82828 !important;}
+	.calendar table .calendar-today{background:#6595db;color:#ffffff;}
+	.calendar table .calendar-today a{font-weight:bold;text-decoration:none;color:#fff}
+	.calendar table .calendar-today a:hover,
+	.calendar table .calendar-today a:visited,
+	.calendar table .calendar-today a:active{background:#6595db;color:#fff}
+	.calendar table .calendar-prev-mon .calendar-date,
+	.calendar table .calendar-next-mon .calendar-date {display:none}
+	.calendar table .calendar-unselectable a:hover,
+	.calendar table .calendar-unselectable a:visited,
+	.calendar table .calendar-unselectable a:active,
+	.calendar table .calendar-unselectable a {background:none !important;color:#ccc !important; cursor:default;}   
+
+jindo.Calendar를 표현하기 위한 css를 정의한다.
+
+#### JavaScript
+
+	//include jindo.Componenet.js
+	//include jindo.UIComponent.js
+	//include jindo.Calendar.js
+	//include jindo.Timer.js
+	//include jindo.LayerManager.js
+	//include jindo.LayerPosition.js
+	//include jindo.DatePicker.js
+	 
+	var oDatePicker = new jindo.DatePicker(jindo.$("datepicker-calendar")).addDatePickerSet({
+	    elInput : jindo.$("datepicker-input")
+	});

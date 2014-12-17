@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>자동으로 입력창 사이즈가 조절되는 예제</title>
+<meta name="class-lists" content="jindo.WatchInput"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="글자의 양에 따라 자동으로 입력창의 크기가 조절되는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.resizable {font-size:16px; resize: none; border:1px solid black; margin:0; padding:0; height:21px; width:200px; overflow:hidden;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<textarea id="resizable" class="resizable"></textarea>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.WatchInput.js"></script>
+<script type="text/javascript">
+	var oNavigator = jindo.$Agent().navigator();
+	var nDefaultScrollHeight = jindo.$("resizable").scrollHeight; //1줄일때의 scrollHeight
+	//값 변화시 사이즈 늘리고 줄임
+	var oWatchInput = new jindo.WatchInput(jindo.$("resizable"), {
+		nInterval : 100,
+		sKeyEvent : "keyup",
+		bActivateOnload : true
+	}).attach({
+		change: function(oCustomEvent){
+			jindo.$Element(oCustomEvent.elInput).css("height", "21px").css("height", Math.max(21, oCustomEvent.elInput.scrollHeight) + "px");	
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

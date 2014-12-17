@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>외부 클릭시 레이어가 닫히는 경우</title>
+<meta name="class-lists" content="jindo.LayerManager"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="레이어를 제외한 곳에 클릭하면 레이어가 감춰지는데, 이때 예외로 둘 엘리먼트를 지정하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.layer { 
+		position:absolute; 
+		border:1px solid #000; 
+		background-color:#eee; 
+		display:none; 
+		margin-top:5px; 
+		width:120px;
+		height:100px;
+		overflow:auto;
+	}
+	
+	.overflow {
+		overflow-x:hidden;
+		overflow-y:auto;
+	}
+	
+	li {
+		font-family:나눔고딕, 굴림;
+		margin:10px;
+	}
+	.layer-show { display: block;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<ul>
+		<li>
+			<a href="#" id="anchor1" onclick="o1.show(); return false;">클릭으로 열고 외부 클릭시 닫기</a>
+			<div id="layer1" class="layer">
+				레이어 <a onclick="o1.hide(); return false;" href="#">[닫기]</a>
+			</div>
+			<br>
+			레이어나 a 태그 클릭시에는 닫히지 않는다.
+		</li>
+		<li>
+			클릭으로 열고 외부 클릭시 닫기. (클릭하여도 닫히지 않는 엘리먼트를 여러개 지정)<br>
+			<a id="anchor2-1" onclick="o2.show(); return false;" href="#">첫번째 LINK</a>
+			<a id="anchor2-2" onclick="o2.show(); return false;" href="#">두번째 LINK</a>
+			<a id="anchor2-3" onclick="o2.show(); return false;" href="#">세번째 LINK</a>
+			<div id="layer2" class="layer">
+				레이어
+			</div>
+		</li>
+	</ul>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript">
+	var o1 = new jindo.LayerManager('layer1').link(jindo.$('layer1'), jindo.$('anchor1'));
+
+	var o2 = new jindo.LayerManager('layer2', { 
+		sCheckEvent : 'click', 
+		nHideDelay : 100 
+	}).link('layer2', 'anchor2-1').link(jindo.$('anchor2-2')).link(jindo.$Element('anchor2-3'));
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

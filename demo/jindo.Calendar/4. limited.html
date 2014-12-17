@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기간 제한</title>
+<meta name="class-lists" content="jindo.Calendar"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="정해진 기간 내에서만 날짜를 선택 할 수 있도록 제한한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+.layer { display:none; }
+.layer-show { display:block; }
+
+/* 롤오버 */
+a.rollover img{border:0;display:inline;}
+a.rollover img.over{display:none;}
+a.rollover:hover{border:0}
+a.rollover:hover img{display:none;}
+a.rollover:hover img.over{display:inline;}
+
+#calendar_layer { position:absolute; top:10px; width:195px; border:1px solid #777; text-align:center; background:#ffffff; z-index:99; }
+#calendar_layer strong {color:#393939; font-size:12px; font-family:tahoma;}
+#calendar_layer img {margin:1px 0 0 0 !important; vertical-align:top;}
+#calendar_layer table {width:175px; margin:10px auto 9px auto !important; border-collapse:collapse;}
+#calendar_layer table th {text-align:center; font-size:10px;}
+#calendar_layer table th.calendar-sat {color:#0000ff;}
+#calendar_layer table th.calendar-sun {color:#ff0000;}
+#calendar_layer table td {width:25px; margin:0; padding:0 0 1px 0; font-size:10px; font-family:tahoma; text-align:center; vertical-align:top;}
+#calendar_layer table td {padding:1px 0 1px 0; color:#6c6c6c;}
+#calendar_layer table td.calendar-prev-mon {opacity:0.2; filter:alpha(opacity=20);}
+#calendar_layer table td.calendar-next-mon {opacity:0.2; filter:alpha(opacity=20);}
+#calendar_layer table td.calendar-sat {color:#0000ff;}
+#calendar_layer table td.calendar-sun,
+#calendar_layer table td.calendar-holiday {color:#f4050b;}
+#calendar_layer table td.calendar-today {color:#383838; background-color:#ecf4fd;}
+#calendar_layer table td.calendar-selected {color:#fff; font-weight:bold; background-color:#6894db;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	
+	<div id="calendar_layer" class="layer">
+		<div>
+			<a href="#" class="rollover calendar-btn-prev-year"><img src="img/Calendar.btn_calendar_first.gif" alt="이전년" width="14" height="13"><img src="img/Calendar.btn_calendar_first_on.gif" alt="이전년" width="14" height="13" class="over"></a>
+			<a href="#" class="rollover calendar-btn-prev-mon"><img src="img/Calendar.btn_calendar_prev.gif" alt="이전달" width="13" height="13" class="pre"><img src="img/Calendar.btn_calendar_prev_on.gif" alt="이전달" width="13" height="13" class="over pre"></a>
+			<strong class="calendar-title"></strong>  
+			<a href="#" class="rollover calendar-btn-next-mon"><img src="img/Calendar.btn_calendar_next.gif" alt="다음달" width="13" height="13" class="next"><img src="img/Calendar.btn_calendar_next_on.gif" alt="다음달" width="13" height="13" class="over next"></a>
+			<a href="#" class="rollover calendar-btn-next-year"><img src="img/Calendar.btn_calendar_last.gif" alt="다음년" width="14" height="13"><img src="img/Calendar.btn_calendar_last_on.gif" alt="다음년" width="14" height="13" class="over"></a>
+		</div>
+		<table cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th class="sun">S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th class="sat">S</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="calendar-week">
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+					<td class="calendar-date"></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+	
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Calendar.js"></script>
+<script type="text/javascript">
+	/*
+		마크업 관련 설정
+		달력 레이어 내에 정의된 class명으로 달력을 출력한다.
+		필수가 아닌 것은 생략 가능하다.
+		.btn_prev_year 이전달 버튼
+		.btn_prev_month 이전년 버튼
+		.btn_next_year 다음년 버튼
+		.btn_next_month 다음달 버튼
+		.title 달력의 타이틀 버튼, 옵션의 titleFormat형식으로 입력됨
+		.week 달력의 한 주에 해당하는 template (필수)
+		.date .week 안에 실제 날짜가 표시될 부분 (필수, 7개) 
+	*/	
+	var oCalendar = new jindo.Calendar("calendar_layer", {
+		nYear : 2009,
+		nMonth : 1,
+		nDate : 1,			
+		sTitleFormat : "yyyy/mm"
+	}).attach({
+		beforeDraw : function(oCustomEvent) {
+			if (oCustomEvent.nYear < 2009) {
+				alert("2009년 이전으로 이동할 수 없습니다.");
+				oCustomEvent.stop();
+			}
+			if (oCustomEvent.nYear > 2009) {
+				alert("2009년 이후로 이동할 수 없습니다.");
+				oCustomEvent.stop();
+			}
+		}
+	});
+	jindo.$Element(oCalendar.getBaseElement()).addClass('layer-show');
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

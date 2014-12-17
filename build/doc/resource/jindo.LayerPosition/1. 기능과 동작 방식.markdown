@@ -1,0 +1,123 @@
+jindo.LayerPosition 컴포넌트는 레이어를 특정 엘리먼트 기준으로 원하는 곳에 위치시킬 수 있는 컴포넌트다. LayerPosition은 특정 엘리먼트에 대햐 상대적으로 위치시키기 위해 다양한 옵션을 제공한다. 위치 설정 관련 옵션(sPosition, sAlign, sValign, nTop, nLeft)의 다양한 조합을 통해서 원하는 형태로 레이어를 위치 시키는 방법을 그림을 통해 설명한다.
+
+#### 기준 엘리먼트 바깥쪽으로 레이어를 위치 시키는 경우
+
+sPosition의 값을 각각 "outside-top-left", "outside-top-right", "outside-bottom-left", "outside-bottom-right"으로 설정한 모습이다. nTop, nLeft 옵션을 통해 기준 엘리먼트와의 간격을 설정할 수 있다. 이 경우 sAling이나 sValign 속성은 적용되지 않는다.
+
+![](outside_out.png "")
+
+* 레이어1 : sPosition 속성을 "outside-top-left"로 설정
+* 레이어2 : sPosition 속성을 "outside-top-right"로 설정
+* 레이어3 : sPosition 속성을 "outside-bottom-left"로 설정
+* 레이어4 : sPosition 속성을 "outside-bottom-right"로 설정
+
+다음은 sPosition의 값이 "outside-top", "outside-bottom"인 경우의 모습이다. sPosition의 값이 "outside-top", "outside-bottom"인 경우 sAlign 옵션이 적용되고 이를 통해 좌우정렬 할 수 있다. sAlign은 "left", "center", "right"으로 설정할 수 있다. sAlign의 값이 "center"인 경우 nLeft 옵션이 적용되지 않는 모습을 볼 수 있다.
+
+![](outside_vin.png "")
+
+* 레이어1 : sPosition은 "outside-top", sAlign은 "left"로 설정
+* 레이어2 : sPosition은 "outside-top", sAlign은 "center"로 설정
+* 레이어3 : sPosition은 "outside-top", sAlign은 "right"로 설정
+* 레이어4 : sPosition은 "outside-bottom", sAlign은 "left"로 설정
+* 레이어5 : sPosition은 "outside-bottom", sAlign은 "center"로 설정
+* 레이어6 : sPosition은 "outside-bottom", sAlign은 "right"로 설정
+
+다음은 sPosition의 값이 "outside-left", "outside-right"인 경우의 모습이다. sPosition의 값이 "outside-left", "outside-right"인 경우 sValign 옵션이 적용되고 이를 통해 상하정렬 할 수 있다. sValign은 "top", "middle", "bottom"으로 설정할 수 있다. sValign의 값이 "middle"인 경우 nTop 옵션이 적용되지 않는 모습을 볼 수 있다.
+
+* 레이어1 : sPosition은 "outside-left", sValign은 "top"로 설정
+* 레이어2 : sPosition은 "outside-left", sValign은 "middle"로 설정
+* 레이어3 : sPosition은 "outside-left", sValign은 "bottom"로 설정
+* 레이어4 : sPosition은 "outside-right", sValign은 "top"로 설정
+* 레이어5 : sPosition은 "outside-right", sValign은 "middle"로 설정
+* 레이어6 : sPosition은 "outside-right", sValign은 "bottom"로 설정
+
+#### 기준 엘리먼트 안쪽으로 레이어를 위치 시키는 경우
+
+기준 엘리먼트의 안쪽에 레이어를 위치시키는 모습이다. sPosition 값이 "inside-"로 시작되는 경우이다. "outside-"와 마찬가지로 "inside-top", "inside-bottom"의 경우 sAlign을 통해서 좌우 정렬이 가능하고 nLeft는 적용되지 않는다. 또한 "inside-left", "inside-right"의 경우 sValign을 통해서 상하 정렬이 가능하고 nTop은 적용되지 않는다.
+
+![](inside.png "")
+
+* 레이어1 :
+	* sPosition을 "inside-top-left"로 설정
+	* sPosition은 "inside-top", sAlign은 "left"로 설정
+	* sPosition은 "inside-left", sValign은 "top"으로 설정
+* 레이어2 : sPosition은 "inside-top", sAlign은 "center"로 설정
+* 레이어3 :
+	* sPosition을 "inside-top-right"로 설정
+	* sPosition은 "inside-top", sAlign은 "right"로 설정
+	* sPosition은 "inside-right", sValign은 "top"으로 설정
+* 레이어4 : sPosition은 "inside-left", sValign은 "middle"로 설정
+* 레이어5 : sPosition을 "inside-center"로 설정
+* 레이어6 : sPosition은 "inside-right", sValign은 "middle"로 설정
+* 레이어7 :
+	* sPosition을 "inside-bottom-left"로 설정
+	* sPosition은 "inside-bottom", sAlign은 "left"로 설정
+	* sPosition은 "inside-left", sValign은 "bottom"으로 설정
+* 레이어8 : sPosition은 "inside-bottom", sAlign은 "center"로 설정
+* 레이어9 :
+	* sPosition을 "inside-bottom-right"로 설정
+	* sPosition은 "inside-bottom", sAlign은 "right"로 설정
+	* sPosition은 "inside-right", sValign은 "bottom"으로 설정
+
+#### bAuto 옵션을 적용한 자동배치
+
+LayerPosition의 옵션 중 bAuto 값을 true로 설정하면 스크롤과 브라우저창의 크기가 변경될 때 레이어의 위치를 다시 조정한다. 또한 자동배치는 레이어의 위치가 화면에 보이지 않는 경우 대칭된 지점으로 위치를 조정하여 화면에 노출될 수 있도록 한다. 아래 그림과 같이 버튼 아래에 레이어를 위치시키고 창 크기를 줄여 레이어가 보이지 않게 되는 경우 버튼 하단에 있던 레이어는 상단으로 위치가 조정되는 모습을 볼 수 있다. 자동 배치 설정 상태에서 레이어가 상하좌우 어느곳에도 위치시킬 수 없는 경우 원래 레이어의 위치로 이동한다.
+
+![](bAuto_before.png "")
+
+![](bAuto_after.png "")
+
+#### 자동배치 설정상태(bAuto가 true)인 경우 커스텀 이벤트 제어
+
+자동배치가 설정된 상태일 때 beforeAdjust와 adjust 커스텀 이벤트가 발생한다. beforeAdjust는 자동 배치에 의해 레이어의 위치가 조정되기 전에 발생한다. adjust는 조정된 후 발생하는 이벤트이다. beforeAdjust 이벤트를 통해 조정되기 전 현재 위치와 조정된 후 이동할 위치를 받을 수 있다. 이를 제어하여 특정 조건에 따라 자동 배치를 수행하지 않을 수도 있다.
+다음 코드는 기준 엘리먼트 우측 하단에 레이어를 위치시키고 bAuto 옵션을 true로 설정한 예제이다.
+
+	var oLayerPosition = new jindo.LayerPosition(jindo.$("center"), jindo.$("layer"), {
+	    sPosition : "outside-right",
+	    sValign : "bottom",
+	    nTop : 0,
+	    nLeft : 10,
+	    bAuto:true
+	});
+
+float:left;
+<div style="float:left;">
+	<img src="custom_before0.png">
+</div>
+<div>
+	<img src="custom_before1.png">
+</div>
+
+![](custom_before2.png "")
+
+그림에서 보는 것과 같이 창 크기가 변경됨에 따라 레이어가 노출되지 않는 경우 상하, 좌우 대칭 되는 곳으로 자동배치되고 있다. beforeAdjust 커스텀 이벤트를 통해 상하 대칭으로 자동배치 되지 않고 좌우 대칭으로만 조정되도록 제어할 수 있다.
+
+	var oLayerPosition = new jindo.LayerPosition(jindo.$("center"), jindo.$("layer"), {
+	    sPosition : "outside-right",
+	    sValign : "bottom",
+	    nTop : 0,
+	    nLeft : 10,
+	    bAuto:true
+	}).attach({
+	    beforeAdjust : function(oCustomEvent) {
+	        //좌우로만 자동 이동하도록 설정
+	        if (oCustomEvent.htAdjustedPosition.nTop < oCustomEvent.htCurrentPosition.nTop) {
+	            // 이벤트 객체의 stop() 메서드를 호출하여 위치 조정이 되지 않도록 한다.
+	            // stop() 메서드를 호출하면 이후 adjust 이벤트는 발생하지 않는다.
+	            oCustomEvent.stop();
+	        }
+	    }
+	});
+
+<div style="float:left;">
+	<img src="custom_after0.png">
+</div>
+<div>
+	<img src="custom_after1.png">
+</div>
+
+![](custom_after2.png "")
+
+#### Note
+
+* 레이어의 사이즈가 fix되어있지 않는 경우 렌더링 오류가 발생한다.(IE)

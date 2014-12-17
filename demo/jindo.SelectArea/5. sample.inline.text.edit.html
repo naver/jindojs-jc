@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>InlineTextEdit 적용 예제</title>
+<meta name="class-lists" content="jindo.SelectArea"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="jindo.InlineTextEdit 컴퍼넌트를 함께 적용 한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#select ul { list-style:none; }
+	#select li { width:300px; margin:5px 0; padding:3px; border:1px solid black; }
+	#select li.selected { background:skyblue; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="select">
+		<ul>
+			<li class="selectable">1</li>
+			<li class="selectable">2</li>
+			<li class="selectable">3</li>
+			<li class="selectable">4</li>
+			<li class="selectable">5</li>
+			<li class="selectable">6</li>
+			<li class="selectable">7</li>
+			<li class="selectable">8</li>
+			<li class="selectable">9</li>
+			<li class="selectable">10</li>
+		</ul>
+	</div>
+	<div id="text">not selected</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.SelectArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.InlineTextEdit.js"></script>
+<script type="text/javascript">
+
+	var fpOnChange = function() {
+	
+		var aSelected = [];
+		jindo.$A(oSelectArea.getSelectableElement()).forEach(function(el){
+			if (oSelectArea.isSelected(el)) {
+				aSelected.push(el.innerHTML);
+			}
+		});
+		jindo.$("text").innerHTML = aSelected.join(", ");
+		
+	};
+
+	var oInlineTextEdit = new jindo.InlineTextEdit().attach({
+		beforeChange : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+			//oCustomEvent.stop();
+		},
+		change : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType);
+			fpOnChange();
+		}
+	});
+	
+	var oSelectArea = new jindo.SelectArea(jindo.$("select"), {
+		sClassName : "selectable",
+		bMultiSelection : false,
+		bRemainOne : true
+	}).attach({
+		select : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent.bSelectedAgain);
+			if (oCustomEvent.bSelectedAgain && this.getSelected() == oCustomEvent.elSelectable) {
+				oInlineTextEdit.edit(oCustomEvent.elSelectable);
+			}
+		},
+		
+		change : function(oCustomEvent) {
+			//console.log(oCustomEvent.sType, oCustomEvent);
+			fpOnChange();
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

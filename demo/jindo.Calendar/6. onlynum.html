@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>숫자만 표현</title>
+<meta name="class-lists" content="jindo.Calendar"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="숫자만 보여주도록 다른 디자인을 적용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.layer { display:none; }
+	.layer-show { display:block; }
+	
+	/* 롤오버 */
+	a.rollover img{border:0;display:inline;}
+	a.rollover img.over{display:none;}
+	a.rollover:hover{border:0}
+	a.rollover:hover img{display:none;}
+	a.rollover:hover img.over{display:inline;}
+	
+	#calendar_layer { text-align:center;}
+	#calendar_layer .calendar-week span { margin:0 2px 0 2px;}
+	#calendar_layer .calendar-week .calendar-sat {color:#0000ff;}
+	#calendar_layer .calendar-week .calendar-sun,
+	#calendar_layer .calendar-week .calendar-holiday {color:#f4050b;}
+	#calendar_layer .calendar-week .calendar-today {color:#383838; background-color:#ccc; border:1px solid #000;}
+	#calendar_layer .calendar-prev-mon {opacity:.2; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; filter:opacity(alpha=20);}
+	#calendar_layer .calendar-next-mon {opacity:.2; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; filter:opacity(alpha=20); }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div class="layer" id="calendar_layer">
+		<div>
+			<a href="#" class="rollover calendar-btn-prev-year"><img src="img/Calendar.btn_calendar_first.gif" alt="이전년" width="14" height="13"><img src="img/Calendar.btn_calendar_first_on.gif" alt="이전년" width="14" height="13" class="over"></a>
+			<a href="#" class="rollover calendar-btn-prev-mon"><img src="img/Calendar.btn_calendar_prev.gif" alt="이전달" width="13" height="13" class="pre"><img src="img/Calendar.btn_calendar_prev_on.gif" alt="이전달" width="13" height="13" class="over pre"></a>
+			<strong class="calendar-title"></strong>  
+			<a href="#" class="rollover calendar-btn-next-mon"><img src="img/Calendar.btn_calendar_next.gif" alt="다음달" width="13" height="13" class="next"><img src="img/Calendar.btn_calendar_next_on.gif" alt="다음달" width="13" height="13" class="over next"></a>
+			<a href="#" class="rollover calendar-btn-next-year"><img src="img/Calendar.btn_calendar_last.gif" alt="다음년" width="14" height="13"><img src="img/Calendar.btn_calendar_last_on.gif" alt="다음년" width="14" height="13" class="over"></a>
+		</div>
+		<div>
+			<span class="calendar-week">
+				<span class="calendar-date"></span>
+				<span class="calendar-date"></span>
+				<span class="calendar-date"></span>
+				<span class="calendar-date"></span>
+				<span class="calendar-date"></span>
+				<span class="calendar-date"></span>
+				<span class="calendar-date"></span>
+			</span>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Calendar.js"></script>
+<script type="text/javascript">
+	/*
+	 * 공휴일 정보
+	 * 일반적으로 웹서버에서 포함시켜주는 방법을 사용하는 것이 좋음.
+	 */
+	var oHoliday = {"2000":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"11":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"5":true,"6":true},"9":{"11":true,"12":true,"13":true}},"2001":{"1":{"1":true,"24":true,"25":true},"3":{"1":true},"5":{"5":true,"1":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"1":true,"2":true},"12":{"25":true},"9":{"30":true}},"2002":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"19":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"11":true,"12":true,"13":true},"9":{"20":true,"21":true,"22":true}},"2003":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"8":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"1":true,"2":true},"9":{"10":true,"11":true,"12":true}},"2004":{"1":{"1":true,"21":true,"22":true,"23":true},"3":{"1":true},"5":{"5":true,"26":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"9":{"27":true,"28":true,"29":true}},"2005":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"15":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"8":true,"9":true,"10":true},"9":{"17":true,"18":true,"19":true}},"2006":{"1":{"1":true,"29":true,"30":true},"3":{"1":true},"5":{"5":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"5":true,"6":true,"7":true},"12":{"25":true}},"2007":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"24":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"17":true,"18":true,"19":true},"9":{"24":true,"25":true,"26":true}},"2008":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"12":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"6":true,"7":true,"8":true},"9":{"13":true,"14":true,"15":true}},"2009":{"1":{"1":true,"25":true,"26":true,"27":true},"3":{"1":true},"5":{"5":true,"2":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"2":true,"4":true},"12":{"25":true}},"2010":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"21":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"13":true,"14":true,"15":true},"9":{"21":true,"22":true,"23":true}},"2011":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"10":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"2":true,"3":true,"4":true},"9":{"11":true,"12":true,"13":true}},"2012":{"1":{"1":true,"23":true,"24":true},"3":{"1":true},"5":{"5":true,"28":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"1":true},"12":{"25":true},"9":{"29":true,"30":true}},"2013":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"17":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"10":true,"11":true},"9":{"18":true,"19":true,"20":true}},"2014":{"1":{"1":true,"30":true,"31":true},"3":{"1":true},"5":{"5":true,"6":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"1":true},"9":{"7":true,"8":true,"9":true}},"2015":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"25":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"18":true,"19":true,"20":true},"9":{"26":true,"27":true,"28":true}},"2016":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"14":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"8":true,"9":true},"9":{"14":true,"15":true,"16":true}},"2017":{"1":{"1":true,"27":true,"28":true,"29":true},"3":{"1":true},"5":{"5":true,"3":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"4":true,"5":true},"12":{"25":true}},"2018":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"22":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"15":true,"16":true,"17":true},"9":{"23":true,"24":true,"25":true}},"2019":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"12":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"4":true,"5":true,"6":true},"9":{"12":true,"13":true,"14":true}},"2020":{"1":{"1":true,"24":true,"25":true,"26":true},"3":{"1":true},"5":{"5":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"1":true,"2":true},"12":{"25":true},"4":{"30":true},"9":{"30":true}},"2021":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"19":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"11":true,"12":true,"13":true},"9":{"20":true,"21":true,"22":true}},"2022":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"8":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"1":true,"2":true},"9":{"9":true,"10":true,"11":true}},"2023":{"1":{"1":true,"21":true,"22":true,"23":true},"3":{"1":true},"5":{"5":true,"27":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"9":{"28":true,"29":true,"30":true}},"2024":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"15":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"9":true,"10":true,"11":true},"9":{"16":true,"17":true,"18":true}},"2025":{"1":{"1":true,"29":true,"30":true},"3":{"1":true},"5":{"5":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"5":true,"6":true,"7":true},"12":{"25":true}},"2026":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"24":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"17":true,"18":true},"9":{"24":true,"25":true,"26":true}},"2027":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"13":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"6":true,"7":true,"8":true},"9":{"14":true,"15":true,"16":true}},"2028":{"1":{"1":true,"26":true,"27":true,"28":true},"3":{"1":true},"5":{"5":true,"2":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"2":true,"4":true},"12":{"25":true}},"2029":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"20":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"13":true,"14":true},"9":{"21":true,"22":true,"23":true}}};
+	
+	/*
+		마크업 관련 설정
+		달력 레이어 내에 정의된 class명으로 달력을 출력한다.
+		필수가 아닌 것은 생략 가능하다.
+		.btn_prev_year 이전달 버튼
+		.btn_prev_month 이전년 버튼
+		.btn_next_year 다음년 버튼
+		.btn_next_month 다음달 버튼
+		.title 달력의 타이틀 버튼, 옵션의 titleFormat형식으로 입력됨
+		.week 달력의 한 주에 해당하는 template (필수)
+		.date .week 안에 실제 날짜가 표시될 부분 (필수, 7개) 
+	
+	*/
+	var oCalendar = new jindo.Calendar("calendar_layer", {
+		sTitleFormat : "yyyy년 m월"
+	}).attach({
+		draw : function(oCustomEvent) {
+			if (typeof oHoliday == "object" && oHoliday[oCustomEvent.nYear] && oHoliday[oCustomEvent.nYear][parseInt(oCustomEvent.nMonth * 1)] && oHoliday[oCustomEvent.nYear][parseInt(oCustomEvent.nMonth * 1)][oCustomEvent.nDate]) {
+				jindo.$Element(oCustomEvent.elDate).addClass("calendar-holiday");
+			}
+		}
+	});
+	jindo.$Element(oCalendar.getBaseElement()).addClass('layer-show');
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

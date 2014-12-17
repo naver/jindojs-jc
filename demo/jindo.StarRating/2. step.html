@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>최대 5점, 0.5점 단위</title>
+<meta name="class-lists" content="jindo.StarRating"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="최대 별점을 5점으로 하고, 0.5점 단위로 점수를 매길 수 있도록 만든 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.starrating-background { background:transparent url(img/w_03.gif) repeat-x scroll 0 0; cursor:pointer; display:inline-block; height:19px; margin:0; width:90px; vertical-align:middle; }
+	.starrating-background span { background:transparent url(img/w_01.gif) repeat-x scroll 0 0; cursor:pointer;	display:inline-block; height:19px !important; }
+	.starrating-background em {position:absolute; top:0; left:0; width:0; height:0; overflow:hidden; visibility:hidden; font-size:0; line-height:0;} /* 대체텍스트 숨기기 */
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div>
+		<strong>평점주기 (10점 만점 1점 단위)</strong>
+		<br/>별을 클릭하세요
+	</div>
+	<div class="starrating-background" id="star_rating">
+		<span><em>평점 4점</em></span>
+	</div>
+	<span id="score"></span>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.StarRating.js"></script>
+<script type="text/javascript">
+	var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
+		nStep : 1,
+		nMaxValue : 10,
+		nDefaultValue : 0
+	}).attach({
+		set : function(oCustomEvent) {
+			jindo.$("score").innerHTML = oCustomEvent.nValue;
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

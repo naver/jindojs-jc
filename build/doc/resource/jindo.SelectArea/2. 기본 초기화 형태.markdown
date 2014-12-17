@@ -1,0 +1,36 @@
+#### HTML
+	<div id="select">
+	    <ul>
+	        <li class="selectable">1</li>
+	        <li class="selectable">2</li>
+	        <li class="selectable">3</li>
+	        <li class="selectable">4</li>
+	        <li class="selectable">5</li>
+	        <li class="selectable">6</li>
+	        <li class="selectable">7</li>
+	        <li class="selectable">8</li>
+	        <li class="selectable">9</li>
+	        <li class="selectable">10</li>
+	    </ul>
+	</div>
+
+#### CSS
+	#select {
+	    position:relative;
+	}
+	#select ul {
+	    list-style:none;
+	}
+	#select li {
+	    width:300px;
+	    margin:5px 0;
+	    border:1px solid black;
+	}
+	#select li.selected {
+	    background:skyblue;
+	}
+	선택된 엘리먼트에 selected 클래스명이 추가된다.
+	드래그 선택기능을 사용하는 경우(bDragSelect옵션 true) 기준 엘리먼트의 css style의 position값은 relative여야 한다.
+
+#### Javascript
+	var oSelectArea = new jindo.SelectArea(jindo.$("select"));

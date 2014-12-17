@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>드래그앤드랍</title>
+<meta name="class-lists" content="jindo.Tree"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="DragArea/DropArea 컴퍼넌트를 함께 사용하여 트리를 드래그 할 수 있게 만든 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.tree { font-family:나눔고딕; font-size:14px; list-style:none; margin:0; padding:0; background:none;}
+	.tree ul { margin-left:11px; padding-left:7px; list-style:none; background:url(img/line_tree_vr.gif) repeat-y 6px 0; }
+	.tree .tree-node { margin-left:-1px; background:url(img/line_tree_hr.gif) no-repeat 0 5px; }
+	.tree .tree-node div { position:relative; }
+	.tree .tree-node.tree-last-node { background:url(img/line_tree_last_hr.gif) no-repeat 0 5px; }
+	.tree .tree-node.tree-last-node.tree-root-node { background:none; }
+	.tree .tree-collapsed .tree-has-child .tree-button { background-position:0 -9px !important; }
+	.tree .tree-collapsed ul { display:none; }
+	.tree .tree-node .tree-has-child .tree-button { background:url(img/button.gif) no-repeat 0 0 transparent; overflow:hidden; display:inline-block; cursor:pointer; _cursor:hand; }
+	.tree .tree-node .tree-button { background-color:transparent; border:0; margin:0; width:9px; height:9px; font-size:0; color:transparent; line-height:200%; position:relative; top:-5px; margin:0 -2px 0 -4px; }
+	.tree .tree-node .tree-label { margin-left:5px; background-color:#fff; cursor:pointer; -moz-user-select:none; }
+	.tree .tree-node .tree-has-child .tree-label { margin-left:5px; }
+	.tree .tree-node .tree-selected .tree-label { background-color:#888; color:#fff; }
+	.tree .tree-node .tree-button { _text-indent:-9px; _margin-left:5px; }
+	*:first-child+html .tree .tree-node .tree-button { _text-indent:-9px; _margin-left:5px; }
+	
+	#phantom { position:absolute; display:none; border:1px solid #888; background-color:#fff; padding:2px; font-size:14px; font-family:맑은 고딕; cursor:default; opacity:.7;	}
+	.dropable { background-color:orange !important; font-style:italic; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div>
+		<ul id="tree" class="tree">
+			<li class="tree-node tree-root-node tree-last-node">
+				<div style="display:none;"><!-- 루트노드를 보이고 싶지 않으면 선언 -->
+					<span class="tree-label">루트노드</span>
+				</div>
+				<ul>
+					<li class="tree-node">
+					<div class="tree-has-child">
+						<button class="tree-button">+</button><span class="tree-label drag-span">포유류</span>
+					</div>
+					<ul>
+						<li class="tree-node">
+							<div class="tree-has-child">
+								<button class="tree-button">+</button><span class="tree-label drag-span">맹수</span>
+							</div>
+							<ul>
+								<li class="tree-node">
+									<div>
+										<button class="tree-button">+</button><span class="tree-label drag-span">호랑이</span>
+									</div>
+								</li>
+								<li class="tree-node">
+									<div class="tree-selected">
+										<button class="tree-button">+</button><span class="tree-label drag-span">사자</span>
+									</div>
+								</li>
+								<li class="tree-node">
+									<div>
+										<button class="tree-button">+</button><span class="tree-label drag-span">표범</span>
+									</div>
+								</li>
+								<li class="tree-node tree-last-node">
+									<div>
+										<button class="tree-button">+</button><span class="tree-label drag-span">재규어</span>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li class="tree-node">
+							<div>
+								<button class="tree-button">+</button><span class="tree-label drag-span">강아지</span>
+							</div>
+						</li>
+						<li class="tree-node tree-last-node tree-dynamic">
+							<div>
+								<button class="tree-button">+</button><span class="tree-label drag-span">동적으로다가</span>
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li class="tree-node tree-collapsed tree-last-node">
+					<div class="tree-has-child">
+						<button class="tree-button">+</button><span class="tree-label drag-span">조류</span>
+					</div>
+					<ul>
+						<li class="tree-node">
+							<div>
+								<button class="tree-button">+</button><span class="tree-label drag-span">까치</span>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			</li>
+		</ul>
+	</div>
+	
+	<div id="phantom"></div>
+</div>
+<hr/>
+<h2>만들기 :</h2>
+<button onclick="sample.createNode_append();">안에다가 넣기 : createNode - appendNode</button>
+<button onclick="sample.createNode_before();">앞에 추가하기 : createNode - insertNodeBefore</button>
+<button onclick="sample.createNode_after();">뒤에 추가하기 : createNode - insertNodeAfter</button>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Tree.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DropArea.js"></script>
+<script type="text/javascript">
+	if (typeof console == 'undefined') {
+		console = {
+			log : function() {},
+			warn : function() { }
+		};
+	}
+	
+	var ePhantom;
+	var oTree, oDragArea, oDropArea;
+	
+	window.onload = function() {
+		
+		ePhantom = jindo.$Element('phantom');
+	
+		oTree = new jindo.Tree(jindo.$('tree'), { sClassPrefix : 'tree-' }).attach({
+		
+			 'select' : function(oCustomEvent) {
+			 	//console.log(oCustomEvent);
+			 },
+			 
+			 'expand' : function(oCustomEvent) {
+			 	//console.log(oCustomEvent);
+			 },
+			 
+			 'collapse' : function(oCustomEvent) {
+			 	//console.log(oCustomEvent);
+			 }
+			 
+		}).attach('beforeProcessData', function(oCustomEvent) {
+
+			var sClassPrefix = this.option('sClassPrefix');
+
+			oCustomEvent.sTemplate =
+			'<li class="{=sNodeClass}{if bLastNode} {=sLastNodeClass}{/if}"><div{if bHasChild} class="{=sHasChildClass}"{/if}><button class="{=sButtonClass}">+</button><span class="{=sLabelClass} drag-span" unselectable="on">{=sText}({=htData.sLabel})</span></div></li>';
+			
+		});
+		
+		oDragArea = new jindo.DragArea(jindo.$('tree'), { 
+			sClassName : 'drag-span',
+			bSetCapture : false
+		}).attach({
+		
+			'dragStart' : function(oCustomEvent) {
+//					console.log(oCustomEvent)
+				var oRawEvent = oCustomEvent.weEvent;
+				var oPos = oRawEvent.pos();
+
+				ePhantom.html(oCustomEvent.elDrag.innerHTML);
+				ePhantom.show();
+				ePhantom.offset(oPos.pageY + 10, oPos.pageX + 5);
+				
+				oCustomEvent.elDrag = ePhantom.$value();
+				//console.log(oCustomEvent);
+			
+			},
+			
+			'dragEnd' : function(oCustomEvent) {
+			
+				var oTarget = oDropArea.getOveredLists()[0];
+				if (oTarget) {
+				
+					var oFrom = oTree.getNode(oCustomEvent.elHandle);
+					var oTo = oTree.getNode(oTarget);
+					
+					if (oFrom != oTo) {
+						//console.log('move:', oFrom, oTo);
+						try {
+							oTree.appendNode(oTo, oFrom);
+						} catch (e) {
+							
+						}
+					}
+					
+					// oTree.sortNodes(oTo);
+
+				}
+				
+				ePhantom.hide();
+				//oDropArea.reCalculate();
+			
+			}
+		
+		});
+		
+		oDropArea = new jindo.DropArea(jindo.$('tree'),  {
+			sClassName : 'drag-span',
+			oDragInstance : oDragArea
+		}).attach({
+		
+			'over' : function(oCustomEvent) {
+				jindo.$Element(oCustomEvent.elDrop).addClass('dropable');
+			},
+			
+			'out' : function(oCustomEvent) {
+				jindo.$Element(oCustomEvent.elDrop).removeClass('dropable');
+			},
+			
+			'drop' : function(oCustomEvent) {
+				jindo.$Element(oCustomEvent.elDrop).removeClass('dropable');
+			}
+		
+		});
+
+		jindo.$Fn(function(oCustomEvent) { oCustomEvent.stop(); }).attach(ePhantom, 'selectstart');
+		
+	};
+
+	var sample = {
+
+		createNode_before : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			
+			var aNewNodes = oTree.createNode(
+				[{ 
+					sLabel : "hello",
+					_aChildren : [ 
+						{sLabel : 'world'}, 
+						{sLabel : 'kuku'}
+					] 
+				}]
+			);
+			oTree.insertNodeBefore(elNode, aNewNodes);
+			
+		},
+		
+		createNode_after : function() {
+			
+			var elNode = oTree.getSelectedNode();
+	
+			var aNewNodes = oTree.createNode([
+			
+				{
+					sLabel : '포유류',
+					geegee : 'babybaby',
+					_aChildren : [
+						{ sLabel : '고래' },
+						{ sLabel : '토끼' },
+						{ sLabel : '다람쥐' },
+						{
+							sLabel : '맹수',
+							_aChildren : [
+								{ sLabel : '호랑이' },
+								{ sLabel : '표범' },
+								{ sLabel : '사자' },
+								{ sLabel : '재규어' }
+							]
+						}
+					
+					]
+				},
+				
+				{ sLabel : '조류' }
+			
+			]);
+			oTree.insertNodeAfter(elNode, aNewNodes);
+			
+		},
+		
+		createNode_append : function() {
+
+			var elNode = oTree.getSelectedNode();
+	
+			var aNewNodes = oTree.createNode([
+			
+				{
+					sLabel : '라면',
+					_aChildren : [
+						{ 
+							sLabel : '봉지라면',
+							_aChildren : [
+								{ sLabel : '무파마' },
+								{ sLabel : '짜파게티' },
+								{ sLabel : '너구리' }
+							]
+						},
+						{ 
+							sLabel : '컵라면', 
+							_aChildren : [
+								{ sLabel : '새우탕면' },
+								{ sLabel : '튀김우동' },
+								{ sLabel : '왕뚜껑' }
+							]
+						}
+					
+					]
+				},
+				
+				{ sLabel : '조류' }
+			
+			]);
+
+			console.log(aNewNodes);
+			oTree.appendNode(elNode, aNewNodes);
+	
+		}			
+
+	};
+	
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

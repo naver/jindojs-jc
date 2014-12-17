@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.MouseGesture"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="마우스 제스쳐를 사용해보는 간단한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<pre>
+- 마우스 오른쪽 버튼을 누르고 아래에서 위로 움직인 후 마우스를 놓으면, 초록색 레이어가 보여짐
+- 위와 동일하게, 오른쪽에서 왼쪽으로 움직인 후 마우스를 놓으면, 레이어의 배경색이 파란색으로 변경됨
+- 위와 동일하게, 왼쪽에서 오른쪽으로 움직인 후 마우스를 놓으면, 레이어의 배경색이 초록색으로 변경됨
+- 위와 동일하게, 위에서 아래로 움직인 후 마우스를 놓으면, 레이어가 사라짐 
+- 여러 동작을 연속적으로 취할 경우, 아래 노란색 박스에 사용자가 취한 코드 값이 출력됨
+	</pre>
+
+	<textarea id="elDebug" style="font-size:15pt;width:99%;background-color:yellow;"></textarea>
+	<div id="elLayer" style="width:150px;height:150px;position:absolute;background:green;top:180px;left:50px;display:none;"></div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.MouseGesture.js"></script>
+<script type="text/javascript">
+		var oMouseGesture = new jindo.MouseGesture();
+		oMouseGesture.attach("gesture", function(eGesture){
+			var sCode = eGesture.sCode+" : ";
+			for(var i=0; i<eGesture.aCodeList.length; i++){
+				switch(eGesture.aCodeList[i]){
+				case 1: sCode += "↗";break;
+				case 2: sCode += "→";break;
+				case 3: sCode += "↘";break;
+				case 4: sCode += "↓";break;
+				case 5: sCode += "↙";break;
+				case 6: sCode += "←";break;
+				case 7: sCode += "↖";break;
+				case 8: sCode += "↑";break;
+				}
+			}
+			
+			if(eGesture.sCode == "8")jindo.$Element("elLayer").show();
+			else if(eGesture.sCode == "4") jindo.$Element("elLayer").hide();
+			else if(eGesture.sCode == "2") jindo.$("elLayer").style.background = "green";
+			else if(eGesture.sCode == "6") jindo.$("elLayer").style.background = "blue";
+			jindo.$("elDebug").value = sCode;
+		});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

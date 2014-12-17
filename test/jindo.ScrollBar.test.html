@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+			
+			#scrollbar {background-color:#ccc; position:relative; width:215px; height:200px;}
+			.scrollbar-box {position:absolute; overflow:hidden; top:0px; left:0px; width:200px; height:200px;}
+			.scrollbar-content {position:absolute;top:0px;left:0px;width:200px;}
+			.scrollbar-v {position:absolute; top:0px; left:200px; width:15px; height:200px;}
+			.scrollbar-track {background-color:#eee; width:15px;height:170px; position:relative; top:0px;}
+			.scrollbar-track-hold {background-color:#ddd;}
+			.scrollbar-thumb {background-color:skyblue;width:15px;height:30px; position:relative; top:0px; overflow:hidden;}
+			.scrollbar-thumb-hold {background-color:blue;}
+			.scrollbar-button-up {background-color:orange;width:15px;height:15px; position:relative; top:0px; overflow:hidden;}
+			.scrollbar-button-up-hold {background-color:red;}
+			.scrollbar-button-down {background-color:orange; width:15px;height:15px; position:relative; top:0px;overflow:hidden;}
+			.scrollbar-button-down-hold {background-color:red;}
+			
+			.scrollbar-noscript .scrollbar-box {width:215px; overflow-y:auto;}
+			.scrollbar-noscript .scrollbar-v {display:none;}	
+					
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+			<div id="scrollbar" class="scrollbar-noscript">
+				<div class="scrollbar-box">
+					<div class="scrollbar-content">
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it.
+		
+		Technologic [4x]
+		
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it.
+		
+		Touch it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it.
+		
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		
+		Technologic [8x]
+		
+		Technologic [4x]
+					</div>
+				</div>
+				
+				<div class="scrollbar-v">
+					<div class="scrollbar-button-up"></div>
+					<div class="scrollbar-track">
+						<div class="scrollbar-thumb"></div>
+					</div>
+					<div class="scrollbar-button-down"></div>
+				</div>
+			</div>		
+		</div>
+		
+		<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Timer.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Effect.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Transition.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.DragArea.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Slider.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.RolloverArea.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.ScrollBar.js"></script>
+		<script type="text/javascript" src="js/jindo.ScrollBar.test.js"></script>
+	</body>
+</html>

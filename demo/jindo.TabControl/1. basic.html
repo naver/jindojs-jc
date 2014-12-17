@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.TabControl"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가장 기본적인 사용 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body { background-color:#ddd; }
+	.tc-panel { display:none; }
+	.tabs { padding:0; margin:0; list-style:none; position:relative; z-index:1; overflow:hidden; _zoom:1; /* 이걸 안 넣으면 IE 에서 clear:both 했을때 공백이 들어감 */ }
+	.tabs li { float:left; border:1px solid #aaa; border-bottom:0; padding:5px; margin-right:2px; background-color:#fff; cursor:pointer; _cursor:hand; color:#aaa; position:relative; }
+	.tabs li.tc-selected { padding-bottom:6px; border-color:#000; cursor:default; font-weight:bold; color:#000; }
+	.panels { padding:0; margin:0; list-style:none; border:1px solid #000; padding:20px; position:relative; top:-1px; clear:both; background-color:#fff; }
+	.panels .tc-panel.tc-selected { display:block; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="tabcontrol" class="tabcontrol">
+		<ul class="tabs">
+			<li class="tc-tab tc-selected">첫번째 탭</li>
+			<li class="tc-tab">두번째 탭</li>
+			<li class="tc-tab">세번째 탭</li>
+		</ul>
+		<div class="panels">
+			<div class="tc-panel tc-selected">
+				JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화하여
+				결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다. NAVER에서 서비스하고 있는
+				수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+				그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+			</div>
+			<div class="tc-panel">
+				JindoJS Component는 JindoJS 를 기반으로 개발된
+				재사용 가능한 독립적인 자바스크립트 모듈입니다. 
+				JindoJS는 Javascript Application 제작시에 반복적으로 발생하는 로직을 컴포넌트화 하여
+				결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+				NAVER에서 서비스하고 있는 수많은 페이지안의 UI들이 JindoJS를 사용하여 개발되었습니다.
+				그런만큼 JindoJS는 크로스 브라우징에 있어서 거의 완벽한 호환성을 입증하고 있습니다.
+			</div>
+			<div class="tc-panel">
+				Jindo Mobile Component(JMC)는 JindoJs 기반으로 개발된 재사용 가능한 독립적인 자바스크립트 모듈로써,
+				국내 모바일 환경에 최적화된 모바일 컴포넌트입니다.
+				오픈 소스인 JMC는 사내 및 사외 Javascript Mobile Application 제작시에
+				반복적으로 발생하는 로직을 컴포넌트화하여 결과물의 품질을 향상시키기 위한 목적으로 작성되었습니다.
+				NAVER의 수많은 모바일 서비스에서 사용하고 있을 정도로 품질과 안정성이 뛰어난 JMC는
+				120여종의 샘플과 상세한 가이드를 제공하고 있어서, 초급자도 손쉽게 고품질의 UI를 개발할 수 있습니다.
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.TabControl.js"></script>
+<script type="text/javascript">
+	var oTab = new jindo.TabControl(jindo.$('tabcontrol'));
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

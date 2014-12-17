@@ -1,0 +1,30 @@
+RolloverArea 컴포넌트는 HTMLElement에 마우스 액션이 있을 경우 클래스를 변경시키고, Custom Event를 발생시킨다. 
+
+MouseOver와 MouseDown이벤트 발생시에 아래의 마크업 구조와 같이로 rollover-over, rollover-down 클래스가 추가된다.
+따라서 메뉴의 디자인을 변경하고 싶을 경우 css에서 rollover-over와 rollover-down 클래스의 스타일 정의하면 각 상황에 따른 디자인이 적용된다.
+
+만약 다른 클래스명을 적용하고 싶다면, 옵션의 sClassPrefix와 htStatus를 원하는 형태로 지정하여 클래스명을 변경할 수 있다.
+ 
+예를 들어 마우스 오버시에는 sClassPrefix값과 htStatus.sOver의 값을 덧붙인 값이 설정되는데
+디폴트 값으로 sClassPrefix는 "'rollover-", htStatus.sOver가 "over"로 정의 되어 있기 때문에 "rollover-over"클래스가 추가된다.
+
+이와는 반대로 마우스 아웃시에는 추가되었던 클래스명 "rollover-over"가 제거된다.
+
+	<!-- 첫번째 메뉴에 마우스오버 됐을 경우 마크업 구조 -->
+	<ul>
+	    <li class="rollover rollover-over"><a href="#">menu1</a></li>
+	    <li class="rollover"><a href="#">menu2</a></li>
+	    <li class="rollover"><a href="#">menu3</a></li>
+	    <li class="rollover"><a href="#">menu4</a></li>
+	</ul>
+	<!-- 첫번째 메뉴에 마우스다운 됐을 경우  마크업 구조-->
+	<ul>
+	    <li class="rollover rollover-over rollover-down"><a href="#">menu1</a></li>
+	    <li class="rollover"><a href="#">menu2</a></li>
+	    <li class="rollover"><a href="#">menu3</a></li>
+	    <li class="rollover"><a href="#">menu4</a></li>
+	</ul>
+	
+이처럼 각각의 이벤트 over, down, up, out에 클래스명이 추가/제거 되게되며 커스텀이벤트를 핸들링하여 메뉴를 클릭한경우 페이지 변경등의 작업을 할 수 있다. 
+
+마지막으로, 이 컴포넌트는 초기화시점에 이벤트를 바인딩하지만, 사용자가 임의적으로 활성하 하기를 원한다면 옵션 bActivateOnload를 false로 지정하여 변경할 수 있다.

@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>선택할 수 있는 날짜 제한</title>
+<meta name="class-lists" content="jindo.DatePicker"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="선택할 수 있는 날짜에 제한을 둔 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.calendar {position:absolute; width:195px; z-index:99999;display:none;}
+	.calendar {width:195px;padding-bottom:9px;border:1px solid #777;background:#ffffff;}
+	.calendar div{margin-bottom:5px;padding:7px 0 9px 0px;text-align:center;background:#f6f6f6;}
+	.calendar div a.rollover img{border:0;display:inline; vertical-align:text-bottom; vertical-align:middle;}
+	.calendar div a.rollover img.over{display:none;}
+	.calendar div a.rollover:hover{border:0}
+	.calendar div a.rollover:hover img{display:none;}
+	.calendar div a.rollover:hover img.over{display:inline;}
+	.calendar div .calendar-title{float:none !important;font-family:verdana;font-size:12px;color:#383838; margin:0 7px;}
+	.calendar table{width:175px;margin:0 auto;text-align:center;}
+	.calendar table *{font-family:tahoma !important;font-size:10px;}
+	.calendar table td{width:25px;height:16px;text-align:center;color:#000000;}
+	.calendar table td a{display:block;height:15px;padding-top:1px;color:#000000;}
+	.calendar table td a:hover{background:#edf4fe;color:#6d6d6d;text-decoration:none !important;font-family:tahoma !important;}
+	.calendar table td a:visited,
+	.calendar table td a:active{color:#000000;text-decoration:none !important;}
+	.calendar table .calendar-selected{background:#edf4fe;color:#6d6d6d;}
+	.calendar table .calendar-selected a{color:#6d6d6d;text-decoration:none;}
+	.calendar table .calendar-sat{color:#2828e8;}
+	.calendar table .calendar-sat a,
+	.calendar table .calendar-sat a:visited,
+	.calendar table .calendar-sat a:hover,
+	.calendar table .calendar-sat a:active{color:#2828e8 !important;}
+	.calendar table .calendar-sun{color:#e82828;}
+	.calendar table .calendar-sun a,
+	.calendar table .calendar-sun a:visited,
+	.calendar table .calendar-sun a:hover,
+	.calendar table .calendar-sun a:active{color:#e82828 !important;}
+	.calendar table .calendar-today{background:#6595db;color:#ffffff;}
+	.calendar table .calendar-today a{font-weight:bold;text-decoration:none;color:#fff}
+	.calendar table .calendar-today a:hover,
+	.calendar table .calendar-today a:visited,
+	.calendar table .calendar-today a:active{background:#6595db;color:#fff}
+	.calendar table .calendar-prev-mon .calendar-date,
+	.calendar table .calendar-next-mon .calendar-date {display:none}
+	.calendar table .calendar-unselectable a:hover,
+	.calendar table .calendar-unselectable a:visited,
+	.calendar table .calendar-unselectable a:active,
+	.calendar table .calendar-unselectable a {background:none !important;color:#ccc !important; cursor:default;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<input type="text" id="date_input" class="text" />
+	<div id="calendar_layer" class="calendar">
+		<div>
+			<a href="#" class="rollover calendar-btn-prev-year"><img src="img/Calendar.btn_calendar_first.gif" alt="이전년" width="14" height="13"><img src="img/Calendar.btn_calendar_first_on.gif" alt="이전년" width="14" height="13" class="over"></a>
+			<a href="#" class="rollover calendar-btn-prev-mon"><img src="img/Calendar.btn_calendar_prev.gif" alt="이전달" width="13" height="13" class="pre"><img src="img/Calendar.btn_calendar_prev_on.gif" alt="이전달" width="13" height="13" class="over pre"></a>
+			<strong class="calendar-title"></strong>  
+			<a href="#" class="rollover calendar-btn-next-mon"><img src="img/Calendar.btn_calendar_next.gif" alt="다음달" width="13" height="13" class="next"><img src="img/Calendar.btn_calendar_next_on.gif" alt="다음달" width="13" height="13" class="over next"></a>
+			<a href="#" class="rollover calendar-btn-next-year"><img src="img/Calendar.btn_calendar_last.gif" alt="다음년" width="14" height="13"><img src="img/Calendar.btn_calendar_last_on.gif" alt="다음년" width="14" height="13" class="over"></a>
+		</div>
+		<table cellspacing="0" cellpadding="0">
+			<tbody>
+	
+				<tr class="calendar-week">
+					<td><a href="#" class="calendar-date"></a></td>
+					<td><a href="#" class="calendar-date"></a></td>
+					<td><a href="#" class="calendar-date"></a></td>
+					<td><a href="#" class="calendar-date"></a></td>
+					<td><a href="#" class="calendar-date"></a></td>
+					<td><a href="#" class="calendar-date"></a></td>
+					<td><a href="#" class="calendar-date"></a></td>
+				</tr>
+	
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Calendar.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DatePicker.js"></script>
+<script type="text/javascript">
+/*
+ * 공휴일 정보
+ * 일반적으로 웹서버에서 포함시켜주는 방법을 사용하는 것이 좋음.
+ */
+var oHoliday = {"2000":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"11":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"5":true,"6":true},"9":{"11":true,"12":true,"13":true}},"2001":{"1":{"1":true,"24":true,"25":true},"3":{"1":true},"5":{"5":true,"1":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"1":true,"2":true},"12":{"25":true},"9":{"30":true}},"2002":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"19":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"11":true,"12":true,"13":true},"9":{"20":true,"21":true,"22":true}},"2003":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"8":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"1":true,"2":true},"9":{"10":true,"11":true,"12":true}},"2004":{"1":{"1":true,"21":true,"22":true,"23":true},"3":{"1":true},"5":{"5":true,"26":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"9":{"27":true,"28":true,"29":true}},"2005":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"15":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"8":true,"9":true,"10":true},"9":{"17":true,"18":true,"19":true}},"2006":{"1":{"1":true,"29":true,"30":true},"3":{"1":true},"5":{"5":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"5":true,"6":true,"7":true},"12":{"25":true}},"2007":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"24":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"17":true,"18":true,"19":true},"9":{"24":true,"25":true,"26":true}},"2008":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"12":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"6":true,"7":true,"8":true},"9":{"13":true,"14":true,"15":true}},"2009":{"1":{"1":true,"25":true,"26":true,"27":true},"3":{"1":true},"5":{"5":true,"2":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"2":true,"4":true},"12":{"25":true}},"2010":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"21":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"13":true,"14":true,"15":true},"9":{"21":true,"22":true,"23":true}},"2011":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"10":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"2":true,"3":true,"4":true},"9":{"11":true,"12":true,"13":true}},"2012":{"1":{"1":true,"23":true,"24":true},"3":{"1":true},"5":{"5":true,"28":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"1":true},"12":{"25":true},"9":{"29":true,"30":true}},"2013":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"17":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"10":true,"11":true},"9":{"18":true,"19":true,"20":true}},"2014":{"1":{"1":true,"30":true,"31":true},"3":{"1":true},"5":{"5":true,"6":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"1":true},"9":{"7":true,"8":true,"9":true}},"2015":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"25":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"18":true,"19":true,"20":true},"9":{"26":true,"27":true,"28":true}},"2016":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"14":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"8":true,"9":true},"9":{"14":true,"15":true,"16":true}},"2017":{"1":{"1":true,"27":true,"28":true,"29":true},"3":{"1":true},"5":{"5":true,"3":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"4":true,"5":true},"12":{"25":true}},"2018":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"22":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"15":true,"16":true,"17":true},"9":{"23":true,"24":true,"25":true}},"2019":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"12":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"4":true,"5":true,"6":true},"9":{"12":true,"13":true,"14":true}},"2020":{"1":{"1":true,"24":true,"25":true,"26":true},"3":{"1":true},"5":{"5":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"1":true,"2":true},"12":{"25":true},"4":{"30":true},"9":{"30":true}},"2021":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"19":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"11":true,"12":true,"13":true},"9":{"20":true,"21":true,"22":true}},"2022":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"8":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"1":true,"2":true},"9":{"9":true,"10":true,"11":true}},"2023":{"1":{"1":true,"21":true,"22":true,"23":true},"3":{"1":true},"5":{"5":true,"27":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"9":{"28":true,"29":true,"30":true}},"2024":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"15":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"9":true,"10":true,"11":true},"9":{"16":true,"17":true,"18":true}},"2025":{"1":{"1":true,"29":true,"30":true},"3":{"1":true},"5":{"5":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"5":true,"6":true,"7":true},"12":{"25":true}},"2026":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"24":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"17":true,"18":true},"9":{"24":true,"25":true,"26":true}},"2027":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"13":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"6":true,"7":true,"8":true},"9":{"14":true,"15":true,"16":true}},"2028":{"1":{"1":true,"26":true,"27":true,"28":true},"3":{"1":true},"5":{"5":true,"2":true},"6":{"6":true},"8":{"15":true},"10":{"3":true,"2":true,"4":true},"12":{"25":true}},"2029":{"1":{"1":true},"3":{"1":true},"5":{"5":true,"20":true},"6":{"6":true},"8":{"15":true},"10":{"3":true},"12":{"25":true},"2":{"13":true,"14":true},"9":{"21":true,"22":true,"23":true}}};
+
+var oDatePicker = new jindo.DatePicker(jindo.$("calendar_layer"), {
+	Calendar : {
+		sTitleFormat : "yyyy/mm"
+	}
+}).addDatePickerSet({
+	elInput : jindo.$("date_input"),
+	htOption : {
+		bDefaultSet : true, //true이면 기본 Input 값을 설정한다. false이면 설정하지 않는다.
+		nYear : 2010, //기본으로 설정될 연도
+		nMonth : 12, //기본으로 설정될 월
+		nDate : 9, //기본으로 설정될 일
+		
+		bReadOnly : false, //true이면 input에 직접 값을 입력하지 못한다.
+		sDateFormat : "yyyy-mm-dd", //input에 입력될 날짜의 형식
+		htSelectableDateFrom : { //선택가능한 첫 날짜
+			nYear : 2010,
+			nMonth : 12,
+			nDate : 6				
+		},
+		htSelectableDateTo : { //선택가능한 마지막 날짜
+			nYear : 2010,
+			nMonth : 12,
+			nDate : 25
+		}
+	}
+}).attach({
+	beforeDraw : function(oCustomEvent) {
+		if (oCustomEvent.nYear != 2010  || oCustomEvent.nMonth != 12) {
+			alert("2010년 12월 내에서만 선택할 수 있습니다.");
+			oCustomEvent.stop();
+		}
+	},
+	draw : function(oCustomEvent) {
+		// 공휴일 적용
+		if (typeof oHoliday == "object" && oHoliday[oCustomEvent.nYear] 
+			&& oHoliday[oCustomEvent.nYear][parseInt(oCustomEvent.nMonth * 1)] 
+			&& oHoliday[oCustomEvent.nYear][parseInt(oCustomEvent.nMonth * 1)][oCustomEvent.nDate]) {
+			jindo.$Element(oCustomEvent.elDateContainer).addClass(this.getCalendar().option("sClassPrefix") + "sun");	
+		}
+	}
+});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

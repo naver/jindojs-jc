@@ -1,0 +1,31 @@
+#### HTML
+
+	<div id="number_stepper"> <!-- 기준 엘리먼트 -->
+	    <h4>0~10까지의 값만 선택가능 (1단위)</h4>
+	    <input type="text" class="ns-input" /> <!-- input[type=text] (필수) -->
+	    <button type="button" class="ns-plus">+</button> <!-- 증가 버튼 (필수) -->
+	    <button type="button" class="ns-minus">-</button> <!-- 감소 버튼 (필수) -->
+	</div>
+	
+NumericStepper를 초기화하기 위해서는 기준 엘리먼트의 자식 엘리먼트로 다음의 세가지 엘리먼트가 반드시 포함되어야 한다.
+
+* 입력값을 표시하는 input[type="text"] (클래스명 [prefix]input)
+* 증가버튼 (클래스명 [prefix]plus)
+* 감소버튼 (클래스명 [prefix]minus)
+
+[prefix]의 디폴트 값은 "ns-"이고, sClassPrefix 옵션값을 지정해 변경 할 수 있다.
+
+#### JavaScript
+
+	//include jindo.Componenet.js
+	//include jindo.UIComponent.js
+	//include jindo.NumericStepper.js
+	 
+	//0~10까지의 값을 1단위로 선택 가능한 NumericStepper 를 생성한다.
+	var oNumericStepper = new jindo.NumericStepper("number_stepper",{
+	    sClassPrefix : 'ns-',
+	    nStep : 1,
+	    nMin : 0,
+	    nMax : 10,
+	    nDefaultValue : 0
+	});

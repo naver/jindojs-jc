@@ -1,0 +1,47 @@
+Rolling 컴포넌트는 한정된 영역에 여러개의 아이템을 표현하고자 할 때 부드러운 이동으로 굴리듯이 아이템을 네비게이팅 할 수 있게 합니다. 
+Rolling 컴포넌트는 jindo.Effect가 제공하는 효과들을 쉡게 적용할 수 있고, 롤링 되는 객체를 추가/삭제 할 수 있습니다.
+
+#### 자바스크립트 삽입
+
+Rolling을 구현하기 위해 필요한 자바스크립트 파일들을 삽입 합니다.
+
+	<head>
+		<script type="text/javascript" src="../../js/jindo.desktop.all.js"></script>
+		<script type="text/javascript" src="../../js/jindo_component.js"></script>
+	</head>
+
+#### 롤링 기능을 구현할 대상 객체 생성
+
+롤링 대상의 div의 id를 지정하고, div안에 리스트를 생성 합니다. 
+롤링 기능을 컨트롤할 버튼을 생성합니다. 
+각 버튼의 클릭 이벤트에 컴포넌트의 함수를 정의 합니다.
+
+	<div id="rolling">
+	    <ul>
+	        <li>첫번째</li>
+	        <li>두번째</li>
+	        <li>세번째</li>
+	        <li>네번째</li>
+	        <li>다섯번째</li>
+	        <li>여섯번째</li>
+	        <li>일곱번째</li>
+	    </ul>
+	</div>
+	<button onClick="oRolling.moveBy(-1); return false;">◀</button>
+	<button onClick="oRolling.moveBy(1); return false;">▶</button>
+
+#### 간단한 사용 예
+
+id가 "rolling"라는 div객체에 Rolling 컴포넌트를 구현하고, oRolling 이라는 Rolling 컴포넌트의 객체를 생성합니다.
+
+	var oRolling = new jindo.Rolling(jindo.$('rolling'), {
+	    sDirection : 'horizontal'
+	});
+
+#### 움직임의 효과를 변경 하려면
+
+	var oRolling = new jindo.Rolling(jindo.$('rolling'), {
+	    nDuration : 400, //롤링 시간은 400ms 으로 설정
+	    sDirection : 'horizontal', //가로형으로 설정
+	    fEffect : jindo.Effect.cubicEase //
+	});

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>레이아웃 위치 변경</title>
+<meta name="class-lists" content="jindo.DropArea"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="레이아웃의 위치를 변경하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	div {  height:124px; }
+	body.dragging, body.dragging * { cursor:default !important; } 
+	ul li {float:left; height:42px; margin:2px; overflow:hidden; position:relative; width:150px; height:150px;}
+	
+	#phantom { border:1px solid #000; position:absolute;padding:10px; z-index:55; width:150px; height:150px; border:dash-dot 3px #222; display:none;  background-color:#CCC;} 
+	
+	.draggable { padding:10px; background-color:#ffd; cursor: pointer; z-index:55; height:128px;}
+	.droppable { background-color:#ccc; padding:10px; border:1px solid #black; }
+	
+	.overed {  border:dotted 2px #000; background-color:#0075C8; width:146px; height:124px; }
+	.dummy {background-color:#fff; height:128px;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<ul>
+		<li class="droppable draggable">1</li>
+		<li class="droppable draggable">2</li>
+		<li class="droppable draggable">3</li>
+		<li class="droppable draggable">4</li>
+		<li class="droppable draggable">5</li>
+		<li class="droppable draggable">6</li>
+	</ul>
+	<div id="phantom"></div> 
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DropArea.js"></script>
+<script type="text/javascript">
+	var oDragArea = new jindo.DragArea(document, { sClassName : 'draggable', bFlowOut: true }).attach({
+		'dragStart' : function(oCustomEvent) { 
+			jindo.$Element(document.body).addClass('dragging'); 
+			var oMousePos = oCustomEvent.weEvent.pos(); 
+			
+			jindo.$Element('phantom').html(oCustomEvent.elDrag.innerHTML).show().offset(
+					oMousePos.pageY + 8, 
+					oMousePos.pageX + 8
+			);
+			oCustomEvent.elDrag = jindo.$('phantom'); 
+		}, 
+		'dragEnd' : function(oCustomEvent) { jindo.$Element(document.body).removeClass('dragging'); 
+			jindo.$Element('phantom').hide(); 
+			jindo.$Element(oCustomEvent.elHandle).removeClass("target");
+		} 
+	});
+	var oDropArea = new jindo.DropArea(document, { sClassName : 'droppable', oDragInstance : oDragArea }).attach({
+		'over' : function(oCustomEvent) {
+			jindo.$Element(oCustomEvent.elDrop).addClass("overed");
+		},
+		'out' : function(oCustomEvent) {
+			jindo.$Element(oCustomEvent.elDrop).removeClass("overed");
+		},
+		
+		'drop' : function(oCustomEvent) {
+			jindo.$Element(oCustomEvent.elHandle).html(oCustomEvent.elDrop.innerHTML);
+			jindo.$Element(oCustomEvent.elDrop).html(jindo.$('phantom').innerHTML);
+			
+			
+		},
+		'dragEnd' : function(oCustomEvent) {
+			if (oCustomEvent.aDrop.length) {
+				jindo.$ElementList(oCustomEvent.aDrop).removeClass('overed');		
+			}
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

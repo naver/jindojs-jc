@@ -1,0 +1,95 @@
+컴포넌트의 특정동작시점에 원하는 동작을 수행시킬 수 있도록 jindo.Component는 커스텀 이벤트를 발생시키고 해당 이벤트에 이벤트 핸들러를 등록하고 해제하는 기능을 제공한다. 진도의 jindo.$Fn이 제공하는 attach()와 detach() 메소드로 DOMEvent에 원하는 이벤트핸들러를 등록/해제하는 것과 유사하게 진도 컴포넌트의 커스텀이벤트를 핸들링할 수 있다.
+
+#### fireEvent()
+
+fireEvent() 메소드는 커스텀 이벤트를 발생시킨다. 이벤트명 명명규칙은 첫글자가 소문자인 CamelCase 즉 lowerCamelCase 방식을 사용한다. 다음은 "before" 커스텀 이벤트를 발생시키는 예이다.
+
+	jindo.NewComponent = jindo.$Class({
+	    $init : function(){
+	    shout : function(sMsg) {
+	        this.fireEvent("before");
+	        alert(sMsg);
+	    }
+	}).extend(jindo.Component);
+	var oInstance = new jindo.NewComponent();
+
+#### attach()
+
+attach() 메소드는 커스텀이벤트가 발생되면 수행될 핸들러를 등록하는 메소드이다. 위의 예제에 이어 "before" 커스텀이벤트 발생시 alert("before");를 수행하는 핸들러를 등록하는 방법은 다음과 같다.
+
+	oInstance.attach("before", function(oCustomEvent){
+	    //this -> oInstance (커스텀이벤트 핸들러내의 this는 컴포넌트의 인스턴스 자신이다)
+	    alert("before");
+	});
+	 
+	oInstance.shout("wow!"); -> alert "before", alert "wow!" 수행
+
+하나의 커스텀이벤트에 여러개의 핸들러를 등록하는 것이 가능하고 등록된 핸들러는 등록된 순서대로 수행된다.
+
+#### 커스텀이벤트 객체
+
+커스텀이벤트 핸들러내에 전달되는 객체 oCustomEvent에는 커스텀이벤트 명을 나타내는 sType 프로퍼티와 더이상의 이벤트 발생과 동작을 중단시키기 위한 stop() 메소드가 포함된다. 원하는 경우 HashTable을 fireEvent() 메소드의 두번째 인자로 지정해 추가할 수 있다.
+
+	jindo.NewComponent = jindo.$Class({
+	    $init : function(){
+	    shout : function(sMsg) {
+	        this.fireEvent("before", { //커스텀이벤트 객체에 원하는 프로퍼티를 추가
+	            sName : "test"
+	        });
+	        alert(sMsg);
+	    }
+	}).extend(jindo.Component);
+	var oInstance = new jindo.NewComponent();
+	oInstance.attach("before", function(oCustomEvent){
+	    alert(oCustomEvent.sType); //oCustomEvent.sType -> "before"
+	    alert(oCustomEvent.sName); //oCustomEvent.sName -> "test"
+	});
+	 
+	oInstance.shout("wow!"); -> alert "before", alert "test", alert "wow!" 수행
+
+fireEvent()의 리턴값은 커스텀이벤트 핸들러내에서 stop() 메소드의 실행여부에 따라 달라진다. stop() 메소드가 수행되면 해당 이벤트에 등록된 실행되지 않은 이벤트핸들러가 있더라도 발생되지 않으며, fireEvent() 리턴 값이 false가 된다. 이를 이용해 before 커스텀이벤트에서 stop() 메소드가 수행되면 기본동작을 중지하도록 소스코드를 수정해보자.
+
+	jindo.NewComponent = jindo.$Class({
+	    $init : function(){
+	    shout : function(sMsg) {
+	        if (this.fireEvent("before")) {
+	            alert(sMsg);
+	        }
+	    }
+	}).extend(jindo.Component);
+	 
+	var oInstance = new jindo.NewComponent();
+	 
+	oInstance.attach("before", function(oCustomEvent){
+	    oCustomEvent.stop(); //shout() 내에서 정의된 this.fireEvent("before")의 리턴값이 false가 됨
+	});
+	 
+	oInstance.shout("test"); -> 아무런 동작 없음
+
+#### detach() / detachAll()
+
+detach() 메소드는 등록된 커스텀 이벤트를 해제시킨다. 일반적인 사용방법은 다음과 같다.
+
+	var fBeforeCustomEventHandler = function(oCustomEvent){
+	    oCustomEvent.stop(); //shout() 내에서 정의된 this.fireEvent("before")의 리턴값이 false가 됨
+	};
+	oInstance.attach("before", fBeforeCustomEventHandler); //fBeforeCustomEventHandler를 핸들러로 등록
+	oInstance.detach("before", fBeforeCustomEventHandler); //fBeforeCustomEventHandler를 핸들러로 해제
+
+커스텀이벤트 핸들러를 1회만 수행시키고 해제하려는 경우 다음과 같이 사용가능하다.
+
+	oInstance.attach("before", function(oCustomEvent){
+	    this.detach(oCustomEvent.sType, arguments.callee); //커스텀이벤트 핸들러가 수행되자마자 곧바로 해제
+	});
+
+여러개의 커스텀이벤트 핸들러를 동시에 해제하기 위해서 detachAll()을 사용가능하다.
+
+	oInstance.attach("before", fA);
+	oInstance.attach("before", fB);
+	oInstance.attach("before", fC);
+	oInstance.detachAll("before"); //"before" 커스텀이벤트 핸들러 모두 해제
+	 
+	oInstance.attach("before", fA);
+	oInstance.attach("before", fB);
+	oInstance.attach("after", fC);
+	oInstance.detachAll(); //모든 커스텀이벤트 핸들러 해제

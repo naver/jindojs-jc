@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.Dialog"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가장 기본적인 사용 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.dialog-layer { display:none; background:#FFFFFF none repeat scroll 0 0; border:2px solid #777777; position:absolute; z-index:2; width:200px; height:200px; }
+	.dialog-close { position:absolute; right:10px; top:10px; }
+	.dialog2-layer { display:none; background:#EEE none repeat scroll 0 0; border:3px solid #777777; position:absolute; z-index:2; width:300px; height:110px; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<h4>레이어타입1 (instance를 공유하므로 다른 레이어가 동시에 뜨지 않음)</h4>
+	<button type="button" id="btn1">메세지1</button>
+	<button type="button" id="btn2">메시지2</button>
+	<p>상태 > <span id="status1"></span></p>
+	
+	<hr>
+	<h4>레이어타입2</h4>
+	<button type="button" id="btn3">메세지3</button>
+	<p>상태 > <span id="status2"></span></p>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Dialog.js"></script>
+<script type="text/javascript">
+	var oDialog1 = new jindo.Dialog({
+		sClassPrefix : "dialog-"
+	}).attach({
+		beforeShow : function(e) {
+			//console.log(e)
+			//e.stop();
+		},
+		show : function(e) {
+			//console.log(e)
+		},
+		beforeHide : function(e) {
+			//console.log(e)
+			//e.stop();
+		},
+		hide : function(e) {
+			//console.log(e)
+		}
+	});
+	oDialog1.setLayerTemplate('<div><a href="#" class="dialog-close"><img width="15" height="14" alt="레이어닫기" src="http://static.naver.com/common/btn/btn_close2.gif"/></a></div><div style="position:absolute;top:30px;left:10px;">{=text}</div><div style="position:absolute;bottom:10px;right:10px;"><button type="button" class="dialog-confirm">확인</button><button type="button" class="dialog-cancel">취소</button></div>');
+	jindo.$Fn(function(){
+		oDialog1.show({ text : "확인하시겠습니까?" }, {
+			close : function(e) {
+				//console.log(e);
+				jindo.$Element("status1").text("메세지1 : 닫음");
+			},
+			cancel : function(e) {
+				//console.log(e);
+				jindo.$Element("status1").text("메세지1 : 취소");
+			},
+			confirm : function(e) {
+				//console.log(e);
+				jindo.$Element("status1").text("메세지1 : 확인");
+			}
+		});	
+	}).attach(jindo.$("btn1"), "click");
+	
+	jindo.$Fn(function(){
+		oDialog1.show({ text : "<strong>확인하시겠습니까?</strong>" }, {
+			close : function(e) {
+				//console.log(e);
+				jindo.$Element("status1").text("메세지2 : 닫음");
+			},
+			cancel : function(e) {
+				//console.log(e);
+				jindo.$Element("status1").text("메세지2 : 취소");
+			},
+			confirm : function(e) {
+				//console.log(e);
+				jindo.$Element("status1").text("메세지2 : 확인");
+			}
+		});	
+	}).attach(jindo.$("btn2"), "click");
+	
+	var oDialog2 = new jindo.Dialog({ sClassPrefix : "dialog2-" });
+	oDialog2.setLayerTemplate('<p style="height:60px;margin:0;padding:10px;" align="center">{=text}</p><p align="center"><button type="button" class="dialog2-confirm">확인</button></p>');
+
+	jindo.$Fn(function(){
+		oDialog2.show({ text : "<strong>확인버튼을 클릭하세요</strong>" }, {
+			confirm : function(e) {
+				jindo.$Element("status2").text("메세지3 : 확인");
+			}
+		});	
+	}).attach(jindo.$("btn3"), "click");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

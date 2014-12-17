@@ -1,0 +1,79 @@
+.tree { 
+	list-style:none; margin:0 0 20px 0; padding:0; background:none;
+}
+
+.tree ul {
+	margin-left:10px;
+	padding-left:7px;
+	list-style:none;
+	background:url(../img/line_tree_vr.gif) repeat-y 6px 0;
+}
+
+.tree .tree-node {
+	margin-left:-1px;
+	margin-top:4px;
+	background:url(../img/line_tree_hr.gif) no-repeat 0 5px;
+}
+
+.tree .tree-node div {
+	position:relative;
+}
+
+.tree .tree-node.tree-last-node {
+	background:url(../img/line_tree_last_hr.gif) no-repeat 0 5px;
+}
+
+.tree .tree-node.tree-last-node.tree-root-node {
+	background:none;
+}
+
+.tree .tree-collapsed .tree-has-child .tree-button {
+	background-position:0 -9px !important;
+}
+
+.tree .tree-collapsed ul { display:none; }
+
+.tree .tree-node .tree-has-child .tree-button {
+	background:url(../img/button.gif) no-repeat 0 0 transparent;
+	overflow:hidden; display:inline-block;
+	cursor:pointer; _cursor:hand;
+	
+}
+
+.tree .tree-node .tree-button {
+	background-color:transparent;
+	border:0; margin:0; width:0px; height:0px;
+	font-size:0; color:transparent; line-height:200%;
+	position:relative;
+	top:-2px; 
+	margin:0 -2px 0 -4px;
+}
+
+.tree .tree-node .tree-label {
+	padding-left:2px;
+	margin-left:6px;
+	background-color:#fff;
+	text-decoration:none;
+}
+
+.tree .tree-node .tree-label strong {
+	font-weight:bold;
+	font-family:tahoma;
+}
+
+.tree .tree-root-node span.tree-category {
+	color:#666;
+	font-size:13px;
+	margin:0;
+	font-family:verdana;
+	font-weight:bold;
+}
+
+.tree .tree-node .tree-has-child .tree-label {
+	margin-left:5px;
+}
+
+.tree .tree-node .tree-selected .tree-label { background-color:#888; color:#fff; }
+
+.tree .tree-node .tree-button { _text-indent:-9px; _margin-left:5px; }
+*:first-child+html .tree .tree-node .tree-button { _text-indent:-9px; _margin-left:5px; }

@@ -1,7 +1,7 @@
 {
   "name": "jindojs-jc",
   "version": "1.14.0",
-  "description": "JindoJS Component",
+  "description": "Jindo Component",
   "main": "dist/jindo-component.js",
   "moduleType": [
     "globals"
@@ -9,16 +9,29 @@
   "keywords": [
     "jindo",
     "jindojs",
+    "javascript",
     "library",
-    "component",
-    "ui"
+    "framework"
   ],
   "authors": [
     "NAVER Corp."
   ],
   "license": "LGPL v2",
-  "homepage": "http://jindo.dev.naver.com/jindo_home/Component.html",
-  "dependencies": {
-    "jindojs-jindo": "*"
-  }
+  "homepage": "http://jindo.dev.naver.com/",
+  "ignore" : [
+    "**/.*",
+    "build",
+    "demo",
+    "dist/desktop",
+    "dist/mobile",
+    "dist/doc",
+    "dist/meta",
+    "src",
+    "test",
+    ".gitignore",
+    ".jshintrc",
+    "Gruntfile.js",
+    "package.json",
+    "*.md"
+  ]
 }

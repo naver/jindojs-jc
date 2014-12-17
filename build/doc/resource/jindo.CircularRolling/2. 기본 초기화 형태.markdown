@@ -1,0 +1,18 @@
+#### HTML
+	<div id="rolling" class="rolling">
+	    <ul>
+	        <li>첫번째</li>
+	        <li>두번째</li>
+	        <li>세번째</li>
+	        <li>네번째</li>
+	        <li>다섯번째</li>
+	    </ul>
+	</div>
+
+#### CSS
+	.rolling { width:330px; border:5px solid violet; overflow:hidden; position:relative; }
+	.rolling ul { list-style:none; width:32700px; margin:0; padding:0; float:left; height: 50px; }
+	.rolling ul li { background-color:#ff7; width:80px; float:left; border:5px solid red; padding:5px; margin:5px; height : 20px; }
+
+#### Javascript
+	var oCircularRolling = new jindo.CircularRolling(jindo.$('rolling'));

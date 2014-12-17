@@ -1,0 +1,338 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.DynamicTree"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가장 기본적인 사용 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+.tree{font-family:나눔고딕;font-size:14px;list-style:none;background:none;margin:0;padding:0;}
+.tree ul{margin-left:11px;padding-left:7px;list-style:none;background:url(img/line_tree_vr.gif) repeat-y 6px 0;}
+.tree .tree-node{margin-left:-1px;background:url(img/line_tree_hr.gif) no-repeat 0 5px;}
+.tree .tree-node div{position:relative;}
+.tree .tree-node.tree-last-node{background:url(img/line_tree_last_hr.gif) no-repeat 0 5px;}
+.tree .tree-node.tree-last-node.tree-root-node{background:none;}
+.tree .tree-collapsed .tree-has-child .tree-button{background-position:0 -9px!important;}
+.tree .tree-node .tree-has-child .tree-button{background:url(img/button.gif) no-repeat 0 0 transparent;overflow:hidden;display:inline-block;cursor:pointer;_cursor:hand;}
+.tree .tree-node .tree-button{background-color:transparent;border:0;width:9px;height:9px;font-size:0;color:transparent;line-height:200%;position:relative;top:-5px;_text-indent:-9px;_margin-left:5px;margin:0 -2px 0 -4px;}
+.tree .tree-node .tree-label{margin-left:5px;background-color:#fff;cursor:pointer;-moz-user-select:none;}
+.tree .tree-node .tree-has-child .tree-label{margin-left:5px;}
+.tree .tree-node .tree-selected .tree-label{background-color:#888;color:#fff;}
+:first-child+html .tree .tree-node .tree-button{_text-indent:-9px;_margin-left:5px;}
+.tree-noscript,.tree .tree-collapsed ul{display:none;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<ul id="tree" class="tree">
+		<li class="tree-node tree-root-node tree-last-node">
+			<div class="tree-has-child" style="display:none;">
+				<button class="tree-button">+</button>
+				<span class="tree-label" unselectable="on">루트노드</span>
+			</div>
+			<ul>
+				<li class="tree-node">
+					<div>
+						<button class="tree-button">+</button>
+						<span class="tree-label" unselectable="on">자식없음</span>
+					</div>
+				</li>
+				<li class="tree-node tree-collapsed">
+					<div class="tree-has-child">
+						<button class="tree-button">+</button>
+						<span class="tree-label" unselectable="on">자식있음</span>
+					</div>
+				</li>
+				<li class="tree-node tree-last-node">
+					<div>
+						<button class="tree-button">+</button>
+						<span class="tree-label" unselectable="on">자식없음</span>
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<hr/>
+	<h2>선택 :</h2>
+	<button onclick="sample.getSelectedNode();">현재 선택된 거 : getSelectedNode</button>
+	<button onclick="sample.selectNode_root();">루트 선택하기 : selectNode</button>
+
+	<h2>지우기 :</h2>
+	<button onclick="sample.removeNode();">삭제하기 : removeNode</button>
+	<button onclick="sample.clearNode();">비우기 : clearNode</button>
+	
+	<h2>만들기 :</h2>
+	<button onclick="sample.createNode_append();">안에다가 넣기 : createNode - appendNode</button>
+	<button onclick="sample.createNode_before();">앞에 추가하기 : createNode - insertNodeBefore</button>
+	<button onclick="sample.createNode_after();">뒤에 추가하기 : createNode - insertNodeAfter</button>
+	
+	<h2>접고 펴기 :</h2>
+	<button onclick="sample.expandNode();">펼치기 : expandNode</button>
+	<button onclick="sample.collapseNode();">접기 : collapseNode</button>
+	<button onclick="sample.expandNode_all();">자식까지 전부 펼치기 : expandNode</button>
+	<button onclick="sample.collapseNode_all();">자식까지 전부 접기 : collapseNode</button>
+	<button onclick="sample.isCollapsed();">펼쳐졌나 확인하기 : isCollapsed</button>
+	
+	<h2>이동 :</h2>
+	<button onclick="sample.getParentNode();">부모노드로 이동 : getParentNode</button>
+	<button onclick="sample.getChildNode();">첫번째 자식 노드로 이동 : getParentNode</button>
+	<button onclick="sample.getPreviousNode();">형 노드로 이동 : getPreviousNode</button>
+	<button onclick="sample.getNextNode();">동생 노드로 이동 : getNextNode</button>
+
+	<h2>기타 :</h2>
+	<button onclick="sample.getNodeDepth();">깊이얻기 : getNodeDepth</button>
+	<button onclick="sample.getNodeData();">데이터얻기 : getNodeData</button>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Tree.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DynamicTree.js"></script>
+<script type="text/javascript">
+	
+	var oTree = new jindo.DynamicTree(jindo.$('tree'), {
+		sClassPrefix: 'tree-',
+		sUrl : "../asset/server/DynamicTreeData.php"
+	}).attach({
+		request : function(e) {
+			//console.log(e)
+		},
+		response : function(e) {
+			//console.log(e)
+		}
+	});
+
+	var sample = {
+		
+		getSelectedNode : function() {
+			alert(oTree.getSelectedNode());
+		},
+		
+		getNodeDepth : function() {
+			alert(oTree.getNodeDepth(oTree.getSelectedNode()));
+		},
+		
+		getNodeData : function() {
+			alert(oTree.getNodeData(oTree.getSelectedNode()));
+		},
+		
+		getData : function() {
+			//console.log(oTree.getData());
+		},
+		
+		selectNode_root : function() {
+			
+			oTree.selectNode(oTree.getRootNode());
+			
+		},
+		
+		removeNode : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			oTree.removeNode(elNode);
+			
+		},
+		
+		createNode_before : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			
+			var aNewNodes = oTree.createNode(
+				[{ 
+					sLabel : "hello",
+					_aChildren : [ 
+						{sLabel : 'world'}, 
+						{sLabel : 'kuku'}
+					] 
+				}]
+			);
+			oTree.insertNodeBefore(elNode, aNewNodes);
+			
+		},
+		
+		createNode_after : function() {
+			
+			var elNode = oTree.getSelectedNode();
+
+			var aNewNodes = oTree.createNode([
+			
+				{
+					sLabel : '포유류',
+					geegee : 'babybaby',
+					_aChildren : [
+						{ sLabel : '고래' },
+						{ sLabel : '토끼' },
+						{ sLabel : '다람쥐' },
+						{
+							sLabel : '맹수',
+							_aChildren : [
+								{ sLabel : '호랑이' },
+								{ sLabel : '표범' },
+								{ sLabel : '사자' },
+								{ sLabel : '재규어' }
+							]
+						}
+					
+					]
+				},
+				
+				{ sLabel : '조류' }
+			
+			]);
+			oTree.insertNodeAfter(elNode, aNewNodes);
+			
+		},
+		
+		createNode_append : function() {
+		
+			var elNode = oTree.getSelectedNode();
+
+			var aNewNodes = oTree.createNode([
+			
+				{
+					sLabel : '라면',
+					_aChildren : [
+						{ 
+							sLabel : '봉지라면',
+							_aChildren : [
+								{ sLabel : '무파마' },
+								{ sLabel : '짜파게티' },
+								{ sLabel : '너구리' }
+							]
+						},
+						{ 
+							sLabel : '컵라면', 
+							_aChildren : [
+								{ sLabel : '새우탕면' },
+								{ sLabel : '튀김우동' },
+								{ sLabel : '왕뚜껑' }
+							]
+						}
+					
+					]
+				},
+				
+				{ sLabel : '조류' }
+			
+			]);
+			
+			oTree.appendNode(elNode, aNewNodes);
+
+		},
+		
+		clearNode : function() {
+		
+			var elNode = oTree.getSelectedNode();
+			oTree.clearNode(elNode);
+			
+		},
+		
+		expandNode : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			oTree.expandNode(elNode);
+			
+		},
+		
+		collapseNode : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			oTree.collapseNode(elNode);
+			
+		},
+		
+		expandNode_all : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			oTree.expandNode(elNode, true);
+			
+		},
+		
+		collapseNode_all : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			oTree.collapseNode(elNode, true);
+			
+		},
+		
+		isCollapsed : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			alert(oTree.isCollapsed(elNode) ? '접혀있음' : '펼쳐있음');
+			
+		},
+		
+		getParentNode : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			var elGotNode = oTree.getParentNode(elNode);
+			
+			if (!elGotNode) {
+				alert('더 이상 없습니다');
+				return;
+			}
+			
+			oTree.selectNode(elGotNode);
+			
+		},
+		
+		getChildNode : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			var elGotNode = oTree.getChildNodes(elNode)[0];
+			
+			if (!elGotNode) {
+				alert('더 이상 없습니다');
+				return;
+			}
+			
+			oTree.selectNode(elGotNode);
+			
+		},
+		
+		getPreviousNode : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			var elGotNode = oTree.getPreviousNode(elNode);
+			
+			if (!elGotNode) {
+				alert('더 이상 없습니다');
+				return;
+			}
+			
+			oTree.selectNode(elGotNode);
+			
+		},
+		
+		getNextNode : function() {
+			
+			var elNode = oTree.getSelectedNode();
+			var elGotNode = oTree.getNextNode(elNode);
+			
+			if (!elGotNode) {
+				alert('더 이상 없습니다');
+				return;
+			}
+			
+			oTree.selectNode(elGotNode);
+			
+		}
+		
+	};	
+	
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

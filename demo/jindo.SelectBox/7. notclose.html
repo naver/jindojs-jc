@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>선택해도 닫히지 않는 옵션 지정</title>
+<meta name="class-lists" content="jindo.SelectBox"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="선택해도 레이어가 닫히지 않도록 옵션을 지정한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body {font-family: "나눔고딕", Dotum, Helvetica, AppleGothic; font-size: 15px;}
+	.selectbox-noscript * { display:none; }
+	.selectbox-noscript .selectbox-source { display:inline; position:relative; left:0;}
+	.selectbox-noscript .selectbox-source * { display:block; }
+
+	.selectbox-source { position:absolute; left:-9999px;}
+	.selectbox-focused .selectbox-box { border-color:green; }
+	.selectbox-disabled .selectbox-box { border-color:gray; }
+
+	.selectbox-box { border:3px solid yellowgreen; cursor:default; width:200px; }
+	.selectbox-label { padding:5px; }
+	.selectbox-layer { display:none; position:absolute; border:3px solid blue; background-color:#eee; z-index:2; }
+	.selectbox-list ul { list-style:none; margin:0; padding:0; }
+
+	.selectbox-list ul li { padding:5px; cursor:default; color:#888; background-color:#eee; zoom:1; }
+	.selectbox-list ul li.selectbox-item-selected { color:#000; font-weight:bold; }
+	.selectbox-list ul li.selectbox-item-over { background-color:#aaa !important; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="s" class="selectbox-noscript">
+		<select class="selectbox-source">
+			<option value="all">기간 전체</option>
+			<option value="week">최근 1주</option>
+			<option value="month">최근 1달</option>
+			<option class="selectbox-notclose" value="specific">기간 입력</option>
+		</select>
+		<div class="selectbox-box">
+			<div class="selectbox-label"></div>
+		</div>
+		<div class="selectbox-layer">
+			<div class="selectbox-list"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.HTMLComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverClick.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.SelectBox.js"></script>
+<script type="text/javascript">
+	var oSelectBox = new jindo.SelectBox(jindo.$("s"), {
+		nWidth : 200,
+		bUseLayerPosition : false,
+		aOptionHTML : [
+			null,
+			null,
+			null,
+			'<label for="period">기간 입력</label><input type="text" id="input_1" maxlength="10">'
+		],
+		aOptionLabel : [
+			null,
+			null,
+			null,
+			"기간 입력"
+		]
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

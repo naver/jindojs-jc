@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+			
+			#panel .accordion-block { height:30px; width:200px; overflow:hidden; margin:0}
+			#panel .accordion-block dt { height:20px; padding:5px; cursor:pointer;}
+			#panel .accordion-block dd { padding:5px; background-color:#eeeeee; overflow:auto; margin:0;}
+			
+			#panel2 { float:left; }
+			#panel2 .accordion-block { position:relative; float:left; width:20px; height:200px; margin:1px; border:1px solid black; overflow:hidden;}
+			#panel2 dt { float:left; width:20px; height:200px; background-color:#eeeeee; }
+			#panel2 dd { position:absolute; margin:0; left:20px; width:150px; height:200px; }
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+			<div id="panel">
+				<dl class="accordion-block" style="background-color:lawngreen;">
+					<dt>1</dt>
+					<dd>내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br /></dd>
+				</dl>		
+				<dl class="accordion-block" style="background-color:greenyellow;">
+					<dt>2</dt>
+					<dd>내용2</dd>
+				</dl>
+				<dl class="accordion-block" style="background-color:chartreuse;">
+					<dt>3</dt>
+					<dd>내용3</dd>
+				</dl>
+				<dl class="accordion-block" style="background-color:lime;">
+					<dt>4</dt>
+					<dd>내용4</dd>
+				</dl>
+				<dl class="accordion-block" style="background-color:limegreen;">
+					<dt><a href="#" onclick="return false" class="accordion-handler">5</a></dt>
+					<dd>내용5</dd>
+				</dl>
+			</div>
+			
+			<div id="panel2">
+				<!-- 초기화면에 확장된 모습으로 보여주고 싶은경우 block의 사이즈를 head+body의 사이즈로 지정합니다. -->
+				<dl class="accordion-block">
+					<dt><a href="#" onclick="return false" class="accordion-handler">1</a></dt>
+					<dd>내용1</dd>
+				</dl>
+				<dl class="accordion-block">
+					<dt><a href="#" onclick="return false" class="accordion-handler">2</a></dt>
+					<dd>내용2</dd>
+				</dl>
+				<dl class="accordion-block">
+					<dt><a href="#" onclick="return false" class="accordion-handler">3</a></dt>
+					<dd>내용3</dd>
+				</dl>
+				<dl class="accordion-block">
+					<dt><a href="#" onclick="return false" class="accordion-handler">4</a></dt>
+					<dd>내용4</dd>
+				</dl>
+				<dl class="accordion-block">
+					<dt><a href="#" onclick="return false" class="accordion-handler">5</a></dt>
+					<dd>내용5</dd>
+				</dl>
+			</div>
+		</div>
+
+	<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../src/jindo.Timer.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../src/jindo.Effect.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../src/jindo.Transition.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../src/jindo.Accordion.js"></script>
+	<script type="text/javascript" src="js/jindo.Accordion.test.js"></script>
+	</body>
+</html>

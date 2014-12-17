@@ -1,0 +1,1 @@
+isActivate() 메소드는 컴포넌트를 활성여부를 리턴한다. activate(); 수행 이후에 호출되면 true, 아니면 false를 리턴한다.

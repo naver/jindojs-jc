@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>라디오버튼에 적용</title>
+<meta name="class-lists" content="jindo.CheckBox"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="라디오버튼에 적용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	/* radio-applied */
+	.radio-applied {display:-moz-inline-block; display:-moz-inline-box; display:inline-block; overflow:hidden; position:relative; width:24px; height:24px; vertical-align:middle;}
+	.radio-applied span.radio-mark {display:-moz-inline-block; display:-moz-inline-box; display:inline-block; position:absolute; left:1px; top:1px; z-index:1; width:22px; height:22px; background:url("img/CheckBox.radio_check.gif") no-repeat 0 0;}
+	.radio-applied span.radio-mark.radio-checked {background-position:0 -31px;}
+	.radio-applied input {position:absolute; left:-9999px;}
+	.radio-applied.radio-disabled span.radio-mark {background-position:0 -62px;}
+	.radio-applied.radio-disabled span.radio-mark.radio-checked {background-position:0 -93px;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+		
+	<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r1" /></span> <label for="r1">첫번째</label>
+	<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r2" checked="checked" /></span> <label for="r2">두번째</label>
+	<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r3" /></span> <label for="r3">세번째</label>
+	
+	<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="a" id="r4" /></span> <label for="r4">네번째</label>
+	<br /><br />
+	<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="b" id="r5" disabled="disabled" /></span> <label for="r5">비활성 첫번째</label>
+	<span class="ajax_radio"><span class="radio-mark"></span><input type="radio" name="b" id="r6" disabled="disabled" checked="checked" /></span> <label for="r6">비활성 두번째</label>
+
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.HTMLComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.CheckBox.js"></script>
+<script type="text/javascript">
+	var aRadioButton = jindo.CheckBox.factory(jindo.$$('.ajax_radio'));
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

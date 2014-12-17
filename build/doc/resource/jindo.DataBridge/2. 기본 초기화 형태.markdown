@@ -1,0 +1,3 @@
+#### Javascript
+
+	var oDataBridge = new jindo.DataBridge();

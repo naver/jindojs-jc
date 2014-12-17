@@ -1,0 +1,115 @@
+DropArea컴포넌트는 DragArea 컴포넌트로 드래그된 엘리먼트가 드랍되었을 때 지정한 동작을 수행할 수 있도록 도와주는 컴포넌트다.
+DropArea 컴포넌트는 단독으로 사용할 수 없고, DragArea 컴포넌트와 함께 Drag&Drop을 기능을 완성한다. 따라서 이 컴포넌트를 제대로 사용하기 위해서는 DragArea 컴포넌트의 이해가 반드시 필요하다.
+
+DropArea는 드래그한 엘리먼트가 드랍할 영역위로 올라왔을 때, 추가적인 작업을 할수있도록 지원하고, 드래그한 엘리먼트가 마우스 포인터와 중첩되어 마우스 이벤트를 받을수 없는 경우에도 포인터의 위치를 계산해서 드랍할 영역에 커스텀 이벤트를 발생시켜 준다. 
+DropArea는 아래 그림과 같이 드래그가 전제되었다고 가정하기 때문에 다른 컴포넌트에 비해 조금 까다롭다. 즉, DragArea 인스턴스와 DropArea 인스턴스를 동시에 핸들링 해야하고 아래와 같이 여러개의 엘리먼트를 핸들링해야한다. 
+
+![](Basic.png "")
+
+##Drop 영역이 활성화 되는 시점
+
+드래그된 엘리먼트를 드랍하기 위해서는 마우스 포인터가 어느 위치에 있느냐가 매우 중요하다. 아래 그림처럼 드래그 중인 엘리먼트와 마우스 포인터가 중첩이 되어 있는 상황에서는 드랍영역에 마우스 이벤트가 전달되지 않기 때문에 드래그 이동중일때, 마우스 포인터를 기준으로 좌표계산을 하게 된다. 즉, Drop 영역을 먼저 찾고 현재 마우스 포인터가 찾은 Drop 영역안에 있는지 계산한다. 이때 마우스 포인터가 영역 안에 있다면, 해당 Drop 영역에 커스텀 이벤트를 발생시켜준다.
+
+##### 마우스포인터와 Drag 엘리먼트가 중첩되는 상황
+
+![](Activation.png "")
+
+아래 그림과 같이 Drop 영역이 여러개 겹쳐 있을수도 있다. 이때도 마찬가지로 모든 Drop 영역을 찾아 배열에 넣고, 하나씩 포인터가 해당 영역에 있는지 검사를 하기때문에 Drop 영역이 여러개 선택될수 있다.
+
+##### 마우스포인터와 Drag 엘리먼트, 그리고 Drop 영역이 여러개 중첩되는 상황
+
+![](Activation1-1.png "")
+
+하지만, 위의 두번째 그림처럼 Drop 영역이 여러개 활성화 되어버리면 정확히 어느지점에 드래그한 엘리먼트를 드랍해야하는지 선택해야한다. 때문에 아래 그림과 같이 드래그된 엘리먼트와 마우스포인터를 분리하여 직접 Drop 영역을 포인팅하도록 지정할 수도 있다. (참고로 네이버 메일의 경우, 후자의 방법을 사용한다.)
+
+##### Drag 엘리먼트와 중첩되는 상황을 피하기 위해, 마우스 포인터를 drag엘리먼트의 좌상단에 지정
+
+![](Activation2.png "")
+
+#### DropArea 초기화하기
+
+간단한 기능확인을 위해 아래와 같이 드래그할 영역과 드랍할 영역 정해 HTML/CSS를 구성했다.
+파란색과 빨간색 박스를 드래그해서, 오른쪽 드랍존에 떨어트리면, 해당 색으로 변경되는 간단한 예제이다.
+
+![](Example.png "")
+
+	<div class="closehand" id="bar"> 
+	    <div class="draggable" id="bar_sub1">#00f</div> 
+	    <div class="draggable" id="bar_sub2">#f00</div> 
+	</div>
+	<div class="droppable"></div>
+	
+	* { margin:0; padding:0; cursor:default; }
+	div { border:1px solid #000; }
+	#bar { width:400px; height:200px; left:50px; top:50px; padding:10px; }
+	#bar_sub1 { width:50px; height:50px; background-color:blue; left:15px; top:15px; z-index:10 }
+	#bar_sub2 { width:50px; height:50px; background-color:red; left:15px; top:90px; z-index:10}
+	.draggable { padding:10px;position:absolute; background-color:#ffd; cursor:url('http://static.naver.com/maps2/openhand.cur'), move; }
+	.droppable { position:absolute; width:190px; height:180px; top:20; left:200; background-color:white; z-index:0}
+	
+	// Javascript
+	var oDragArea, oDropArea;
+	window.onload = function() {
+	    oDragArea = new jindo.DragArea(document);
+	    oDropArea = new jindo.DropArea(document, {oDragInstance:oDragArea}).attach({
+	        over : function(oCustomEvent) {
+	            oCustomEvent.elDrop.style.backgroundColor = oCustomEvent.elDrag.innerHTML;
+	        },
+	        out : function(oCustomEvent){
+	            oCustomEvent.elDrop.style.backgroundColor = "#FFF";
+	        }
+	    });
+	}
+
+DorpArea의 첫번째 인자는 Drop 기능이 동작하는 영역을 지정하기 때문에 일단은 Doucment 전체 영역으로 지정했다. Drop은 Drag를 전제로 하기 때문에 옵션 인자로 oDragInstance를 반드시 지정 해줘야한다. 위 코드를 실행해보면 over와 out이벤트 핸들러에서 정의한대로, 엘리먼트를 DropZone으로 드래그하면 색이 변하는것을 볼수있다.
+
+#### 커스텀 이벤트 발생 순서
+
+아래 그림은 DropArea 컴포넌트의 커스텀이벤트 발생순서를 나타내고 있다. 
+
+![](EventSequence.png "")
+
+빨간색 표시된 것은 DragArea의 커스텀이벤트인 것에 유의하자. 3~7번(5번제외)까지는 Drop 영역 위에서 발생하는 이벤트들로써, 이벤트 객체안에는 elDrop 엘리먼트가 모두 포함되어 있다. 자세한 내용은 커스텀이벤트 표를 확인하자.
+
+#### 드래그 엘리먼트와 마우스 포인터가 중첩되는 상황을 피하는 방법
+
+Drag 기능은 기본적으로 엘리먼트를 잡고 움직이기 때문에 Drag엘리먼트와 Drop영역이 중첩되는 문제가 발생한다. 이 문제는 이미 Drop 영역이 활성화 되는 시점을 통해 알아보았다. 실제 구현은 다음과 같은 방법을 사용하였다.
+ 1. 먼저, 실제 움직일 가상 엘리먼트(phantom)를 숨겨둔다.
+ 2. 그리고 드래그가 시작(dragStart)될때, 드래그된 엘리먼트를 복사해 가상 엘리먼트에 넣고(innerHTML)
+ 3. 마우스 포인터 우하단의 상대적인 값을 구해, 가상 엘리먼트의 위치를 지정한다.
+ 4. 마지막으로 실제 움직일 엘리먼트(elDrag)에 가상 엘리먼트를 지정한다.
+구현된 코드는 아래와 같다.
+
+	var oDragArea = new jindo.DragArea(document, { sClassName : 'draggable' }).attach({
+	    'dragStart' : function(oCustomEvent) {
+	        jindo.$Element(document.body).addClass('dragging');
+	        var oMousePos = oCustomEvent.weEvent.pos();
+	         
+	        // 가상 엘리먼트를 항상 마우스 커서 우측 하단에 붙도록 지정
+	        jindo.$Element('phantom').html(oCustomEvent.elDrag.innerHTML).show().offset(
+	                oMousePos.pageY + 10,
+	                oMousePos.pageX + 8
+	        );
+	         
+	        // 실제 움직이는 엘리먼트는 가상 엘리먼트로 지정
+	        oCustomEvent.elDrag = jindo.$('phantom');
+	    },
+	    'dragEnd' : function(oCustomEvent) {
+	        jindo.$Element(document.body).removeClass('dragging');
+	        jindo.$Element('phantom').hide();
+	    }
+	});
+	 
+	var oDropArea = new jindo.DropArea(document, { sClassName : 'droppable', oDragInstance : oDragArea }).attach({
+	    'over' : function(oCustomEvent) {
+	        jindo.$Element(oCustomEvent.elDrop).addClass('overed');
+	    },
+	    'out' : function(oCustomEvent) {
+	        jindo.$Element(oCustomEvent.elDrop).removeClass('overed');
+	    },
+	    'dragEnd' : function(oCustomEvent) {
+	        if (oCustomEvent.aDrop.length) {
+	            jindo.$ElementList(oCustomEvent.aDrop).removeClass('overed');                  
+	        }  
+	    }
+	});

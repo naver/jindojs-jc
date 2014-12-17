@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>mouseout시 레이어가 닫히는 경우</title>
+<meta name="class-lists" content="jindo.LayerManager"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="레이어의 노출/가림을 mouseover/mouseout 으로 적용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.layer { 
+		position:absolute; 
+		border:1px solid #000; 
+		background-color:#eee; 
+		display:none; 
+		margin-top:5px; 
+		width:120px;
+		height:100px;
+		overflow:auto;
+	}
+	
+	.overflow {
+		overflow-x:hidden;
+		overflow-y:auto;
+	}
+	
+	li {
+		font-family:나눔고딕, 굴림;
+		margin:10px;
+	}
+	.layer-show { display: block;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<ul>
+		<li>
+			<a id="anchor1" onclick="o1.show(); return false;" href="#">클릭으로 열고 마우스아웃시(외부에 마우스 오버시) 닫기</a>
+			<div id="layer1" class="layer ">
+				레이어 
+			</div>
+		</li>
+		<li>
+			<a id="anchor2" onmouseover="o2.show(); return false;" href="#">마우스오버로 열고 마우스아웃시(외부에 마우스 오버시) 닫기</a>
+			<div id="layer2" class="layer">
+				레이어
+			</div>
+		</li>
+	</ul>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript">
+	var o1 = new jindo.LayerManager('layer1', { 
+		sCheckEvent : "mouseover", 
+		nHideDelay : 200
+	}).link(jindo.$('layer1'), jindo.$("anchor1"));
+	
+	var o2 = new jindo.LayerManager('layer2', { 
+		sCheckEvent : "mouseover", 
+		nHideDelay : 100
+	}).link(jindo.$('layer2'), jindo.$('anchor2'));
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+#### HTML
+
+	<ul id="rolloverarea">
+	    <li class="rollover"><a href="#">menu1</a></li>
+	    <li class="rollover"><a href="#">menu2</a></li>
+	    <li class="rollover"><a href="#">menu3</a></li>
+	    <li class="rollover"><a href="#">menu4</a></li>
+	</ul>
+
+#### CSS
+	
+	.rollover { background-color : green;   }
+	.rollover-over { background-color : white; }
+	.rollover-down { background-color : gray; }
+
+#### JavaScript
+
+	//include jindo.Componenet.js
+	//include jindo.UIComponent.js
+	//include jindo.RolloverArea.js
+	//include jindo.RolloverClick.js
+	 
+	var oRolloverClick = new jindo.RolloverClick(jindo.$("rollover"));

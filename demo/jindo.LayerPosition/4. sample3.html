@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>beforeAdjust 이벤트 제어</title>
+<meta name="class-lists" content="jindo.LayerPosition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="자동배치 설정시 좌우 대칭 조정만 되도록 beforeAdjust 이벤트를 제어하는 예제입니다. (새창에서 창을 리사이징하며 확인하세요.)">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.center_layer {position:absolute; top:80px; left:110px; width:150px; height:150px; padding:5px;  background-color:#666; color:white; text-align:center; border:1px solid black;}
+	.layer {position:absolute; width:50px; height:50px; padding:5px; background-color:white; border:1px solid black; z-index:2; }
+	.auto {font-size:8pt; width:50px; height:50px; padding:5px; background-color:#0075c8; color:#fff;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div id="center" class="center_layer">center layer</div>
+<div id="layer" class="layer auto">좌우자동배치</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript">
+	var oLayerPosition = new jindo.LayerPosition(jindo.$("center"), jindo.$("layer"), { 
+		sPosition : "outside-right", 
+		sValign : "bottom", 
+		nTop : 0, 
+		nLeft : 10, 
+		bAuto:true 
+	}).attach({
+		beforeAdjust : function(oCustomEvent) {
+			//좌우로만 자동 이동하도록 설정
+			if (oCustomEvent.htAdjustedPosition.nTop < oCustomEvent.htCurrentPosition.nTop) {
+				oCustomEvent.stop();
+			}
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

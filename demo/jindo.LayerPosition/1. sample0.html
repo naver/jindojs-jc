@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>레이어 배치</title>
+<meta name="class-lists" content="jindo.LayerPosition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="25개의 레이어를 간단하게 배치해보는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.center_layer {position:absolute; top:100px; left:100px; width:300px; height:300px; padding:5px;  background-color:#666; color:white; border:1px solid black; text-align:center;}
+	.layer {position:absolute; width:50px; height:50px; padding:5px; background-color:white; border:1px solid black; z-index:2; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div id="center" class="center_layer">center layer</div>
+		
+<div id="layer1" class="layer">layer 1</div>
+
+<div id="layer2" class="layer">layer 2</div>
+<div id="layer3" class="layer">layer 3</div>
+<div id="layer4" class="layer">layer 4</div>
+<div id="layer5" class="layer">layer 5</div>
+<div id="layer6" class="layer">layer 6</div>
+<div id="layer7" class="layer">layer 7</div>
+
+<div id="layer8" class="layer">layer 8</div>
+<div id="layer9" class="layer">layer 9</div>
+<div id="layer10" class="layer">layer 10</div>
+<div id="layer11" class="layer">layer 11</div>
+<div id="layer12" class="layer">layer 12</div>
+<div id="layer13" class="layer">layer 13</div>
+
+<div id="layer14" class="layer">layer 14</div>
+<div id="layer15" class="layer">layer 15</div>
+<div id="layer16" class="layer">layer 16</div>
+<div id="layer17" class="layer">layer 17</div>
+<div id="layer18" class="layer">layer 18</div>
+<div id="layer19" class="layer">layer 19</div>
+
+<div id="layer20" class="layer">layer 20</div>
+<div id="layer21" class="layer">layer 21</div>
+<div id="layer22" class="layer">layer 22</div>
+<div id="layer23" class="layer">layer 23</div>
+<div id="layer24" class="layer">layer 24</div>
+<div id="layer25" class="layer">layer 25</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript">
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer1"), { sPosition : "outside-top-left", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer2"), { sPosition : "outside-top", sAlign : "left", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer3"), { sPosition : "outside-top", sAlign : "center", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer4"), { sPosition : "outside-top", sAlign : "right", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer5"), { sPosition : "outside-top-right", nTop : 10, nLeft : 10 });
+	
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer6"), { sPosition : "outside-right", sValign : "top", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer7"), { sPosition : "outside-right", sValign : "middle", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer8"), { sPosition : "outside-right", sValign : "bottom", nTop : 10, nLeft : 10 });
+	
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer9"), { sPosition : "outside-bottom-right", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer10"), { sPosition : "outside-bottom", sAlign : "right", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer11"), { sPosition : "outside-bottom", sAlign : "center", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer12"), { sPosition : "outside-bottom", sAlign : "left", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer13"), { sPosition : "outside-bottom-left", nTop : 10, nLeft : 10 });
+	
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer14"), { sPosition : "outside-left", sValign : "bottom", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer15"), { sPosition : "outside-left", sValign : "middle", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer16"), { sPosition : "outside-left", sValign : "top", nTop : 10, nLeft : 10 });
+	
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer17"), { sPosition : "inside-top-left", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer18"), { sPosition : "inside-top", sAlign : "center", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer19"), { sPosition : "inside-top-right", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer20"), { sPosition : "inside-right", sValign : "middle", nTop : 10, nLeft : 10 });
+	
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer21"), { sPosition : "inside-bottom-right", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer22"), { sPosition : "inside-bottom", sAlign : "center", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer23"), { sPosition : "inside-bottom-left", nTop : 10, nLeft : 10 });
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer24"), { sPosition : "inside-left", sValign : "middle", nTop : 10, nLeft : 10 });
+	
+	new jindo.LayerPosition(jindo.$("center"), jindo.$("layer25"), { sPosition : "inside-center" });
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

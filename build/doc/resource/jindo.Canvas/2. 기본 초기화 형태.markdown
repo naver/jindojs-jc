@@ -1,0 +1,4 @@
+#### Javascript
+
+	var elCanvas = jindo.Canvas.create();
+	var oCanvas = new jindo.Canvas(elCanvas);

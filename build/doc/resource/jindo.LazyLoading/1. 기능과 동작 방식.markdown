@@ -1,0 +1,1 @@
+jindo.LazyLoading 컴포넌트는 js파일을 동적으로 로드합니다.

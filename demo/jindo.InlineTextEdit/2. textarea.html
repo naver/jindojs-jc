@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>textarea 편집 예제</title>
+<meta name="class-lists" content="jindo.InlineTextEdit"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="textarea안의 글자를 편집하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	p { cursor:pointer; padding:5px 0; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<p onclick="oInlineTextEdit.edit(this)">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis odio leo, iaculis in mollis nec, pulvinar non nunc. In hac habitasse platea dictumst. Praesent et orci ipsum, at adipiscing massa. Ut condimentum pharetra arcu ut ultrices. Nulla facilisi. Praesent eget est non tellus sagittis ultricies. Ut tellus nulla, gravida ac cursus a, varius eu lacus. Phasellus a erat dolor. Donec urna mi, tempus eget pharetra at, rhoncus vel odio. Morbi varius felis a tellus aliquam cursus.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Phasellus facilisis dignissim enim. Nulla blandit gravida diam eu volutpat. Sed molestie diam faucibus purus tincidunt interdum. Fusce aliquam dolor at ligula faucibus pretium. Praesent tempus, purus nec malesuada adipiscing, erat eros interdum arcu, et condimentum lacus est non quam. Nam vel diam enim. Fusce in nisi ac odio interdum auctor. Aliquam luctus convallis rhoncus. Donec a arcu et sapien varius luctus sit amet congue odio. Duis sed turpis nec erat posuere rutrum sit amet varius nunc. Vivamus quis lacus massa, pretium varius metus. Ut sit amet massa eget ipsum sollicitudin consectetur. Mauris libero lectus, dictum non convallis malesuada, tincidunt id turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed in mi dui, semper gravida elit. Nam tincidunt egestas tincidunt. Maecenas orci nunc, euismod vel cursus vulputate, hendrerit laoreet ipsum.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Sed venenatis lacus nec nulla feugiat eget rhoncus leo bibendum. Etiam gravida varius porttitor. Sed vel nisi et lacus lacinia rhoncus. Nam non nisl nibh, dapibus fringilla nulla. Vestibulum laoreet, elit vitae egestas pellentesque, erat justo convallis nisi, vitae tempor nunc velit vitae tortor. Sed sed auctor enim. Etiam id libero felis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean et urna vel risus vestibulum volutpat. Cras nisl magna, facilisis at eleifend ac, aliquet ut erat.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut at vestibulum dolor. Ut ac justo et nisi condimentum dignissim. Nulla arcu libero, congue eu tincidunt a, pulvinar nec nunc. Donec blandit iaculis orci, at eleifend massa interdum in. Maecenas interdum dui sed sapien tincidunt non aliquet lacus dictum. Praesent nec nisi a augue ullamcorper ullamcorper. Aliquam bibendum, tortor ut vulputate consectetur, ipsum diam facilisis nibh, eu vestibulum enim nisl at velit. Aliquam facilisis est id mauris iaculis sit amet mollis lectus viverra. Vivamus ligula justo, rutrum ac faucibus eget, dapibus non orci. Cras sodales egestas est quis auctor. Etiam nunc dolor, tristique vel interdum ut, sollicitudin eu lacus. Etiam bibendum lacus vel turpis porta lacinia.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Pellentesque orci ante, porttitor a iaculis in, consectetur ac neque. Duis feugiat, neque eget venenatis cursus, nunc augue faucibus quam, sit amet porta ante tortor eget diam. Aliquam a purus mauris, vehicula semper odio. Praesent tempor pharetra tellus ut blandit. Vestibulum id ante justo. Integer nec massa et eros malesuada lacinia. Sed interdum molestie augue, at placerat ipsum tincidunt nec. Sed vitae posuere ante. Aenean suscipit lacus nec erat sodales pellentesque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras at posuere ipsum.</p>
+	<!--p onclick="oInlineTextEdit.edit(this)">Nullam vel sem diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas fermentum arcu lorem. Pellentesque egestas quam nec tortor hendrerit at rhoncus dolor imperdiet. Vestibulum porttitor sapien sed arcu venenatis ornare. Morbi tincidunt adipiscing ullamcorper. Nunc at mattis magna. Proin interdum eros vitae nisi varius nec auctor libero scelerisque. Nulla commodo aliquam venenatis. Sed metus eros, faucibus nec pretium et, malesuada et felis. Phasellus sagittis fermentum tincidunt. Fusce vel lectus tellus, at volutpat urna. Aenean ac eros sit amet augue cursus volutpat non a nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Maecenas ut metus ut magna volutpat tincidunt ultrices eu elit. Pellentesque placerat purus et nunc elementum ac ultricies tortor pulvinar. Integer nibh ante, auctor in vehicula sed, lobortis a velit. Donec vulputate posuere nisi a feugiat. Vivamus mollis mi neque. Morbi gravida purus vel leo elementum commodo. Nullam a est sit amet lacus lacinia porta et a velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed hendrerit, odio sit amet tincidunt fringilla, ante leo rutrum sapien, vel congue dolor turpis ut nibh. Cras cursus, metus et suscipit mattis, purus lacus tincidunt turpis, a consectetur odio risus ac orci. Vestibulum eu massa nec lectus dignissim pretium. Pellentesque malesuada, dolor a sagittis eleifend, erat orci placerat lectus, vitae cursus erat massa at felis. Cras in lorem lacus, non dictum enim. Ut varius blandit massa scelerisque auctor. Donec aliquet mollis sapien nec dictum. Suspendisse nec feugiat ipsum.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Donec bibendum placerat volutpat. Quisque ac quam mi. Phasellus ultrices dui quis erat tincidunt convallis. Proin sodales interdum iaculis. Nam posuere orci vel tellus viverra ac bibendum arcu aliquet. Curabitur augue eros, gravida ac tincidunt eu, porttitor non est. Vestibulum et lorem dolor. Vivamus facilisis suscipit tincidunt. Phasellus laoreet turpis a eros ornare sed eleifend nisi imperdiet. Fusce id venenatis augue.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Quisque pretium sodales congue. Fusce auctor rutrum ultrices. Aliquam erat volutpat. Sed non sem est, sed vestibulum velit. Mauris varius, tortor id tincidunt eleifend, dui urna placerat leo, nec feugiat odio quam quis elit. Duis a gravida est. Sed dictum tempus cursus. Nullam eu ornare elit. Donec elementum, lorem ut convallis laoreet, dui nunc venenatis justo, vitae aliquet orci elit id enim. Nunc facilisis volutpat porta. Mauris nec urna ante. Pellentesque sodales dolor bibendum magna consectetur volutpat eget ac elit. Phasellus risus augue, egestas at mattis eget, commodo at sapien. Duis quam sem, eleifend nec venenatis sit amet, sagittis ac lectus.</p>
+	<p onclick="oInlineTextEdit.edit(this)">Aliquam erat volutpat. Quisque nisl eros, molestie ac malesuada et, cursus eu massa. Sed dictum ipsum vel nisl ornare mattis. Curabitur dictum venenatis rutrum. Nam lorem erat, tempus at aliquam faucibus, semper et elit. Sed tempus, leo nec lacinia lacinia, elit sem tempor leo, at congue leo ante vel libero. Sed massa purus, tempus vel consectetur eu, auctor sit amet est. In id eros diam, in dignissim neque. Aenean eget dolor justo. Cras ac leo nulla. In non auctor velit.</p-->
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.InlineTextEdit.js"></script>
+<script type="text/javascript">
+	var oInlineTextEdit = new jindo.InlineTextEdit({
+		elInput : jindo.$("<textarea>")
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

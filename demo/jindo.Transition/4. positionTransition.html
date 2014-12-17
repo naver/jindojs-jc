@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>위치 변경</title>
+<meta name="class-lists" content="jindo.Transition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="위치를 변경하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#rect {
+		position:absolute; width:100px; height:100px; left:10px; top:50px; padding:10px;
+		background-color:#0075c8; color:#fff;
+		font-weight:bold;
+		font-size:1.5em;
+	}
+	
+	label {
+		font-size : 13px;
+	}
+	
+	table { margin-left : 130px;}
+	
+	tr th {
+		padding : 10px;
+		border-top:1px solid #999;
+		border-bottom:1px solid #999;
+	}
+	tr td {
+		padding : 10px;
+		border-bottom:1px solid #ccc;
+	}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<select id="selectEffect">
+		<option value="linear">linear</option>
+		<option value="easeIn">easeIn</option>
+		<option value="easeOut">easeOut</option>
+		<option value="easeInOut">easeInOut</option>
+		<option value="easeOutIn">easeOutIn</option>
+		<option value="bounce">bounce</option>
+		<option value="overphase">overphase</option>
+		<option value="cubicEase">cubicEase</option>
+		<option value="cubicEaseIn">cubicEaseIn</option>
+		<option value="cubicEaseOut">cubicEaseOut</option>
+		<option value="cubicEaseInOut">cubicEaseInOut</option>
+		<option value="cubicEaseOutIn">cubicEaseOutIn</option>
+	</select>
+</div>
+<div id="rect"></div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript">
+
+var oTransition = new jindo.Transition();
+				
+jindo.$Fn(function(weEvent) {
+	
+	var sTagName = weEvent.element.tagName.toLowerCase();
+	
+	if (sTagName == "select" || sTagName == "option") {
+		return;
+	}
+	
+	var oPos = weEvent.pos();
+	var sEffect = jindo.$("selectEffect").value;
+	
+	oTransition.abort().start(1000,
+		jindo.$('rect'), {
+			'@left' : jindo.Effect[sEffect](oPos.pageX + 'px')
+		},
+		jindo.$('rect'), {
+			'@top' : jindo.Effect[sEffect](oPos.pageY + 'px')
+		}
+	)
+}).attach(document, "click");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

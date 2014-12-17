@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>textarea의 값을 클립보드에 설정</title>
+<meta name="class-lists" content="jindo.Clipboard"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="버튼을 클릭해서 textarea의 값을 클립보드에 설정하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.clipboard { cursor:pointer; _cursor:hand; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<textarea id="a" onkeyup="oClipboard.setData(jindo.$('copy'), this.value);"></textarea>
+	<button id="copy" type="button" class="clipboard">복사하기</button>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<!--<script type="text/javascript" charset="utf-8" src="../../asset/flashObject.js"></script>-->
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Clipboard.js"></script>
+<script type="text/javascript">
+	var oClipboard = new jindo.Clipboard('clipboard.swf').attach({
+		load: function(e){
+			this.setData(jindo.$('copy'), jindo.$('a').value);
+		},
+		copy: function(e){
+			alert('"' + e.data + '" 이(가) 클립보드에 저장되었습니다');
+		},
+		failure: function(e){
+			alert('클립보드에 저장하지 못했습니다!');
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

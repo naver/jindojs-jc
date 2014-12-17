@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>bDefaultIndex 옵션</title>
+<meta name="class-lists" content="jindo.Accordion"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="기본으로 열려있는 항목을 지정하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.accordion-block { height:30px; width:200px; overflow:hidden; margin:0}
+	.accordion-block dt { height:20px; padding:5px; cursor:pointer;}
+	.accordion-block dd { padding:5px; background-color:#eeeeee; overflow:auto; margin:0;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<!--
+	레이어의 구조는 .block .head .body .handler 이렇게 4가지 요소로 구분됩니다.
+	개별 단위인 block은 head와 body로 구성되어야하고
+	handler는 마우스의 이벤트를 처리하는 엘리먼트입니다.
+	
+	기본동작은 overflow:hidden 된 block의 사이즈를 조절함으로써 body의 내용을 보여주고 숨깁니다.
+	block이 최소화 되었을때의 사이즈는 head의 사이즈,
+	block이 최대화 되었을때의 사이즈는 head+body의 사이즈가 됩니다.
+	-->
+	<div id="panel">
+		<dl class="accordion-block" style="background-color:lawngreen;">
+			<dt>1</dt>
+			<dd>내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br /></dd>
+		</dl>		
+		<dl class="accordion-block" style="background-color:greenyellow;">
+			<dt>2</dt>
+			<dd>내용2</dd>
+		</dl>
+		<dl class="accordion-block" style="background-color:chartreuse;">
+			<dt>3</dt>
+			<dd>내용3</dd>
+		</dl>
+		<dl class="accordion-block" style="background-color:lime;">
+			<dt>4</dt>
+			<dd>내용4</dd>
+		</dl>
+		<dl class="accordion-block accordion-handler" style="background-color:limegreen;">
+			<dt>5</dt>
+			<dd>내용5</dd>
+		</dl>
+	</div>
+	<div style="clear:both;">
+		<a href="#" onclick="oAccordion.contractAll()">전체축소</a>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Accordion.js"></script>
+<script type="text/javascript">
+	var oAccordion = new jindo.Accordion("panel", { 
+		nDefaultIndex : 0
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

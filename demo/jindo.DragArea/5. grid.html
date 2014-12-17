@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>드래그 중 좌표를 제어</title>
+<meta name="class-lists" content="jindo.DragArea"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="드래그중에 좌표를 계산하여 상하좌우 20px씩 움직이도록 한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body,input,textarea,button{ padding:10px;font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+	div { border:1px solid #000; }
+	
+	.draggable { position:absolute; background-color:#fff; cursor:move; }
+	#foo { width:300px; padding:10px; left:10px; top:10px; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="draggable" id="foo">
+	<p style="height:200px;overflow:auto;">
+		JindoJS Component는<br>
+		JindoJS 를 기반으로 개발된<br>
+		재사용 가능한 독립적인<br>
+		자바스크립트 모듈입니다.<br>
+		<br>
+		JindoJS는 Javascript Application<br>
+		제작시에 반복적으로<br>
+		발생하는 로직을<br>
+		컴포넌트화 하여
+		결과물의 품질을<br>
+		향상시키기 위한 목적으로<br>
+		작성되었습니다.<br>
+		<br>
+		NAVER에서 서비스하고 있는<br>
+		수많은 페이지안의 UI들이<br>
+		JindoJS를 사용하여 개발되었습니다.<br>
+		<br>
+		그런만큼 JindoJS는<br>
+		크로스 브라우징에 있어서<br>
+		거의 완벽한 호환성을<br>
+		입증하고 있습니다.
+	</p>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript">
+	var oDragArea = new jindo.DragArea(jindo.$('foo'), {
+		sClassName : 'draggable',
+		bFlowOut : true
+	}).attach({
+		'beforeDrag' : function(oCustomEvent) {
+			//oCustomEvent.nX = null; // 가로로는 안 움직이게
+			oCustomEvent.nX = Math.round(oCustomEvent.nX / 20) * 20;
+			oCustomEvent.nY = Math.round(oCustomEvent.nY / 20) * 20;
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

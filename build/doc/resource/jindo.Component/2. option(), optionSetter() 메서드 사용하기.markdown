@@ -1,0 +1,78 @@
+#### option()
+
+option() 메소드는 컴포넌트를 초기화하기 위해 사용되는 다양한 옵션값들을 지정하고 반환하기위해 사용한다. option() 메소드는 컴포넌트 내부에서 사용되는 어떠한 상수값 또는 사용자의 입력값에 따라 다르게 동작하는 컴포넌트를 구현할 때 다음과 같은 방법으로 자주 사용된다.
+
+	jindo.NewComponent = jindo.$Class({
+	    $init : function(htOption){
+	        //디폴트 옵션 정의
+	        this.option({
+	            nDefaultValue : 100
+	        });
+	        //사용자가 입력한 옵션 HashTable(htOption)이 있는 경우 옵션값을 변경
+	        this.option(htOption || {});
+	    },
+	    getDefaultValue : function(){
+	        return this.option("nDefaultValue");
+	    }
+	}).extend(jindo.Component);
+
+위 예제에서는 디폴트 옵션값으로 nDefaultValue를 100으로 지정하고 getDefaultValue() 메소드를 정의하여 지정된 nDefaultValue 옵션값을 리턴하도록 하였다. 그리고 컴포넌트 초기화시에 htOption을 인자로 받아 사용자가 입력한 옵션 HashTable이 있는 경우 옵션값을 변경하도록 선언하였다. jindo.NewComponent를 다음과 같이 초기화하는 경우 getDefaultValue() 메소드는 내부에서 디폴트 옵션으로 지정한 100을 리턴한다.
+
+	var oInstance = new jindo.NewComponent();
+	oInstance.getDefaultValue(); //100
+
+다음과 같이 초기화하는 경우 getDefaultValue() 메소드는 사용자가 지정한 200을 리턴하게된다.
+	var oInstance = new jindo.NewComponent({
+	    nDefaultValue : 200
+	});
+	oInstance.getDefaultValue(); //200
+
+#### optionSetter()
+
+옵션 값은 컴포넌트 초기화시에 지정하게 하는 것이 일반적이지만 경우에 따라 초기화 이후에 변경할수 있도록 설계할 수도 있다. 초기화 이후의 옵션 값의 변경이 다른 로직에 영향을 주는 경우가 있을 수 있는데, 이 경우 optionSetter() 메소드를 사용하여 적절한 동작을 수행시킬 수 있다. 예를 들어 지정한 nInterval 옵션값에 따라 특정 동작을 반복하여 수행하도록 초기화하는 컴포넌트가 있다고 가정해보자. 특정 동작의 반복은 setInterval() 함수로 구현하였다.
+
+	jindo.Loop = jindo.$Class({
+	    $init : function(htOption){
+	        //디폴트 옵션 정의
+	        this.option({
+	            nInterval : 1000
+	        });
+	        this.option(htOption || {});
+	        this._loop();
+	    },
+	    _action : function() {
+	        //반복동작
+	    },
+	    _loop : function() {
+	        this._nTimer = setInterval(this._action, this.option("nInterval"));
+	    }
+	}).extend(jindo.Component);
+	var oInstance = new jindo.Loop();
+	 
+	oInstance.option("nInterval", "2000"); //옵션값을 바꾸어도 반복동작에는 아무런 변화 없음.
+
+초기화된 Loop 컴포넌트는 매 1000ms 마다 반복동작을 수행하게 되는데 nInterval 옵션값을 바꾸더라도 동작은 변하지 않는다. 초기화된 Loop 컴포넌트의 nInterval 옵션값의 변경에 따라 반복동작이 변하도록 구현하려면 다음과 같이 optionSetter() 메소드를 사용하면 된다.
+
+	jindo.Loop = jindo.$Class({
+	    $init : function(htOption){
+	        //디폴트 옵션 정의
+	        this.option({
+	            nInterval : 1000,
+	        });
+	        //nInterval옵션에 대한 optionSetter 정의
+	        this.optionSetter("nInterval", function(){
+	            clearInterval(this._nTimer);
+	            this._loop();
+	        });
+	        this.option(htOption || {});
+	        this._loop();
+	    },
+	    _action : function() {
+	        //반복동작
+	    },
+	    _loop : function() {
+	        this._nTimer = setInterval(this._action, this.option("nInterval"));
+	    }
+	}).extend(jindo.Component);
+	var oInstance = new jindo.Loop();
+	oInstance.option("nInterval", "2000"); //옵션값을 바꾸면 반복동작의 시간간격이 변함.

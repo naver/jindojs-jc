@@ -1,0 +1,98 @@
+#### HTML
+
+	<div id="browsebutton" class="browsebutton"> <!-- 기준 엘리먼트 -->
+	    <div class="browse-box"> <!-- box 엘리먼트 -->
+	        <input class="browse-file-input" type="file"> <!-- File Input 엘리먼트 -->
+	    </div>
+	 
+	    <a class="browse-button" href="#" onclick="return false;">찾아보기</a> <!-- 찾아보기 버튼 엘리먼트 -->
+	</div>
+	<div id="fileName"></div> <!-- 파일 이름 엘리먼트 -->
+	 
+	<noscript> <!-- 자바스크립트가 지원되지 않는 경우의 표현 -->
+	    <style type="text/css">
+	        .browsebutton {display:none;}
+	        .browse-file-input {width:250px; height:21px; border:1px solid #999;}
+	    </style>
+	   <input class="browse-file-input" type="file" name="browse" />
+	</noscript>
+	
+* File Input 엘리먼트는 "[prefix]file-input" 클래스명을 가진다.
+* box 엘리먼트는 클래스명 "[prefix]box"를 가지고 File Input의 부모노드로 구성되도록 한다.
+* 버튼 엘리먼트는 클래스명 "[prefix]button"를 가진다.
+* [prefix] 는 "sClassPrefix" 옵션값으로 지정할 수 있다. 디폴트 값은 "browse-"이다.
+
+#### CSS
+	
+	.browsebutton {
+		position:relative;
+		height:23px;
+	}
+	
+	.browsebutton .browse-output {
+		position:absolute;
+		display:block;
+		width:180px;
+		height:21px;
+		border:1px solid #aaa;
+		margin-right:5px;
+		overflow:hidden;
+		padding:0 5px;
+	}
+	
+	.browsebutton .browse-box {
+		position:absolute;
+		left:200px;
+		width:69px;
+		height:23px;
+		overflow:hidden;
+		background-color:gray;
+		opacity:0!important;
+		-ms-opacity:0!important;
+		filter:alpha(opacity=0)!important;
+		-ms-filter:alpha(opacity=0)!important;
+		z-index:32000;
+	}
+	
+	.browsebutton .browse-file-input {
+		position:absolute;
+		border:0 none;
+		margin:0;
+		padding:0;
+	}
+	
+	.browsebutton .browse-button {
+		position:absolute;
+		left:200px;
+		width:69px;
+		height:23px;
+		background:url(../../resource/img/BrowseButton.button.gif) 0 0;
+		text-indent:-99em;
+		overflow:hidden;
+		display:none;
+	}
+	
+	.browsebutton .browse-applied {
+		display:block;
+	}
+	
+	.browsebutton .browse-over {
+		background:url(../../resource/img/BrowseButton.button.gif) 0 -25px;
+	}
+	
+* File Input 컨트롤은 투명(opacity)해야 한다
+* File Input 컨트롤은 버튼 엘리먼트 전체를 덮어야 한다
+* File Input 컨트롤의 "position" 스타일의 속성값은 "absolute" 이여야 한다
+* 초기화시 [prefix]button 엘리먼트에 클래스명 "[prefix]applied"이 추가된다
+
+#### JavaScript
+
+	//include jindo.Componenet.js
+	//include jindo.BrowseButton.js
+	 
+	var oBrowseButton = new jindo.BrowseButton(jindo.$('browsebutton'));
+	oBrowseButton.attach("sourceChange", function(oCustomEvent){
+	 
+	    jindo.$('fileName').innerHTML = this.getFileSelect().value;
+	 
+	});

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>bDragOnTrack：false 옵션 사용</title>
+<meta name="class-lists" content="jindo.Slider"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="bDragOnTrack 옵션을 false 로 하여 트랙을 드래그 했을 때는 Thumb 이 드래그 되지 않도록 막은 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.slider {
+		background:#eee url(img/Slider.grid.gif) no-repeat 5px bottom; position:relative;
+		width:211px; height:40px;
+	}
+	
+	.slider .slider-thumb {
+		background:url(img/Slider.thumb.gif) no-repeat;
+		position:absolute; width:11px; height:21px; overflow:hidden;
+		cursor:default;
+	}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div class="slider" id="gamma">
+		<div class="slider-thumb">&nbsp;</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Slider.js"></script>
+<script type="text/javascript">
+	var oSlider = new jindo.Slider(jindo.$('gamma'), { nMinValue : 100, nMaxValue : 200, bDragOnTrack : false });
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

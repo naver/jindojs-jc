@@ -1,0 +1,3 @@
+#### File API 미지원 브라우저를 위한 플래시 파일 다운로드
+
+[uploadQueue.swf](../../../../demo/jindo.UploadQueue/uploadQueue.swf) (우클릭해서 다운로드 받으세요)

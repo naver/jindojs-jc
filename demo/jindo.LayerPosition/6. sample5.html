@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본으로 하단 노출</title>
+<meta name="class-lists" content="jindo.LayerPosition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="레이어가, 기본적으로 버튼의 하단에 배치되지만, 공간이 없는 경우 버튼의 상단에 배치되는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.layer {position:absolute; left:0px; top:0px; width:50px; height:50px; padding:5px; background-color:#0075c8; color:#fff; border:1px solid black; z-index:2; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<br /><br /><br /><br /><br /><br /><br /><br />
+	<button id="place">toggle</button>
+</div>
+<div id="layer1" class="layer" style="display:none;">상하자동배치</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript">
+	var oLayerPosition = new jindo.LayerPosition(null, null, { sPosition : "outside-bottom", sAlign : "left", nTop : 5, bAuto : true });
+	jindo.$Fn(function(we){
+		we.stop();
+		oLayerPosition.setElement(jindo.$("place")).setLayer(jindo.$("layer1"));
+		jindo.$Element(jindo.$("layer1")).toggle();
+		oLayerPosition.setPosition();
+	}).attach(jindo.$("place"), "click");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>
+

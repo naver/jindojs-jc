@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>sClassPrefix 옵션의 사용</title>
+<meta name="class-lists" content="jindo.Rolling"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="sClassPrefix 옵션을 사용하여 마크업을 변경한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+.rolling { width:330px; border:5px solid violet; overflow:hidden; }
+.rolling div.rolling-list { list-style:none; width:32700px; margin:0; padding:0; float:left; }
+.rolling div.rolling-item { background-color:#ff7; width:80px; float:left; border:5px solid red; padding:5px; margin:5px; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="rolling" class="rolling">
+		<div class="rolling-list">
+			<div class="rolling-item">첫번째</div>
+			<div class="rolling-item">두번째</div>
+			<div class="rolling-item">세번째</div>
+			<div class="rolling-item">네번째</div>
+			<div class="rolling-item">다섯번째</div>
+			<div class="rolling-item">여섯번째</div>
+			<div class="rolling-item">일곱번째</div>
+			<div class="rolling-item">여덟번째</div>
+			<div class="rolling-item">아홉번째</div>
+			<div class="rolling-item">열번째</div>
+		</div>
+	</div>
+	<hr />
+	<button onClick="oRolling.moveBy(-1); return false;">◀</button>
+	<button onClick="oRolling.moveBy(1); return false;">▶</button>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Rolling.js"></script>
+<script type="text/javascript">
+	var oRolling = new jindo.Rolling(jindo.$("rolling"), {
+		sClassPrefix : 'rolling-'
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

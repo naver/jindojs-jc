@@ -1,0 +1,30 @@
+#### HTML
+
+	<div class="droppable"></div>
+	<div class="draggable">Drag me</div>
+
+#### CSS
+
+	.draggable { position:absolute; width:50px; height:50px; background-color:#ccc; left:50px; top:50px; padding:10px; border:1px solid #000; cursor:move; }
+	.droppable { position:absolute; background-color:#999; padding:10px; width:150px; height:150px; left:250px; top:50px; border: solid 4px #444; }
+	.overed { background-color:#0075c8; }
+
+##Javascript
+
+	var oDragArea = new jindo.DragArea(document, { sClassName : 'draggable' });
+	var oDropArea = new jindo.DropArea(document, { sClassName : 'droppable', oDragInstance : oDragArea }).attach({
+	    'over' : function(oCustomEvent) {
+	        jindo.$Element(oCustomEvent.elDrop).addClass('overed');
+	    },
+	    'move' : function(oCustomEvent) {
+	        oCustomEvent.elDrop.innerHTML = "내부 좌우비율:" + oCustomEvent.nRatioX.toFixed(2) + ' <br/>내부 상하비율:' + oCustomEvent.nRatioY.toFixed(2);
+	    },
+	    'out' : function(oCustomEvent) {
+	        jindo.$Element(oCustomEvent.elDrop).removeClass('overed').html("");
+	    },
+	    'dragEnd' : function(oCustomEvent) {
+	        if (oCustomEvent.aDrop.length) {
+	            jindo.$ElementList(oCustomEvent.aDrop).removeClass('overed');                  
+	        }  
+	    }
+	});

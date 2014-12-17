@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>선택 목록을 HTML 로 표현</title>
+<meta name="class-lists" content="jindo.SelectBox"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="선택 목록을 HTML 로 표현하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body {font-family: "나눔고딕", Dotum, Helvetica, AppleGothic; font-size: 15px;}
+	.selectbox-noscript * { display:none; }
+	.selectbox-noscript .selectbox-source { display:inline; position:relative; left:0;}
+	.selectbox-noscript .selectbox-source * { display:block; }
+
+	.selectbox-source { position:absolute; left:-9999px;}
+	.selectbox-focused .selectbox-box { border-color:green; }
+	.selectbox-disabled .selectbox-box { border-color:gray; }
+
+	.selectbox-box { border:3px solid yellowgreen; cursor:default; width:200px; }
+	.selectbox-label { padding:5px; }
+	.selectbox-layer { display:none; position:absolute; border:3px solid blue; background-color:#fff; z-index:2; }
+	.selectbox-list ul { list-style:none; margin:0; padding:0; }
+
+	.selectbox-list ul li { padding:5px; cursor:default; color:#888; background-color:#fff; zoom:1; }
+	.selectbox-list ul li.selectbox-item-selected { color:#000; font-weight:bold; }
+	.selectbox-list ul li.selectbox-item-over { background-color:#eee !important; }
+	
+	
+	/* Select Component Variation */
+	.selectbox-layer {z-index:30;}
+	.selectbox-box {width:100px;}
+	.selectbox-layer {width:110px; margin:0 !important;}
+		
+	/* Star Grade */
+	.cbox_star_grade {display:inline-block; width:80px; height:16px; margin:-1px 0 0 -1px; background:url(img/SelectBox.bg_sprite_ico.gif) left -300px no-repeat; vertical-align:top;}
+	.cbox_star_grade span {display:inline-block; width:80px; height:16px; margin:0; background:url(img/SelectBox.bg_sprite_ico.gif) left -340px no-repeat; vertical-align:top;}
+	.cbox_star_grade em {display:none;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="s" class="selectbox-noscript">
+		<select class="selectbox-source">
+		<option class="selectbox-default">평점선택</option>
+		<option value="5">5점</option>
+		<option value="4.5">4.5점</option>
+
+		<option value="4">4점</option>
+		<option value="3.5">3.5점</option>
+		<option value="3">3점</option>
+		<option value="2.5">2.5점</option>
+		<option value="2">2점</option>
+		<option value="1.5">1.5점</option>
+
+		<option value="1">1점</option>
+		<option value="0.5">0.5점</option>
+		</select>
+		<div class="selectbox-box">
+			<div class="selectbox-label">평점선택</div>
+		</div>
+		<div class="selectbox-layer">
+			<div class="selectbox-list">
+
+				<ul>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:100%;"><em>5점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:90%;"><em>4.5점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:80%;"><em>4점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:70%;"><em>3.5점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:60%;"><em>3점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:50%;"><em>2.5점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:40%;"><em>2점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:30%;"><em>1.5점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:20%;"><em>1점</em></span></span></li>
+				<li class="selectbox-item"><span class="cbox_star_grade"><span style="width:10%;"><em>0.5점</em></span></span></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.HTMLComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverClick.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.SelectBox.js"></script>
+<script type="text/javascript">
+	var oSelectBox = new jindo.SelectBox(jindo.$("s"), {
+		nWidth:100,
+		bUseLayerPosition : false,
+		aOptionHTML : [
+			null,
+			'<span class="cbox_star_grade"><span style="width:100%;"><em>5점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:90%;"><em>4.5점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:80%;"><em>4점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:70%;"><em>3.5점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:60%;"><em>3점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:50%;"><em>2.5점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:40%;"><em>2점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:30%;"><em>1.5점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:20%;"><em>1점</em></span></span>',
+			'<span class="cbox_star_grade"><span style="width:10%;"><em>0.5점</em></span></span>'
+		]
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

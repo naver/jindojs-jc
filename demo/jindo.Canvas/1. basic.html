@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>기본 예제</title>
+<meta name="class-lists" content="jindo.Canvas"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="가장 기본적인 사용 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	#canvas {
+		border:1px solid black;
+		left:10px;
+		top:10px;
+		width:150px;
+		height:150px;
+	}	
+
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div class="canvas" id="canvas">
+	</div>
+	
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Canvas.js"></script>
+
+<script type="text/javascript">
+
+	var elCanvas, elCanvasContainer, ctx, oCanvas;
+
+	/* canvas */
+	var elCanvas = jindo.Canvas.create(150, 150, jindo.$("canvas")),
+		oCanvas = new jindo.Canvas(elCanvas),
+		ctx = oCanvas.getContext(elCanvas);
+	
+	ctx.beginPath();
+	ctx.moveTo(75,40);
+	ctx.bezierCurveTo(75,37,70,25,50,25);
+	ctx.bezierCurveTo(20,25,20,62.5,20,62.5);
+	ctx.bezierCurveTo(20,80,40,102,75,120);
+	ctx.bezierCurveTo(110,102,130,80,130,62.5);
+	ctx.bezierCurveTo(130,62.5,130,25,100,25);
+	ctx.bezierCurveTo(85,25,75,37,75,40);
+	ctx.fillStyle = "rgb(200,0,0)";
+	ctx.fill();
+	
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

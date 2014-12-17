@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>커스텀 이벤트</title>
+<meta name="class-lists" content="jindo.SelectBox"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="change 와 open 이벤트를 활용하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body {font-family: "나눔고딕", Dotum, Helvetica, AppleGothic; font-size: 15px;}
+	.selectbox-noscript * { display:none; }
+	.selectbox-noscript .selectbox-source { display:inline; position:relative; left:0;}
+	.selectbox-noscript .selectbox-source * { display:block; }
+
+	.selectbox-source { position:absolute; left:-9999px; opacity:0; }
+	.selectbox-focused .selectbox-box { border-color:green; }
+	.selectbox-disabled .selectbox-box { border-color:gray; }
+
+	.selectbox-box { border:3px solid yellowgreen; width:200px; cursor:default; }
+	.selectbox-label { padding:3px; }
+	.selectbox-layer { display:none; position:absolute; border:3px solid blue; width:200px; background-color:#eee; z-index:2; }
+	.selectbox-list ul { list-style:none; margin:0; padding:0; }
+
+	.selectbox-list ul li { padding:3px; cursor:default; color:#888; background-color:#eee; zoom:1; }
+	.selectbox-list ul li.selectbox-item-selected { color:#000; font-weight:bold; }
+	.selectbox-list ul li.selectbox-item-over { background-color:#aaa !important; }	
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="select" class="selectbox-noscript">
+	    <select class="selectbox-source">
+	        <option value="1">1</option>
+	        <option value="2">2</option>
+	        <option value="3">3</option>
+	    </select>
+	    <div class="selectbox-box">
+	        <div class="selectbox-label"></div>
+	    </div>
+	    <div class="selectbox-layer">
+	        <div class="selectbox-list"></div>
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.HTMLComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverClick.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerManager.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.SelectBox.js"></script>
+<script type="text/javascript">
+	var oSelectBox = new jindo.SelectBox(jindo.$("select"));
+	oSelectBox.attach({
+		change : function(oEvent) {
+			alert('change 이벤트 발생\n 선택된 옵션의 인덱스 : '+ oEvent.nIndex +'\n선택되기 전의 옵션의 인덱스 : '+ oEvent.nLastIndex);
+		},
+		open : function(oEvent) {
+			alert('open 이벤트 발생');
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

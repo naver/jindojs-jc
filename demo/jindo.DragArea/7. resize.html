@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>리사이즈</title>
+<meta name="class-lists" content="jindo.DragArea"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="드래그가 시작될때, 실제로 움직일 대상의 높이값을 변경해서 리사이즈 효과를 준 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	body,input,textarea,button{ padding:10px;font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+	.box { border:1px solid #888; width:500px; height:400px; margin-top:10px; }
+	.resize { border:1px solid #888; background-color:#aaa; width:500px; height:10px; cursor:ns-resize; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="box" style="height:200px;"></div>
+<div class="resize"></div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.DragArea.js"></script>
+<script type="text/javascript">
+	var oDragArea = new jindo.DragArea(document, {
+		sClassName : 'resize'
+	}).attach({
+		'dragStart' : function(oCustomEvent) {
+			var oBox = jindo.$$.getSingle('!+ .box', oCustomEvent.elDrag);
+			this._orgHeight = parseInt(jindo.$Element(oBox).css('height')) || 0;
+			//oCustomEvent.stop();
+		},
+		'beforeDrag' : function(oCustomEvent) {
+			var oBox = jindo.$$.getSingle('!+ .box', oCustomEvent.elDrag);
+			oBox.style.height = Math.max(this._orgHeight + oCustomEvent.nGapY, 50) + 'px';
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

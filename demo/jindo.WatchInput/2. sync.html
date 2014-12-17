@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>입력값의 변화를 보여주는 예제</title>
+<meta name="class-lists" content="jindo.WatchInput"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="change 이벤트를 활용하여 왼쪽의 입력값 변화를 오른쪽 Text Input 에 싱크하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	input {margin:10px 10px 0 0;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	
+	<button id="start">Start</button>&#160;<button id="stop">Stop</button>
+	&#160;<strong id="status">정지</strong>
+
+	<br />
+
+	<input type="text" id="src" name="source" /> <input type="text" id="dest" name="dest" readonly="readonly" />
+
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.WatchInput.js"></script>
+<script type="text/javascript">
+	var elDest = jindo.$('dest');
+	var welStatus = jindo.$Element('status');
+	var oWatchInput = new jindo.WatchInput(jindo.$('src'), {
+		bActivateOnload : false
+	}).attach({
+		start : function(oCustomEvent){
+			welStatus.text('시작');
+		},
+		stop : function(oCustomEvent){
+			welStatus.text('정지');
+		},
+		change : function(oCustomEvent){
+			elDest.value = oCustomEvent.sText;
+		}
+	});
+
+	jindo.$Fn(oWatchInput.start, oWatchInput).attach(jindo.$('start'), 'click');
+	jindo.$Fn(oWatchInput.stop, oWatchInput).attach(jindo.$('stop'), 'click');
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

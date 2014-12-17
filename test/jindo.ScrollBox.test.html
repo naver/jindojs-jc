@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+		</style>
+		<style type="text/css">
+			#scrollbox { background-color:#ccc; position:relative;	width:200px; height:200px; }
+			.scrollbar-box { position:absolute; overflow:hidden; top:0px; left:0px; width:200px; height:200px; }
+			.scrollbar-content { position:absolute; top:0px; left:0px; width:785px; } /* 요 내용부분의 크기만 설정해주면 됨.*/
+			
+			.scrollbar-h { position:absolute; /*top:185px; top값은 자동으로 조절*/ /*width:200px;*/ left:0px; 	height:15px; display:none; }
+			.scrollbar-h .scrollbar-track { background-color:#eee; position:absolute; /*left:15px;*/ height:15px; overflow:hidden; /*ie6 height*/ }
+			.scrollbar-h .scrollbar-thumb { display:block; position:absolute; height:15px; overflow:hidden; /*ie6 height*/ }
+			.scrollbar-h .scrollbar-thumb-head { width:6px; height:15px; background:#ff8; }
+			.scrollbar-h .scrollbar-thumb-body { width:18px; height:15px; background:#8f8; } 
+			.scrollbar-h .scrollbar-thumb-foot { width:6px; height:15px; background:#8ff; }
+			.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-head { background-position:0 -15px;}
+			.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-body { background-position:center -15px;}
+			.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-foot { background-position:right -15px;}
+			.scrollbar-h .scrollbar-button-left { background-color:red; position:absolute; left:0; width:15px; height:15px; overflow:hidden; /*ie6 height*/ }
+			.scrollbar-h .scrollbar-button-left-hold { background-color:blue; }
+			.scrollbar-h .scrollbar-button-right { background-color:pink; position:absolute; right:0px; width:15px; height:15px; overflow:hidden; /*ie6 height*/ }
+			.scrollbar-h .scrollbar-button-right-hold { background-color:skyblue; }
+			.scrollbar-show { display:block; }
+			.scrollbar-disabled .scrollbar-track { background-color:#bbb; }
+			.scrollbar-disabled .scrollbar-thumb { display:none; }
+			.scrollbar-disabled .scrollbar-button-left { }
+			.scrollbar-disabled .scrollbar-button-right { }
+			
+			.scrollbar-v { position:absolute; top:0px; right:0px; width:15px; display:none; }
+			.scrollbar-v .scrollbar-track { background-color:#eee; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+			.scrollbar-v .scrollbar-thumb { display:block; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+			.scrollbar-v .scrollbar-thumb-head { width:15px; height:6px; background:#ff8; }
+			.scrollbar-v .scrollbar-thumb-body { width:15px; height:18px; background:#8f8; }
+			.scrollbar-v .scrollbar-thumb-foot { width:15px; height:6px; background:#8ff; }
+			.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-head { background-position:-15px top; }
+			.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-body { background-position:-15px center; }
+			.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-foot { background-position:-15px bottom; }
+			.scrollbar-v .scrollbar-button-up { width:15px;height:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ background-color:red; }
+			.scrollbar-v .scrollbar-button-up-hold { background-color:blue; }
+			.scrollbar-v .scrollbar-button-down { width:15px;height:15px; position:relative; overflow:hidden; /*ie6 height*/ background-color:pink; }
+			.scrollbar-v .scrollbar-button-down-hold { background-color:skyblue; }
+			.scrollbar-show { display:block; }
+			.scrollbar-disabled .scrollbar-track { background-color:#bbb;}
+			.scrollbar-disabled .scrollbar-thumb { display:none; }
+			.scrollbar-disabled .scrollbar-button-up { }
+			.scrollbar-disabled .scrollbar-button-down { }
+			
+			.scrollbar-noscript .scrollbar-box {overflow:auto;}
+			.scrollbar-noscript .scrollbar-h, .scrollbar-noscript .scrollbar-v, scrollbar-noscript .scrollbar-disabled {display:none;}
+		</style>		
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+				
+			<div id="scrollbox" class="scrollbar-noscript">
+				<div class="scrollbar-box">
+					<div class="scrollbar-content">
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it.
+		
+		Technologic [4x]
+		
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it.
+		
+		Touch it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it.
+		
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Buy it, use it, break it, fix it,
+		Trash it, change it, mail, upgrade it,
+		Charge it, point it, zoom it, press it,
+		Snap it, work it, quick erase it,
+		Write it, cut it, paste it, save it,
+		Load it, check it, quick rewrite it,
+		Plug it, play it, burn it, rip it,
+		Drag it, drop it, zip, unzip it,
+		Lock it, fill it, call it, find it,
+		View it, code it, jam, unlock it,
+		Surf it, scroll it, pose it, click it,
+		Cross it, crack it, switch, update it,
+		Name it, read it, tune it, print it,
+		Scan it, send it, fax, rename it,
+		Touch it, bring it, pay it, watch it,
+		Turn it, leave it, start, format it,
+		
+		Technologic [8x]
+		
+		Technologic [4x]
+					</div>
+				</div>
+				
+				<div class="scrollbar-v">
+					<div class="scrollbar-button-up"></div>
+					<div class="scrollbar-track">
+						<div class="scrollbar-thumb"><img src="about:blank" class="scrollbar-thumb-head" /><img src="about:blank" class="scrollbar-thumb-body" /><img src="about:blank" class="scrollbar-thumb-foot" /></div>
+					</div>
+					<div class="scrollbar-button-down"></div>
+				</div>
+				
+				<div class="scrollbar-h">
+					<div class="scrollbar-button-left"></div>
+					<div class="scrollbar-track">
+						<div class="scrollbar-thumb"><img src="about:blank" class="scrollbar-thumb-head" /><img src="about:blank" class="scrollbar-thumb-body" /><img src="about:blank" class="scrollbar-thumb-foot" /></div>
+					</div>
+					<div class="scrollbar-button-right"></div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Timer.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Effect.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Transition.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.DragArea.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Slider.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.RolloverArea.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.ScrollBar.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.ScrollBox.js"></script>
+		<script type="text/javascript" src="js/jindo.ScrollBox.test.js"></script>
+	</body>
+</html>
+

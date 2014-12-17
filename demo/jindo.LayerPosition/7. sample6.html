@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>항상 가운데에 위치</title>
+<meta name="class-lists" content="jindo.LayerPosition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="사이즈가 변경되어도 항상 가운데에 위치하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.center_layer {
+		position:absolute;
+		border:1px solid black; 
+		width:100px;
+		height:100px;
+		 background-color:#0075c8;
+		padding:10px;
+		text-align:center;
+		vertical-align:middle;
+		font-weight:bold;
+	}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+
+<button onclick="oLayerPosition.activate(); return false;">activate</button>
+<button onclick="oLayerPosition.deactivate(); return false;">deactivate</button>
+<div id="layer" class="center_layer">
+	<button id="bt1">100x100</button><br>
+	<button id="bt2">150x150</button><br>
+	<button id="bt3">200x200</button><br>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript">
+	var oLayerPosition = new jindo.LayerPosition(document.body, jindo.$("layer"), {   
+	     sPosition : "inside-center",
+	     bAuto : true
+	});
+
+	jindo.$Fn(function(e){
+		jindo.$Element("layer").css({
+			"width" : "100px",
+			"height" : "100px"
+		});
+		oLayerPosition.setPosition();
+	}).attach(jindo.$("bt1"), "click");
+	
+	jindo.$Fn(function(e){
+		jindo.$Element("layer").css({
+			"width" : "150px",
+			"height" : "150px"
+		});
+		oLayerPosition.setPosition();
+	}).attach(jindo.$("bt2"), "click");
+	
+	jindo.$Fn(function(e){
+		jindo.$Element("layer").css({
+			"width" : "200px",
+			"height" : "200px"
+		});
+		oLayerPosition.setPosition();
+	}).attach(jindo.$("bt3"), "click");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

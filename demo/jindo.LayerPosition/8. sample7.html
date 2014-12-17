@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>Foggy 컴포넌트와의 조합</title>
+<meta name="class-lists" content="jindo.LayerPosition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="Foggy 컴포넌트와 함께 사용하여 Modal Layer를 구현한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.fog {
+		position:absolute;
+		left:0; top:0; padding:0; margin:0; border:0;
+		width:100px; height:100px;
+		background-color:#111;
+		opacity:0;
+	}
+
+	.center_layer {
+		position:absolute;
+		border:3px solid black; 
+		width:150px;
+		height:80px;
+		background:#ffffff;
+		display:none;
+		padding:10px;
+		text-align:center;
+		vertical-align:middle;
+		font-weight:bold;
+	}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+
+<div id="layer" class="center_layer">
+	Foggy + LayerPosition<br/><br/>
+	<button>닫기</button>
+</div>
+<div class="demo">
+	<button id="btn">SHOW!</button> 
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Foggy.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript">
+	var oFoggy = new jindo.Foggy({
+		nShowDuration : 200,  
+		nShowOpacity : 0.7,      
+		nHideDuration : 200,  
+		nHideOpacity : 0,
+		fShowEffect : jindo.Effect.cubicEase,
+		fHideEffect : jindo.Effect.linear,  
+		nFPS : 15  
+	}).attach({
+		hide : function(){
+			jindo.$Element("layer").hide();
+		}
+	});
+	oFoggy.getFog().className = "fog";
+	
+	var oLayerPosition = new jindo.LayerPosition(document.body, jindo.$("layer"), {   
+	     sPosition : "inside-center",
+	     bAuto : true
+	});
+	jindo.$Fn(function(e){
+		jindo.$Element("layer").show();
+		oLayerPosition.setPosition();
+		oFoggy.show(jindo.$("layer"));
+	}).attach(jindo.$("btn"), "click");
+	
+	jindo.$Fn(function(e){
+		oFoggy.hide();
+	}).attach(jindo.$$.getSingle("button", jindo.$("layer")), "click");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

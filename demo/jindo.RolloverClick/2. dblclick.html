@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>더블 클릭에 반응하는 예제</title>
+<meta name="class-lists" content="jindo.RolloverClick"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="더블클릭 이벤트에 반응하는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	ul { list-style: none; position:relative;float:left;padding-left:10px;}
+	ul li { width:120px; border:1px solid black; margin:1px 0 0 0;}
+	ul li a{ color:#EEEEEE;display:block; font-size:14px; font-weight:bold; padding:7px; text-decoration:none;}
+	
+	.rollover, .s_rollover {background:#0075c8; color:red;}
+	.rollover-over{ background:#FFFFFF;}
+	.rollover-over a{ color:#0075c8;}
+	.rollover-down{ background:#DDDDDD;}
+	.rollover-down a{ color:#0075c8;}
+	
+	.sample { border:0px;color:black; font-size:13px; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<ul>
+	    <li class="sample">더블클릭</li>
+	    <li class="rollover"><a href="#">0</a></li>
+	    <li class="rollover"><a href="#">0</a></li>
+	    <li class="rollover"><a href="#">0</a></li>
+  	</ul>
+  	<ul>
+	    <li class="sample">CSS 적용 샘플</li>
+	    <li class="s_rollover"><a href="#">Default Style</a></li>
+	    <li class="s_rollover rollover-over"><a href="#">MouseOver</a></li>
+	    <li class="s_rollover rollover-down"><a href="#">MouseDown</a></li>
+  	</ul>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.RolloverClick.js"></script>
+<script type="text/javascript">
+	var oRolloverClick = new jindo.RolloverClick(document.body, {
+		sCheckEvent : "click",
+		bCheckDblClick : true,
+		RolloverArea : {
+			sClassName : "rollover",
+			sClassPrefix : "rollover-",
+			htStatus : {
+	
+				sOver : "over",
+				sDown : "down"
+			}
+		}
+	}).attach({
+		dblclick  : function(oCustomEvent){
+			
+			var n = jindo.$Element(jindo.$Element(oCustomEvent.element).query('a')).html();
+			n = n != "" ? parseInt(n, 10)+1 :  1;
+			jindo.$Element(jindo.$Element(oCustomEvent.element).query('a')).html(n); 
+						
+		}
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

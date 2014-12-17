@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>탭 안의 아코디언</title>
+<meta name="class-lists" content="jindo.TabControl, jindo.Accordion"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="탭 안에 아코디언을 사용한 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+
+	body { background-color:#ddd; }
+	.tc-panel { display:none; }
+	.tabs { padding:0; margin:0; list-style:none; position:relative; z-index:1; _zoom:1; /* 이걸 안 넣으면 IE 에서 clear:both 했을때 공백이 들어감 */ }
+	.tabs li { float:left; border:1px solid #aaa; border-bottom:0; padding:5px; margin-right:2px; background-color:#fff; cursor:pointer; _cursor:hand; color:#aaa; position:relative; }
+	.tabs li.tc-selected { padding-bottom:6px; border-color:#000; cursor:default; font-weight:bold; color:#000; }
+	.panels { padding:0; margin:0; list-style:none; border:1px solid #000; padding:20px; position:relative; top:-1px; clear:both; background-color:#fff; }
+	.panels .tc-panel.tc-selected { display:block; }
+	
+	.accordion-block { height:30px; width:200px; overflow:hidden; margin:0}
+	.accordion-block dt { height:20px; padding:5px; cursor:pointer;}
+	.accordion-block dd { padding:5px; background-color:#eeeeee; overflow:auto; margin:0;}
+	
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="tabcontrol" class="tabcontrol">
+		<ul class="tabs">
+			<li class="tc-tab tc-selected">첫번째 탭</li>
+			<li class="tc-tab">두번째 탭</li>
+			<li class="tc-tab">세번째 탭</li>
+		</ul>
+		<div class="panels">
+			<div class="tc-panel tc-selected">
+				I can't let go(go go go)
+				어딜 봐도 네 모습이 보이고(무너지는 내 맘)
+				숨길 수가 없어 baby 단 1분 1초도
+				I can't let go(go go go)
+				어딜 가도 네 목소리 들리고(부서지는 심장)
+				숨쉴 수가 없어 baby 단 1분 1초도
+				(한 순간도 단 1분 1초도)
+				그 날 넌 머리가 맘에 안들고
+				눈이 부었다고 다시 잠들고
+				난 외투를 벗으며 말 없이 삐지고
+				전화길 들어 밥을 시키고
+				커튼을 치고 몇 시간이 지났는지도 모르고
+				watchin' DVD's, (just you and me)
+				어깨에 기댄 너의 숨소리
+				난 나가지 않길 잘했다고 생각했지
+				우습게도 이런 기억들이 아직도 날 괴롭힌다
+				문득 네가 했던 농담들이 기억나고 무너진다
+				아무것도 아닌 순간들이 오늘도 날 뒤엎는다
+				문득 네가 짓던 표정들이 기억나고 부서진다
+				I can't let go(go go go)
+				어딜 봐도 네 모습이 보이고(무너지는 내 맘)
+				숨길 수가 없어 baby 단 1분 1초도
+				(시간이 멈추고 심장이 멈춰도)
+				I can't let go(go go go)
+				어딜 가도 네 목소리 들리고(부서지는 심장)
+				숨쉴 수가 없어 baby 단 1분 1초도
+				(한 순간도 단 1분 1초도)
+				그 어딜 가도 창가 옆 모퉁이 구석자리에
+				앉을 때 손을 포개 놓지 왼쪽 다리에
+				피곤해 하품할 땐 닦은 눈물을 보곤 해
+				그리곤 바보처럼 웃어 양 볼엔 보조개
+				물을 마실 땐 항상 세워 둔 새끼손가락
+				눈이 부셨어 윤기나던 검은 머리카락
+				서툰 젓가락질조차 매력이라 말했어
+				부르튼 입술도 난 영원하길 바랬어
+			</div>
+			<div class="tc-panel">두번째 패널</div>
+			<div class="tc-panel">
+
+				<div id="panel">
+					<dl class="accordion-block" style="background-color:lawngreen;">
+						<dt>1</dt>
+						<dd>내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br />내용1<br /></dd>
+					</dl>		
+					<dl class="accordion-block" style="background-color:greenyellow;">
+						<dt>2</dt>
+						<dd>내용2</dd>
+					</dl>
+					<dl class="accordion-block" style="background-color:chartreuse;">
+						<dt>3</dt>
+						<dd>내용3</dd>
+					</dl>
+					<dl class="accordion-block" style="background-color:lime;">
+						<dt>4</dt>
+						<dd>내용4</dd>
+					</dl>
+					<dl class="accordion-block accordion-handler" style="background-color:limegreen;">
+						<dt>5</dt>
+						<dd>내용5</dd>
+					</dl>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.TabControl.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Accordion.js"></script>
+<script type="text/javascript">
+	var oTab = new jindo.TabControl(jindo.$('tabcontrol'));
+	var oAccordion = new jindo.Accordion("panel");
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

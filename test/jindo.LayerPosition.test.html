@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+			
+			.center_layer {position:absolute; width:250px; height:250px; margin:10px; padding:5px; background-color:#666; color:white; border:1px solid black; text-align:center;}
+			
+			.layer {position:absolute; width:50px; height:50px; padding:5px; background-color:white; border:1px solid black; z-index:1000}
+			
+			.auto {font-size:8pt; width:50px; height:50px; padding:5px; background-color:yellow;}
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="center" class="center_layer">center layer2</div>
+		<div id="ui">
+		
+			<div id="layer1" class="layer">layer 1</div>
+			<div id="layer2" class="layer">layer 2</div>
+			<div id="layer3" class="layer">layer 3</div>
+			<div id="layer4" class="layer">layer 4</div>
+			<div id="layer5" class="layer">layer 5</div>
+			<div id="layer6" class="layer">layer 6</div>
+			<div id="layer7" class="layer">layer 7</div>
+			<div id="layer8" class="layer">layer 8</div>
+			<div id="layer9" class="layer">layer 9</div>
+			<div id="layer10" class="layer">layer 10</div>
+			<div id="layer11" class="layer">layer 11</div>
+			<div id="layer12" class="layer">layer 12</div>
+			<div id="layer13" class="layer">layer 13</div>
+			<div id="layer14" class="layer">layer 14</div>
+			<div id="layer15" class="layer">layer 15</div>
+			<div id="layer16" class="layer">layer 16</div>
+			<div id="layer17" class="layer">layer 17</div>
+			<div id="layer18" class="layer">layer 18</div>
+			<div id="layer19" class="layer">layer 19</div>
+			<div id="layer20" class="layer">layer 20</div>
+			<div id="layer21" class="layer">layer 21</div>
+			<div id="layer22" class="layer">layer 22</div>
+			<div id="layer23" class="layer">layer 23</div>
+			<div id="layer24" class="layer">layer 24</div>
+			<div id="layer25" class="layer">layer 25</div>
+			<div id="layer26" class="layer auto">자동배치</div>
+		</div>
+
+		<script type="text/javascript" src="./asset/jindo.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.LayerPosition.js"></script>
+		<script type="text/javascript" src="js/jindo.LayerPosition.test.js"></script>
+	</body>
+</html>

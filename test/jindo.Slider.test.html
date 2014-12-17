@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+			
+			.slider {
+				background:#eee; position:relative;
+				width:211px; height:40px;
+			}
+			
+			.slider .slider-thumb {
+				background:#888;
+				position:absolute; width:11px; height:21px; overflow:hidden;
+				cursor:default;
+			}			
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+			<div class="slider" id="gamma">
+				<div class="slider-thumb">&nbsp;</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.DragArea.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Slider.js"></script>
+		<script type="text/javascript" src="js/jindo.Slider.test.js"></script>
+	</body>
+</html>

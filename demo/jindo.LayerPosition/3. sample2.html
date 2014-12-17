@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>bAuto 옵션을 통한 자동 배치</title>
+<meta name="class-lists" content="jindo.LayerPosition"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="bAuto 옵션을 이용해 창 크기에 따라 원래 위치에서 상하, 좌우 대칭된 위치로 자동배치 되는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+	.center_layer {position:absolute; top:80px; left:110px; width:150px; height:150px; padding:5px;  background-color:#666; color:white; text-align:center; border:1px solid black;}
+	.layer {position:absolute; width:50px; height:50px; padding:5px; background-color:white; border:1px solid black; z-index:2; }
+	.auto {font-size:8pt; width:50px; height:50px; padding:5px; background-color:#0075c8; color:#fff;}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div id="center" class="center_layer">center layer</div>
+		
+<div id="layer1" class="layer auto">좌우상하 자동배치</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.LayerPosition.js"></script>
+<script type="text/javascript">
+var oLayerPosition = new jindo.LayerPosition(jindo.$("center"), jindo.$("layer1"), { sPosition : "outside-right", sValign : "bottom", nTop : 10, nLeft : 10, bAuto : true });
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

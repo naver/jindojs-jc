@@ -1,0 +1,10 @@
+#### HTML
+
+	<div id="layer" style="position:absolute">레이어</div>
+
+* 적용할 레이어는 document.body 바로 하위에 위치해야한다.
+* 적용할 레이어의 css position은 absolute이어야한다.
+
+#### Javascript
+
+	var oFloatingLayer = new jindo.FloatingLayer(jindo.$("layer"));

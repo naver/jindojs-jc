@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" charset="utf-8" src="./asset/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			
+			#ui {
+				position:relative;
+				margin:10px;
+			}
+			
+			#ui p {
+				cursor:pointer;
+			}
+			
+			#select {
+				background-color:white;
+				position:absolute;
+				right:0px;
+				top:0px;
+				padding:20px;
+			}
+			#select ul {
+				list-style:none;
+			}
+			#select li {
+				width:300px;
+				margin:0 0 5px 0;
+				border:1px solid black;
+			}
+			#select li.selected {
+				background:skyblue;
+			}
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+		</div>
+		<div id="select">
+			<ul>
+				<li class="selectable">1</li>
+				<li class="selectable">2</li>
+				<li class="selectable">3</li>
+				<li class="selectable">4</li>
+				<li class="selectable">5</li>
+				<li class="selectable">6</li>
+				<li class="selectable">7</li>
+				<li class="selectable">8</li>
+				<li class="selectable">9</li>
+				<li class="selectable">10</li>
+			</ul>
+		</div>
+
+<script type="text/javascript" charset="utf-8" src="./asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="./asset/mock/$Event.js"></script>
+<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="../src/jindo.SelectArea.js"></script>
+<script type="text/javascript" src="js/jindo.SelectArea.test.js"></script>
+	</body>
+</html>

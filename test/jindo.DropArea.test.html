@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" src="./asset/qunit/qunit.js"></script>	
+        <link rel="stylesheet" href="./asset/qunit/qunit.css" type="text/css" media="screen" />
+		<style type="text/css">
+			* { margin:0; padding:0; cursor:default; }
+			div { border:1px solid #000; }
+			body,input,textarea,button{font-size:12px;line-height:1.5em;font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;color:#383d41;}
+			body.dragging, body.dragging * { cursor:default !important; }
+			
+			.draggable-pointing, .draggable-magnetic { position:absolute; background-color:skyblue; cursor:move; padding:10px; border:1px solid #08a; }
+			.droppable { position:absolute; background-color:pink; padding:10px; border:1px solid #a88; width:100px; height:100px; }
+			.droppable-alone { position:absolute; background-color:pink; padding:10px; border:1px solid #a88; width:100px; height:100px; }
+			
+			.overed { background-color:#d8a; }
+			#phantom { position:absolute; border:1px solid #000; background-color:#fff; padding:10px; display:none; }
+		</style>
+    </head>
+	<body style="margin:0; padding:0;">
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="ui">
+			<div class="droppable" style="left:200px; top:100px;">DROP HERE</div>
+			<div class="droppable" style="left:250px; top:150px;">DROP HERE</div>
+			<div class="droppable-alone" style="left:400px; top:150px;">DROP HERE</div>
+
+			<div class="draggable-magnetic" id="drag1" style="left:50px; top:100px;">DRAG ME</div>
+			<div class="draggable-pointing" id="drag2" style="left:100px; top:150px;">DRAG ME</div>
+		</div>
+		<div id="phantom"></div>
+		
+
+		<script type="text/javascript" src="./asset/jindo.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.DragArea.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../src/jindo.DropArea.js"></script>
+		<script type="text/javascript" src="js/jindo.DropArea.test.js"></script>
+	</body>
+</html>

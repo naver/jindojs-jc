@@ -1,0 +1,60 @@
+jindo.CheckBox 컴포넌트는 사용자의 입력을 받기위한 폼 컨트롤 중 Checkbox / Radio Button 컨트롤의 디자인을 커스터마이징하는 컴포넌트이다. 체크박스는 브라우저에서 아래와 같은 형태로 보여진다. 
+ 
+![](example_01.png "")
+ 
+체크박스나 라디오버튼은 css로 디자인을 적용하는데 한계가 있다. 예를 들어 체크의 모양을 x로 바꾸거나 색상을 바꾸거나 라디오버튼의 모양을 네모모양으로 바꿀 수 없다. CheckBox 컴포넌트를 사용하면 체크박스나 라디오 버튼에 원하는 디자인을 적용할 수 있다.
+
+#### jindo.CheckBox 컴포넌트로 체크박스에 디자인 적용하기
+
+우선, 아래와 같이 마크업과 css를 구성해 보자.
+
+	<span class="checkbox">
+	    <span class="checkbox-mark"></span>
+	    <input type="checkbox" name="c" id="c1" />
+	</span> <label for="c1">첫번째</label>
+	 
+	<span class="checkbox">
+	    <span class="checkbox-mark"></span>
+	    <input type="checkbox" name="c" id="c2" checked="checked" />
+	</span> <label for="c2">두번째</label>
+
+	.checkbox-applied {display:-moz-inline-block; display:-moz-inline-box; display:inline-block; overflow:hidden; position:relative; width:15px; height:15px; vertical-align:middle;}
+	.checkbox-applied span.checkbox-mark {display:-moz-inline-block; display:-moz-inline-box; display:inline-block; position:absolute; left:0; top:0; width:15px; height:15px; background:url("../../resource/img/CheckBox.radio_check2.gif") no-repeat -19px 0px}
+	.checkbox-applied span.checkbox-mark.checkbox-checked {background-position:-19px -18px;}
+	.checkbox-applied input {position:absolute; left:-9999px;}
+
+컴포넌트를 초기화 하기 전에는 디자인은 변경되지 않는다. 그 이유는 컴포넌트가 로드된 이후에 체크박스를 감싸고 있는 엘리먼트에 "checkbox-applied" 클래스명추가되기 때문이다. CheckBox 컴포넌트는 활성화 되기 전까지 디자인이 변경되지 않도록 할 수 있다. 이러한 안전장치가 없다면 자바스크립트를 지원하지 않는 환경에서는 체크박스의 디자인이 깨져 버린다.
+즉, 위의 CSS는 CheckBox컴포넌트를 위한 스타일이 적용되었기 때문에 컴포넌트가 활성화 되지 않는다면 위의 스타일도 적용되어서는 안된다. 
+
+#### jindo.CheckBox 초기화
+
+이제 CheckBox 컴포넌트를 사용하기 위한 준비가 모두 끝났다. 이제 아래와 같은 스크립트를 추가해 보자.
+
+	var aCheckBox = jindo.$$('.checkbox');
+	var oCheckBox1 = new jindo.CheckBox(aCheckBox[0], {sClassPrefix : 'checkbox-'});
+	var oCheckBox2 = new jindo.CheckBox(aCheckBox[1], {sClassPrefix : 'checkbox-'});
+
+아래의 캡쳐 이미지와 동일하게 출력된다면 성공이다. 
+
+![](example_02.png "")
+
+#### 여러 체크박스를 동시에 생성하기
+
+CheckBox컴포넌트를 적용하려면 체크박스는 각각 CheckBox컴포넌트를 생성해야 한다.
+만약 10개의 체크박스가 있다면 CheckBox 클래스를 10번 생성하여야 하는데 다음과 같이 jindo.Component의 factory 스태틱 메소드를 사용한다면 손쉽게 여러 CheckBox를 생성할 수 있다. jindo.Component에서 상속된 factory메소드는 다수의 컴포넌트를 일괄적으로 생성하여 인스턴스를 배열로 반환해 준다.
+
+	var aCheckBox = jindo.CheckBox.factory(jindo.$$('.checkbox'), { sClassPrefix : 'checkbox-' });
+
+#### 체크된 상태로 초기화하기
+
+체크박스를 체크된 상태로 초기화하기 위해서는 input 엘리먼트의 속성으로 checked="checked"를 추가한다.
+
+#### 비활성 상태로 초기화하기
+
+체크박스를 체크된 상태로 초기화하기 위해서는 input 엘리먼트의 속성으로 disabled="true"를 추가한다.
+
+#### Note
+
+* CheckBox 컴포넌트는 input[type=checkbox], input[type=radio]에 적용가능하다.
+* 기본적인 input 엘리먼트의 동작과 같이 탭 키를 이용해 포커스 이동이 가능하다
+* input[type=checkbox], input[type=radio]에 이벤트를 직접 바인딩해서 사용할 경우 제대로 동작하지 않는다. 필요한 경우 커스텀이벤트를 이용한다.

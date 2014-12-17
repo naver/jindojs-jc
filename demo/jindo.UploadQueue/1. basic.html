@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>기본 예제</title>
+		<meta name="class-lists" content="jindo.UploadQueue"/>
+		<meta name="screenshots" content=""/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="description" content="가장 기본적인 사용 예제입니다.">
+		<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+		<link rel="stylesheet" type="text/css" href="basic.css">
+	</head>
+	<body>
+		<script type="text/javascript" src="../asset/demojs/demo.js#header"
+			 data-title="Jindo Component"
+			 data-subtitle="=document.title"
+			 data-backbutton="false"
+			 data-viewsource="false"
+			 data-qrcode="true"></script>
+		<div id="wrap">
+			<button id="activate" onclick="o.activate(); jindo.$('activate').disabled = true; jindo.$('deactivate').disabled = false; return false;">activate</button>
+			<button id="deactivate" onclick="o.deactivate(); jindo.$('activate').disabled = false; jindo.$('deactivate').disabled = true; return false;">deactivate</button>
+
+			<h1>Choose (multiple) files or drag them onto drop zone below</h1>
+
+			<!--
+			<form action="" method="post" enctype="multipart/form-data">
+				<input type="file" id="fileField" name="fileField" multiple />
+			</form>
+			-->
+
+			<div id="fileDrop1" class="fileDrop">
+				<p>Drop files here #1</p>
+			</div>
+
+			<div id="fileButton1" class="fileButton browsebutton">
+				<div class="browse-box"><input class="browse-file-input" type="file" name="browse" /></div>
+				<a class="browse-button" href="#" onclick="return false;">Browse #1</a>
+			</div>
+
+			<hr>
+
+			<div id="fileDrop2" class="fileDrop">
+				<p>Drop <span>files</span> here #2</p>
+			</div>
+
+			<div id="fileButton2" class="fileButton browsebutton">
+				<div class="browse-box"><input class="browse-file-input" type="file" name="browse" /></div>
+				<a class="browse-button" href="#" onclick="return false;">Browse #2</a>
+			</div>
+
+			<div id="files">
+				<h2>File list</h2>
+				<div id="progress"></div>
+				<ul class="category">
+					<li class="wait">Waiting file to upload</li>
+					<li class="progress">Progressing file</li>
+					<li class="load">Loaded file</li>
+					<li class="error">Error occured file</li>
+				</ul>
+				<a id="reset" href="#" title="Reset completed files from list" onclick="o.reset(); return false;">reset</a>
+				<a id="remove" href="#" title="Remove all files from list" onclick="o.remove(); return false;">remove</a>
+				<a id="abort" href="#" title="Cancel uploading in list" onclick="o.abort(); return false;">abort</a>
+				<a id="upload" href="#" title="Upload all files in list" onclick="o.upload(); return false;">upload</a>
+				<ul id="fileList"></ul>
+			</div>
+			
+		</div>
+		<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+		<!--<script type="text/javascript" charset="utf-8" src="../../asset/flashObject.js"></script>-->
+		<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../src/jindo.UIComponent.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../src/jindo.BrowseButton.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../src/jindo.UploadQueue.js"></script>
+		<script type="text/javascript">
+		
+			var sUploadURL = "../asset/server/UploadQueue.php"; // 업로드 할 URL
+			
+			function updateProgress() {
+				var info = o.getInfo();
+				jindo.$('progress').style.width =
+					info.size.total &&
+					Math.round((info.size.load + info.size.error) / info.size.total * 100) + '%';
+			}
+		
+			var o = new jindo.UploadQueue(sUploadURL, {
+			
+				// 눌렀을때 파일 선택 다이얼로그를 띄우게 할 엘리먼트(버튼)
+				aButton : [ jindo.$('fileButton1'), jindo.$('fileButton2') ],
+
+				// 파일을 드랍 할 수 있는 영역
+				aDropArea : [ jindo.$('fileDrop1'), jindo.$('fileDrop2') ],
+				
+				bMultiple : true, // 파일 선택 창에서 여러개의 파일을 선택 할 수 있도록 할지 여부
+				nParallel : 3,
+				
+				sSwfPath : 'uploadQueue.swf?2', // File API 를 지원하지 않는 브라우저를 위한 플래시 파일 경로
+				sParamName : 'johndoe'
+				
+			}).attach({
+				
+				'beforeSelect' : function(oCustomEvent) {
+					
+					var aLists = oCustomEvent.aFiles;
+					
+					for (var i = 0, len = aLists.length; i < len; i++) {
+						
+						if (aLists[i].ext === 'png') {
+							alert('PNG 파일은 올릴 수 없습니다.');
+							oCustomEvent.stop();
+							return;
+						}
+						
+					}
+					
+				},
+				
+				'selectError' : function(oCustomEvent) {
+					
+					alert(oCustomEvent.sMessage);
+					
+				},
+				
+				'beforeAdd' : function(oCustomEvent) {
+					
+					var oFile = oCustomEvent.oFile;
+					
+					/*
+					if (oFile.ext !== 'jpg') {
+						oCustomEvent.stop();
+					}
+					*/
+					
+					oCustomEvent.sKey = 'R' + new Date().getTime() + Math.round(Math.random() * 100000);
+					
+				},
+				
+				'add' : function(oCustomEvent) {
+					
+					var oFile = oCustomEvent.oFile;
+
+					var elLI = jindo.$([
+						'<li id="' + oCustomEvent.sKey + '" class="none">',
+							'<h3></h3><p></p><div class="loadingIndicator"></div>',
+							'<div class="buttons">',
+								'<button class="reset">reset</button>',
+								'<button class="upload">upload</button>',
+								'<button class="abort">abort</button>',
+								'<button class="remove">remove</button>',
+							'</div>',
+						'</li>'
+					].join(''));
+
+					jindo.$Element(jindo.$$.getSingle('h3', elLI)).text(oFile.name);
+					jindo.$Element(jindo.$$.getSingle('p', elLI)).text(oFile.ext + " - " + oFile.size + ' bytes');
+					
+					jindo.$('fileList').appendChild(elLI);
+					
+					updateProgress();
+					
+				},
+				
+				'remove' : function(oCustomEvent) {
+					
+					var elLI = jindo.$(oCustomEvent.sKey);
+					jindo.$('fileList').removeChild(elLI);
+					
+					updateProgress();
+
+				},
+				
+				'wait' : function(oCustomEvent) {
+					
+					var elLI = jindo.$(oCustomEvent.sKey);
+					elLI.className = 'wait';
+					
+				},
+				
+				'uploadStart' : function(oCustomEvent) {
+
+					var elLI = jindo.$(oCustomEvent.sKey);
+					elLI.className = 'progress';
+					updateProgress();
+					
+				},
+				
+				'uploadProgress' : function(oCustomEvent) {
+					
+					var elLI = jindo.$(oCustomEvent.sKey);
+					var elLoadingIndicator = jindo.$$.getSingle('.loadingIndicator', elLI);
+					
+					elLoadingIndicator.style.width = Math.round(oCustomEvent.oFile.rate * 100) + '%'
+					
+				},
+				
+				'beforeUploadLoad' : function(oCustomEvent) {
+
+					// 원하는 응답이 오지 않았으니 잘못 업로드 된 것이라 판단
+					if (String(oCustomEvent.oFile.size) !== oCustomEvent.sResponseText) {
+						oCustomEvent.stop();
+					}
+					
+				},
+				
+				'uploadLoad' : function(oCustomEvent) {
+					
+					var elLI = jindo.$(oCustomEvent.sKey);
+					var elLoadingIndicator = jindo.$$.getSingle('.loadingIndicator', elLI);
+					
+					elLoadingIndicator.style.width = Math.round(oCustomEvent.oFile.rate * 100) + '%'
+
+					elLI.className = 'load';
+					updateProgress();
+					
+					// this.remove(oCustomEvent.sKey);
+					
+				},
+				
+				'uploadError' : function(oCustomEvent) {
+					
+					var elLI = jindo.$(oCustomEvent.sKey);
+					elLI.className = 'error';
+					
+					updateProgress();
+					// this.remove(oCustomEvent.sKey);
+					
+				},
+				
+				'uploadAbort' : function(oCustomEvent) {
+					
+					var elLI = jindo.$(oCustomEvent.sKey);
+					elLI.className = 'none';
+
+					var elLoadingIndicator = jindo.$$.getSingle('.loadingIndicator', elLI);
+					elLoadingIndicator.style.width = 0;
+					
+					updateProgress();
+					
+				},
+				
+				'reset' : function(oCustomEvent) {
+					
+					var elLI = jindo.$(oCustomEvent.sKey);
+					elLI.className = 'none';
+					
+					updateProgress();
+					
+				},
+				
+				'uploadEnd' : function(oCustomEvent) {
+					
+					if (oCustomEvent.bFinish) {
+						alert('더 이상 업로드 할 파일이 없습니다.');
+					}
+					
+				},
+				
+				'dragOver' : function(oCustomEvent) {
+					jindo.$Element(oCustomEvent.element).addClass('over');
+				},
+				
+				'dragOut' : function(oCustomEvent) {
+					jindo.$Element(oCustomEvent.element).removeClass('over');
+				},
+				
+				'buttonOver' : function(oCustomEvent) {
+					jindo.$Element(oCustomEvent.element).addClass('over');
+				},
+				
+				'buttonOut' : function(oCustomEvent) {
+					jindo.$Element(oCustomEvent.element).removeClass('over');
+				}
+				
+			});
+			
+			jindo.$Element('fileList').delegate('click', 'button.reset', function(oEvent) {
+				var sKey = jindo.$$.getSingle('! li', oEvent.element).id;
+				o.reset(sKey);
+				oEvent.stopDefault();
+			});
+			
+			jindo.$Element('fileList').delegate('click', 'button.upload', function(oEvent) {
+				var sKey = jindo.$$.getSingle('! li', oEvent.element).id;
+				o.upload(sKey);
+				oEvent.stopDefault();
+			});
+			
+			jindo.$Element('fileList').delegate('click', 'button.abort', function(oEvent) {
+				var sKey = jindo.$$.getSingle('! li', oEvent.element).id;
+				o.abort(sKey);
+				oEvent.stopDefault();
+			});
+			
+			jindo.$Element('fileList').delegate('click', 'button.remove', function(oEvent) {
+				var sKey = jindo.$$.getSingle('! li', oEvent.element).id;
+				o.remove(sKey);
+				oEvent.stopDefault();
+			});
+			
+			if (o.getMethod() !== 'HTML5') {
+				jindo.$Element('fileDrop1').hide();	
+				jindo.$Element('fileDrop2').hide();	
+			}
+
+			jindo.$('activate').disabled = true;
+			
+		</script>
+	</body>
+</html>

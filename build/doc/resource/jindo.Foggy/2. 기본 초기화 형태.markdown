@@ -1,0 +1,14 @@
+#### CSS
+
+	.fog {
+	    position:absolute;
+	    left:0; top:0; padding:0; margin:0; border:0;
+	    width:100px; height:100px;
+	    background-color: green;
+	    opacity:0;
+	}
+
+fog 엘리먼트의 디자인을 CSS 수정으로 손쉽게 변경할 수 있다.
+
+#### Javascript
+	var oFoggy = new jindo.Foggy();

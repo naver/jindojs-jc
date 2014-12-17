@@ -1,0 +1,55 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<title>세로 방향</title>
+<meta name="class-lists" content="jindo.CircularRolling"/>
+<meta name="screenshots" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="세로 방향으로 롤링되는 예제입니다.">
+<link rel="stylesheet" type="text/css" href="../asset/demo.css">
+<style type="text/css">
+.rolling { width:200px; border:5px solid yellowgreen;	overflow:hidden; height:150px; margin-top:10px; }
+.rolling ol { list-style:none; margin:0; padding:0; }
+.rolling ol li { background-color:#ff7; border:5px solid red; height:30px; padding:5px; margin:0; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="../asset/demojs/demo.js#header"
+     data-title="Jindo Component"
+     data-subtitle="=document.title"
+     data-backbutton="false"
+     data-viewsource="false"
+     data-qrcode="true"></script>
+	
+<div class="demo">
+	<div id="rolling" class="rolling">
+		<ol>
+			<li>첫번째</li>
+			<li>두번째</li>
+			<li>세번째</li>
+			<li>네번째</li>
+			<li>다섯번째</li>
+		</ol>
+	</div>
+	<hr />
+	<button onClick="oCircularRolling.moveBy(-1); return false;">◀</button>
+	<button onClick="oCircularRolling.moveBy(1); return false;">▶</button>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="../asset/jindo.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.Rolling.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../src/jindo.CircularRolling.js"></script>
+<script type="text/javascript">
+	var oCircularRolling = new jindo.CircularRolling(jindo.$("rolling"), {
+		sDirection : "vertical"
+	});
+</script>
+<script type="text/javascript" src="../asset/demojs/demo.js#footer"></script>
+</body>
+</html>

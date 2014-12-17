@@ -1,0 +1,24 @@
+UI 컴포넌트 구현시 jindo.UIComponent 클래스를 상속하여 컴포넌트의 활성/비활성 기능을 편리하게 구현가능하다. 
+아래의 코드는 jindo.UIComponent 를 상속한 jindo.NewUIComponent를 정의하고 초기화하는 예제이다.
+
+	//include jindo.Component.js
+	//include jindo.UIComponent.js
+	     
+	//NewUIComponent 정의
+	jindo.NewUIComponent = jindo.$Class({
+	    _onActivate : function() {
+	    },
+	     
+	    _onDeactivate : function() {
+	    }
+	}).extend(jindo.UIComponent);
+	 
+	//jindo.NewComponent 초기화 및 인스턴스 생성
+	var oInstance = new jindo.NewUIComponent();
+
+이제 oInstance는 jindo.UIComponent에서 정의된 isActivating, activate, deactivate 메소드를 사용할 수 있다.
+
+또한 jindo.UIComponent는 jindo.Component를 상속한 클래스이기 때문에 jindo.Component에서 정의된 option, optionSetter, fireEvent, attach, detach, detachAll과 같은 인스턴스 메소드와 getInstance, factory와 같은 스태틱 메소드를 사용할 수 있다.
+
+#### Note
+* jindo.Component에 정의된 메소드에 대해서는 jindo.Component 문서를 참고한다.
