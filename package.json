@@ -3,7 +3,7 @@
 	"title": "jindo-component",
 	"version": "1.14.0-pre",
 	"author": "NAVER corp",
-	"description": "JindoJS Component",
+	"description": "Jindo Component",
 	"main": "dist/jindo_component.js",
 	"homepage": "http://jindo.dev.naver.com/jindo_home/Component.html",
 	"repository": {
