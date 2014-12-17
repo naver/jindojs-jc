@@ -4,7 +4,7 @@
 	"version": "1.14.0-pre",
 	"author": "NAVER corp",
 	"description": "Jindo Component",
-	"main": "dist/jindo_component.js",
+	"main": "dist/jindo-component.js",
 	"homepage": "http://jindo.dev.naver.com/jindo_home/Component.html",
 	"repository": {
 		"type": "git",
