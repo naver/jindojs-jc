@@ -9,29 +9,30 @@
   "keywords": [
     "jindo",
     "jindojs",
-    "javascript",
     "library",
-    "framework"
+    "component",
+    "ui"
   ],
   "authors": [
     "NAVER Corp."
   ],
   "license": "LGPL v2",
-  "homepage": "http://jindo.dev.naver.com/",
+  "homepage": "http://jindo.dev.naver.com/jindo_home/Component.html",
+  "dependencies": {
+    "jindojs-jindo": "*"
+  },
   "ignore" : [
-    "**/.*",
-    "build",
-    "demo",
-    "dist/desktop",
-    "dist/mobile",
+    "build/",
+    "demo/",
     "dist/doc",
-    "dist/meta",
     "src",
-    "test",
+    "test/",
     ".gitignore",
     ".jshintrc",
+    "bower.json",
     "Gruntfile.js",
+    "LICENSE.md",
     "package.json",
-    "*.md"
+    "README.md"
   ]
 }
