@@ -1,7 +1,7 @@
 {
 	"name": "jindo-component",
 	"title": "jindo-component",
-	"version": "1.14.0-pre",
+	"version": "1.14.0",
 	"author": "NAVER corp",
 	"description": "Jindo Component",
 	"main": "dist/jindo-component.js",
