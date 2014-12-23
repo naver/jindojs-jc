@@ -6,6 +6,7 @@ module.exports = function(grunt) {
 
 		// Metadata
 		pkg : grunt.file.readJSON('package.json'),
+		version : '<%= pkg.version.replace(/-pre/, "") %>',
 		banner : [
 			'/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ',
 			'<%= grunt.template.today("yyyy-mm-dd") %>\n',
@@ -50,7 +51,37 @@ module.exports = function(grunt) {
 				src : [ 'src/*.js' ],
 				options : { jshintrc: true }
 			}
-		}
+        },
+
+        githubtag : {
+            options : {
+                json : "bower.json",
+                shell : {
+
+                }
+            }
+        },
+
+        shell : {
+            makeBranch : {
+                command : [
+                    'git branch tmp_<%= version %>',
+                    'git checkout tmp_<%= version %>'
+                ].join("&&")
+            },
+            commit : {
+                command : [
+                    'git add <%= uglify.dist.src %> <%= uglify.dist.dest %>',
+                    'git commit -m "bower" package.json bower.json <%= uglify.dist.src %> <%= uglify.dist.dest %>'
+                ].join("&&")
+            },
+            makeTag : {
+                command : [
+                    'git tag <%= version %> tmp_<%= version %>',
+                    'git push origin <%= version %>'
+                ].join("&&")
+            }
+        }
 
 	});
 
@@ -60,6 +91,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-shell');
 
 	grunt.registerTask('clean', function() {
 		if (grunt.file.exists('dist')) {
@@ -188,6 +220,44 @@ module.exports = function(grunt) {
 		grunt.task.run('uglify');
 
 	});
+
+    // 버전 변경
+    grunt.registerTask('changeVersion', function(){
+        var pkg = grunt.config.data.pkg;
+        pkg.version = pkg.version.replace(/-pre/, "");
+        grunt.file.write("package.json", JSON.stringify(pkg, null, 4));
+    });
+
+    // 임시 브랜치 생성
+    grunt.registerTask("makeBranch", ['shell:makeBranch']);
+
+    // 수정된 버전파일 및 dist 폴더 내 js 파일 commit
+    grunt.registerTask("gitcommit", ['shell:commit']);
+
+    // 태그 생성 및 push
+    grunt registerTask("makeTag", ['shell:makeTag']);
+
+    // 태그 생성을 위한 dist 파일 추가의 일련의 과정
+	grunt.registerTask('tagprocess', function() {
+
+        var options = this.options();
+        var pkg = grunt.config.data.pkg;
+        var jsonPath = options.json;
+        var bowerJson = grunt.file.readJSON(jsonPath);
+
+        // bower 버전 수정
+        bowerJson.version = pkg.version.replace(/-pre/,"");
+        grunt.file.write(jsonPath, JSON.stringify(bowerJson, null, 4));
+
+        grunt.task.run('makeBranch');
+        grunt.task.run('changeVersion');
+        grunt.task.run('clean');
+		grunt.task.run('auidoc');
+		grunt.task.run('merge');
+		grunt.task.run('uglify');
+		grunt.task.run('gitcommit');
+
+    });
 
 };
 
