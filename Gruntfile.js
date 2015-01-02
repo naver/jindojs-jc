@@ -205,7 +205,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('changeJindo', 'jindo버전 바꾸기', function(version) {
 		grunt.log.oklns("테스트용 Jindo " + version + " 으로 변경");
 		grunt.file.copy("test/asset/jindo." + version + ".js", "test/asset/jindo.js" );
-	});	
+	});
 
 	// Default task
 	grunt.registerTask('default', function() {
@@ -235,7 +235,7 @@ module.exports = function(grunt) {
     grunt.registerTask("gitcommit", ['shell:commit']);
 
     // 태그 생성 및 push
-    grunt registerTask("makeTag", ['shell:makeTag']);
+    grunt.registerTask("makeTag", ['shell:makeTag']);
 
     // 태그 생성을 위한 dist 파일 추가의 일련의 과정
 	grunt.registerTask('tagprocess', function() {
