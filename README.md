@@ -1,5 +1,6 @@
 **JC - Jindo Component**
 =========================================
+[![Build Status](https://travis-ci.org/naver/jindojs-jc.svg?branch=master)](https://travis-ci.org/naver/jindojs-jc)
 
 ## **What is JC?**
 JC is a framework that make easier to develope desktop web UI. JC provide UI components like DragArea, DropArea, etc..
