@@ -1,0 +1,41 @@
+jindo.Canvas 컴포넌트는 HTML5 Canvas 엘리먼트를 생성하고 컨텍스트 객체를 이용한 간단한 그래픽 작업을 할 수 있도록 지원하는 컴포넌트입니다.
+
+#### HTML5 Canvas
+
+HTML5 Canvas 엘리먼트는 비트맵방식의 그래픽을 스크립트로 처리할 수 있는 엘리먼트입니다.
+
+##### 브라우저 지원
+
+HTML5 Canvas 엘리먼트는 IE9과 기타 거의 모든 최신 웹브라우저가 지원하고 있습니다.
+HTML5 Canvas 엘리먼트를 지원하지 않는 IE9 이전버전에서의 지원을 위해 내부적으로 ExplorerCanvas (excanvas) 라이브러리를 사용합니다.
+ExplorerCanvas는 구글맵에서 도형을 그리기위해 작성된 오픈소스 라이브러리로 IE6이상의 브라우저에서 IE가 제공하는 기능인 VML을 이용하여 Canvas 객체를 에뮬레이팅해줍니다.
+
+#### Canvas 엘리먼트의 생성
+
+jindo.Canvas 컴포넌트를 이용해 Canvas 엘리먼트를 생성하는 방법은 다음과 같습니다.
+
+	//디폴트 가로크기 300, 세로크기 150
+	var elCanvas = jindo.Canvas.create();
+	//가로크기 500, 세로크기 300
+	var elCanvas = jindo.Canvas.create(500, 300);
+	//가로크기 500, 세로크기 300, jindo.$("test")에 append
+	var elCanvas = jindo.Canvas.create(500, 300, jindo.$("test"));
+
+#### Canvas 엘리먼트의 컨텍스트 가져오기
+
+생성된 Canvas 엘리먼트에 그래픽을 그리기 위해서는 컨텍스트(context)객체를 가져와야합니다.
+
+	var elCanvas = jindo.Canvas.create();
+	 
+	//jindo.Canvas.getContext() 스태틱 메서드 사용
+	var ctx = jindo.Canvas.getContext(elCanvas);
+	 
+	//jindo.Canvas.getContext() 인스턴스 메서드 사용
+	var oCanvas = new jindo.Canvas(elCanvas);
+	var ctx = oCanvas.getContext();
+
+컨텍스트 객체를 이용해서 라인, 사각형을 그리거나 문자, 이미지, 음영, 그라데이션처리 등의 그래픽 작업을 할 수 있습니다. 자세한 내용은 HTML Canvas 2D Context 문서를 참고하기 바랍니다.
+
+#### 간단한 드로잉
+
+jindo.Canvas 컴포넌트는 캔버스의 컨텍스트를 이용한 간단한 그래픽 드로잉(선/면/사각형/지우기 등)을 지원합니다. 자세한 내용은 데모와 Method 설명에서 확인해주세요.

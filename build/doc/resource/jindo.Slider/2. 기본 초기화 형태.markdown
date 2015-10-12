@@ -1,0 +1,14 @@
+#### HTML
+	<div class="slider" id="simpleSlider"> <!-- 기준 엘리먼트 (track) -->
+	    <div class="slider-thumb"> </div> <!-- thumb 엘리먼트 (다수도 가능) -->
+	</div>
+	
+thumb 엘리먼트는 클래스명 "[prefix]thumb"을 가져야 한다. [prefix]는 sClassPrefix 옵션으로 변경가능하고 디폴트값은 "slider-"이다.
+
+#### CSS
+
+	.slider { background:#eee url(./images/grid.gif) no-repeat 5px bottom; position:relative; width:211px; height:40px; }
+	.slider .slider-thumb { background:url(./images/thumb.gif) no-repeat; position:absolute; width:11px; height:21px; overflow:hidden; cursor:default; }
+
+#### Javascript
+	var oSlider = new jindo.Slider(jindo.$('simpleSlider'));

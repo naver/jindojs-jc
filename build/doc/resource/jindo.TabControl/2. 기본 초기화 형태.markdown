@@ -1,0 +1,29 @@
+#### HTML
+
+	<div id="tabcontrol">
+	    <ul>
+	        <li class="tc-tab tc-selected">첫번째 탭</li>
+	        <li class="tc-tab">두번째 탭</li>
+	        <li class="tc-tab">세번째 탭</li>
+	    </ul>
+	    <div>
+	        <div class="tc-panel tc-selected">첫번째 패널</div>
+	        <div class="tc-panel">두번째 패널</div>
+	        <div class="tc-panel">세번째 패널</div>
+	    </div>
+	</div>
+                
+* TabControl 컴포넌트는 tab과 그에 1:1 대응하는 panel로 구성된다.
+* 탭은 ul > li 로 구성되고 클래스명은 "tc-tab"으로 정의한다.
+* 패널은 div > div 으로 구성되고 클래스명은 "tc-panel"로 정의한다.
+* 디폴트로 선택될 탭과 패널에는 "tc-selected" 클래스명을 추가한다.
+* 탭이 선택되면 선택된 탭과 패널에만 "tc-selected" 클래스명이 추가된다.
+
+#### CSS
+
+	div.tc-panel { display:none; }
+	div.tc-selected { display:block; }
+
+#### Javascript
+
+	var oTabControl = new jindo.TabControl(jindo.$('tabcontrol'))

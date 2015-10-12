@@ -1,0 +1,21 @@
+#### HTML
+
+초기화시에는 HTML 선언이 필요없다.  초기화가 된 후에는 document.body의 첫 번째 자식노드로 [prefix]layer 클래스명을 가진 다이얼로그 엘리먼트가 추가된다. jindo.Dialog에서는 다이얼로그에서 사용되는 레이어를 document.body에 추가시켜서 마지막에 레이어 엘리먼트가 배치되는 점이 다르다.  다이얼로그가 표시될때는 Foggy 컴포넌트의 fog레이어가 노출된다.
+
+#### CSS
+
+setLayerTemplate()으로 지정한 레이어엘리먼트에 적용될수 있도록 CSS를 지정한다.
+
+#### Javascript
+	// 다이얼로그를 생성한 후
+	var oModalDialog = new jindo.ModalDialog();
+	 
+	// 출력할 다이얼로그의 HTML을 설정합니다.
+	var sLayerHTML = '<div>layer</div>';
+	oModalDialog.setLayerTemplate(sLayerHTML);
+	 
+	// show 메소드를 호출하여 다이얼로그를 띄웁니다.
+	oModalDialog.show();
+	 
+	// close 메소드를 호출하여 다이얼로그를 닫습니다.
+	oModalDialog.close();

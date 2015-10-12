@@ -1,0 +1,15 @@
+진도 컴포넌트 구현시 jindo.Component 클래스를 상속하여 옵션, 커스텀이벤트 핸들링 기능등의 공통기능들을 편리하게 사용할 수 있다. 아래의 코드는 jindo.Component 를 상속한 jindo.NewComponent를 정의하고 초기화하는 예제이다.
+
+	//include jindo.Component.js
+	
+	//NewComponent 정의
+	jindo.NewComponent = jindo.$Class({}).extend(jindo.Component);
+	 
+	//jindo.NewComponent 초기화 및 인스턴스 생성
+	var oInstance = new jindo.NewComponent();
+
+이제 oInstance는 jindo.Component에서 정의된 option, optionSetter, fireEvent, attach, detach, detachAll과 같은 인스턴스 메소드와 getInstance, factory와 같은 스태틱 메소드를 사용할 수 있다.
+
+#### Note
+
+* 진도 컴포넌트 구현시 반드시 jindo.Component를 상속받을 필요는 없다.

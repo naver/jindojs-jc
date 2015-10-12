@@ -1,0 +1,5 @@
+#### HTML
+	<input type="text" id="input" style="ime-mode:disabled" />
+
+#### Javascript
+	var oNumberFormatter = new jindo.NumberFormatter(jindo.$('input'));

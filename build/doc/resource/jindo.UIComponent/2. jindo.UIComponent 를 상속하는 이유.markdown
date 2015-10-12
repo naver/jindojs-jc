@@ -1,0 +1,35 @@
+UIComponent는 엘리먼트를 지정하고, 그 엘리먼트의 DOMEvent에 특정한 동작을 수행하는 핸들러를 바인딩하여 사용자의 인터랙션을 처리하는 경우가 많다.
+
+또는 컴포넌트의 어떠한 동작을 수행하고 있는 상태인 활성상태, 그와는 반대인 아무런 동작을 수행하고 있지 않은 비활성 상태를 구분지어 구현해야하는 경우가 있는데
+이런 경우에 미리 구현된 UIComponent를 상속하여 편리하게 활성/비활성 상태를 제어할 수 있다.
+
+특히 이벤트핸들러가 해제되지 않은 엘리먼트가 DOM에서 제거되는 경우, 메모리 누수가 발생할 수 있으므로
+컴포넌트내부에서 엘리먼트에 이벤트 핸들러를 등록하는 경우 반드시 해제할 수 있는 퍼블릭 메소드를 구현해주어야한다.
+
+자주 사용되는 패턴은 다음과 같다.
+
+	//NewUIComponent 정의
+	jindo.NewUIComponent = jindo.$Class({
+	    $init : function(el) {
+	        this._el = el;
+	        this._wfOnClick = jindo.$Fn(this._onClick, this);
+	        this.activate(); //활성화
+	    }
+	     
+	    _onClick : function(we) {
+	        //"click" DOMEvent handler
+	    },
+	         
+	    _onActivate : function() {
+	        //activate() 호출시 수행되는 메소드
+	        this._wfOnClick.attach(this._el, "click");
+	    },
+	     
+	    _onDeactivate : function() {
+	        //deactivate() 호출시 수행되는 메소드
+	        this._wfOnClick.detach(this._el, "click");
+	    }
+	}).extend(jindo.UIComponent);
+	 
+	//jindo.NewUIComponent 초기화 및 인스턴스 생성
+	var oInstance = new jindo.NewUIComponent();

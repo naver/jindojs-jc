@@ -1,0 +1,6 @@
+#### JavaScript
+
+	//include jindo.Component.js
+	//include jindo.Timer.js
+	 
+	var oTimer = new jindo.Timer();

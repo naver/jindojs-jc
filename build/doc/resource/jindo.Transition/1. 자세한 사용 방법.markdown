@@ -1,0 +1,55 @@
+Transition 컴포넌트는 엘리먼트의 css style의 변화를 주어 움직이는 효과를 주는 컴포넌트이다. 다이나믹한 페이지 제작시 간단하게 다양한 css 변화효과을 구현할 수 있다.
+
+#### 움직일 대상 객체 생성
+
+움직일 대상을 "rect"라는 id의 DIV 엘리먼트 생성한다.
+
+	<head>
+	<style type="text/css">
+	    #rect {
+	        position:absolute; width:100px; height:100px; left:100px; top:100px;
+	        background-color:#07f; color:#7f7;
+	    }
+	</style>
+	</head>
+	<body>
+	    <div id="rect"></div>
+	</body>
+	  
+#### 간단한 사용 예
+
+아럐 예제는 oTransition이라는 Transition 컴포넌트의 객체를 생성하고, 컴포넌트의 start() 함수를 실행하여,
+"1000ms(1초)의 시간" 만큼 "id가 rect인 객체"의 "opacity값을 0"으로 변경 시키는 간단한 스크립트이다.
+
+css style 속성값을 변경하려면, "@속성명"으로, 프로퍼티를 변경하려면 "프로퍼티명"으로 선언한다.
+
+예) @left, @top, @width, @backgroundColor, scrollTop
+ 
+start() 메소드에 대한 사용법은 Method 부분을 참고한다.
+
+	var oTransition = new jindo.Transition();
+	oTransition.start(1000, jindo.$('rect'), {'@opacity' : 0});
+	
+#### 움직임의 효과를 변경 하는 방법
+
+jindo.Effect에서 제공하는 이펙트 효과를 다양하게 지정할 수 있다.
+
+	//jindo.Effect 클래스 내의 움직임 효과 함수를 Transition 컴포넌트 초기화 시에 fEffect 옵션으로설정하는 방법 (목표값만 지정)
+	var oTransition = new jindo.Transition({
+	    fEffect : jindo.Effect.easeOut
+	});
+	oTransition.start(1000, jindo.$('rect'), {'@opacity' : 0});
+	 
+	//jindo.Effect 클래스 내의 움직임 효과 함수를 Transition 컴포넌트 초기화 시에 fEffect 옵션으로설정하는 방법 (시작, 목표값 지정)
+	var oTransition = new jindo.Transition({
+	    fEffect : jindo.Effect.easeOut
+	});
+	oTransition.start(1000, jindo.$('rect'), {'@opacity' : [1, 0]});
+	 
+	//start() 메소드 호출시 지정하는 방법 (목표값만 지정)
+	var oTransition = new jindo.Transition();
+	oTransition.start(1000, jindo.$('rect'), {'@opacity' : jindo.Effect.easeIn(0)});
+	 
+	//start() 메소드 호출시 지정하는 방법 (시작, 목표값 지정)
+	var oTransition = new jindo.Transition();
+	oTransition.start(1000, jindo.$('rect'), {'@opacity' : jindo.Effect.easeIn(1, 0)});

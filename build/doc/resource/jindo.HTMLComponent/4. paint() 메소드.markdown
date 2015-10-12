@@ -1,0 +1,13 @@
+#### paint() 인스턴스 메소드
+
+paint() 인스턴스 메소드는 해당 컴포넌트의 HTML 엘리먼트의 상태를 읽어와 상태에 맞는 디자인을 적용한다. 위에서 예를든 jindo.CheckBox에서 input[type="checkbox"]의 value값을 임의로 바꾼경우 paint() 메소드를 호출해주어야 value값에 맞는 디자인이 적용된다.
+
+	jindo.$$.getSingle(".ajax_checkbox input[type=checkbox]").value = false; //value값 변경
+	oCheckBox.paint(); //paint() 호출해서 변경된 value값에 대한 디자인 적용
+
+#### paint() 스태틱 메소드
+
+paint() 스태틱 메소드는 해당 클래스로 초기화된 모든 인스턴스에 대해 paint() 메소드를 수행시킨다. 예를 들어 factory 스태틱 메소드를 이용해 다수의 컴포넌트를 일괄 생성하였다고 가정하면 paint() 스태틱 메소드로 간단하게 모든 인스턴스에 대해 paint() 메소드를 수행시킬 수 있다.
+
+	jindo.CheckBox.factory(jindo.$$(".ajax_checkbox"));
+	jindo.CheckBox.paint();

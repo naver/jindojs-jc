@@ -1,0 +1,23 @@
+HTML 컴포넌트 구현시 jindo.HTMLComponent 클래스를 상속하여야한다. 아래의 코드는 jindo.HTMLComponent 를 상속한 jindo.NewHTMLComponent를 정의하고 초기화하는 예제이다.
+
+	//include jindo.Component.js
+	//include jindo.UIComponent.js
+	//include jindo.HTMLComponent.js
+	 
+	//NewHTMLComponent 정의
+	jindo.NewHTMLComponent = jindo.$Class({
+	    sTagName : "", //적용될 HTML엘리먼트의 태그이름 ex) select
+	    _onPaint : function() {
+	        //paint() 호출시 수행되는 메소드
+	    }
+	}).extend(jindo.HTMLComponent);
+	 
+	//jindo.NewComponent 초기화 및 인스턴스 생성
+	var oInstance = new jindo.NewHTMLComponent();
+
+이제 oInstance는 jindo.HTMLComponent에서 정의된 paint() 인스턴스 메소드와 paint() 스태틱 메소드를 사용할 수 있다. (메소드의 이름이 같지만 하나는 인스턴스 메소드이고 다른하나는 스태틱 메소드인 것에 유의하자) jindo.HTMLComponent는 jindo.UIComponent를 상속한 클래스이기 때문에 isActivating, activate, deactivate 메소드를 사용할 수 있다. 또한 jindo.UIComponent는 jindo.Component를 상속한 클래스이기 때문에 jindo.Component에서 정의된 option, optionSetter, fireEvent, attach, detach, detachAll과 같은 인스턴스 메소드와 getInstance, factory와 같은 스태틱 메소드를 사용할 수 있다.
+
+#### Note
+
+* jindo.UIComponent에 정의된 메소드에 대해서는 jindo.UIComponent 문서를 참고한다.
+* jindo.Component에 정의된 메소드에 대해서는 jindo.Component 문서를 참고한다.

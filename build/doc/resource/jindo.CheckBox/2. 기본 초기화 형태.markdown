@@ -1,0 +1,32 @@
+#### HTML
+
+	<span class="checkbox" id="checkbox"> <!-- 기준 엘리먼트 -->
+	    <span class="checkbox-mark"></span> <!-- 디자인된 체크박스가 표현될 엘리먼트 -->
+	    <input type="checkbox" name="c" id="c1" /> <!-- 적용될 체크박스 -->
+	</span> <label for="c1">확인</label> <!-- 체크박스의 레이블 -->
+
+* 적용 될 checkbox, radiobutton 엘리먼트는 기준 엘리먼트의 자식엘리먼트여야한다.
+* 클래스명이 [prefix]mark인 엘리먼트가 input 엘리먼트의 형제엘리먼트로 존재해야한다.
+
+#### CSS
+
+	.checkbox-applied {display:-moz-inline-block; display:-moz-inline-box; display:inline-block; overflow:hidden; position:relative; width:15px; height:15px; vertical-align:middle;}
+	.checkbox-applied span.checkbox-mark {display:-moz-inline-block; display:-moz-inline-box; display:inline-block; position:absolute; left:0; top:0; width:15px; height:15px; background:url("../../resource/img/CheckBox.radio_check2.gif") no-repeat -19px 0px}
+	.checkbox-applied span.checkbox-mark.checkbox-checked {background-position:-19px -18px;}
+	.checkbox-applied input {position:absolute; left:-9999px;}
+
+* 컴포넌트가 적용되면 감싸진 엘리먼트에 [prefix]applied 클래스명이 추가된다
+* input이 체크 되면 [prefix]mark 엘리먼트에 [prefix]check 클래스명이 추가 된다
+* input이 [prefix]disabled이면 [prefix]mark 엘리먼트에 [prefix]disabled 클래스명이 추가된다
+* input에 focus되면 [prefix]focused 클래스명이 추가된다
+* [prefix] 는 "sClassPrefix" 옵션값으로 지정할 수 있다. 디폴트 값은 "checkbox-"이다.
+            
+#### JavaScript
+
+	//include jindo.Componenet.js
+	//include jindo.UIComponent.js
+	//include jindo.HTMLComponent.js
+	//include jindo.CheckBox.js
+	 
+	var oCheckBox = new jindo.CheckBox(jindo.$("checkbox"));
+

@@ -1,0 +1,87 @@
+SelectBox 컴포넌트는 HTML의 select 엘리먼트의 디자인을 대체 적용하는 컴포넌트이다.
+
+일반적으로 select 엘리먼트의 스타일을 css로 변경하는 데는 한계가 있다.
+따라서 HTMLComponent를 상속하여 사용자의 인터랙션을 처리하는 UI를 아래의 그림과 같이 따로 구성하여 CSS로 스타일을 지정할 수 있게 한다. 
+ 
+##### 표준 Select
+![](SelectBox-standard.png "")
+ 
+##### 진도 SelectBox 컴포넌트
+![](SelectBox-design.png "")
+
+SelectBox 컴포넌트는 optgroup을 설정하지 않은 size=1인 HTML Select 엘리먼트의 동작방식과 동일하다.
+SelectBox가 적용되면 select 엘리먼트와 마찬가지로 Tab 이동에 의해서 포커스되고 HTML Select 엘리먼트와 동일한 키 컨트롤이 가능하다. 
+
+select엘리먼트와 다르게 다시 선택할 수 없는 디폴트 값을 설정할 수 있고, 실제 select내의
+option으로 존재하지만 선택할 수 없도록 목록에 표시하지 않을 수 있으며, 목록에 표시는 되지만 선택 되지 않게 할 수도 있다. 
+
+또한 특정 브라우저에서 select 엘리먼트와 Flash 오브젝트가 겹치는 오류가 발생하는데 이런 문제를 쉽게 해결하도록 해준다.
+
+#### 동작 방식
+
+SelectBox 컴포넌트를 적용하기 위한 HTML 구조는 다음과 같다.
+	
+	<div class="selectbox-noscript"> <!-- 기준 엘리먼트 -->
+	    <select class="selectbox-source"> <!-- HTML Select 엘리먼트 -->
+	        <option class="selectbox-default">선택하세요</option> <!-- 디폴트 선택항목 (다시 선택할 수 없음) -->
+	        <option value="1">1</option> <!-- 일반적인 선택항목 -->
+	        <option value="2">2</option>
+	        <option value="3">3</option>
+	        <option value="4">4</option>
+	        <option value="5" class="selectbox-invisible">이건안보여요</option> <!-- 선택목록에 노출되지 않는 항목 -->
+	        <option disabled="disabled">------------------</option> <!-- 선택목록에는 노출되지만 선택할 수 없는 항목 -->
+	        <option value="6">6</option>
+	        <option value="7">7</option>
+	        <option value="8">8</option>
+	        <option value="9">9</option>
+	        <option value="10" class="selectbox-notclose">10</option> <!-- 선택되어도 선택목록이 닫히지 않는 항목 -->
+	    </select>
+	    <div class="selectbox-box"> <!-- 박스 엘리먼트 -->
+	        <div class="selectbox-label"></div> <!-- 레이블 엘리먼트 -->
+	    </div>
+	    <div class="selectbox-layer"> <!-- 레이어 엘리먼트 -->
+	        <div class="selectbox-list"></div> <!-- 목록 엘리먼트 -->
+	    </div>
+	</div>
+	
+컴포넌트가 초기화되면 기준엘리먼트의 [prefix]noscript 클래스명이 제거되고, 레이블 엘리먼트에 디폴트 선택항목이 설정되며,
+HTML Select 엘리먼트 내부의 선택항목 option 엘리먼트의 정보를 토대로 목록 엘리먼트가 다음과 같은 형태로 변경된다.
+
+	<div> <!-- 기준엘리먼트 noscript 클래스명 제거-->
+	    <select class="selectbox-source"> <!-- HTML Select 엘리먼트 -->
+	        ...
+	    </select>
+	    <div class="selectbox-box"> <!-- 박스 엘리먼트 -->
+	        <div class="selectbox-label">선택하세요</div> <!-- 레이블 엘리먼트 -->
+	    </div>
+	    <div class="selectbox-layer">
+	        <div class="selectbox-list"> <!-- 목록 엘리먼트 -->
+	            <ul>
+	                <li class="selectbox-item">1</li>
+	                <li class="selectbox-item">2</li>
+	                <li class="selectbox-item">3</li>
+	                <li class="selectbox-item">4</li>
+	                <li class="selectbox-item-disabled">------------------</li> <!-- 선택할 수 없는 항목 -->
+	                <li class="selectbox-item">6</li>
+	                <li class="selectbox-item">7</li>
+	                <li class="selectbox-item">8</li>
+	                <li class="selectbox-item">9</li>
+	                <li class="selectbox-item selectbox-notclose">10</li> <!-- 선택되어도 선택목록이 닫히지 않는 항목 -->
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	
+컴포넌트가 초기화되면 다음과 같이 변한다.
+
+* 목록 엘리먼트 내부에 ul 엘리먼트가 추가되고 select의 option엘리먼트들중 화면에 보여질 엘리먼트들만 li 엘리먼트로 추가된다.
+* option 엘리먼트에 적용된 style 속성 값과 클래스명은 모두 li 엘리먼트에 복사된다.
+* 목록의 아이템들은 [prefix]item 클래스명을 가지고 선택될수 없는 아이템은 [prefix]item-disabled 클래스명을 가진다.
+* 선택된 아이템에는 [prefix]item-selected, 마우스오버된 아이템에는 [prefix]item-over 클래스명이 추가된다.
+* tab이동으로 select에 포커스가 주어지거나 셀렉트박스를 클릭할 경우 기준 엘리먼트에 [prefix]focused 클래스명이 추가된다.
+* 셀렉트박스가 disabled 되면 기준 엘리먼트에 [prefix]disabled 클래스명이 추가된다.
+
+#### Note
+
+* select에 size속성을 선언하지 않아야한다. (항상 size="1")
+* optgroup을 설정할 수 없고 단일 선택만 가능하다.

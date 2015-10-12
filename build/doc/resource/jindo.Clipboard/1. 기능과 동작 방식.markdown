@@ -1,0 +1,26 @@
+#### 플래시 파일 다운로드
+
+[clipboard.swf](../../../../demo/jindo.Clipboard/clipboard.swf) (우클릭해서 다운로드 받으세요)
+
+#### 간단 사용법
+
+클립보드 컴포넌트는 플래시 객체를 사용하여 시스템 클립보드에 값을 설정할수 있게 한다.
+클립보드 컴포넌트는 setData() 메소드는 반드시 Flash 객체가 로드된 이후에 실행되어야한다. 따라서 다음과 같이 load 컴스텀 이벤트 핸들러 내에서 수행할 것을 권장한다.
+
+	// 플래시저장위치는 사용하는 HTML 파일의 도메인과 동일해야 한다.
+	var oClipboard = new jindo.Clipboard('플래시저장위치/clipboard.swf').attach({
+	    load : function(oCustomEvent) {
+	        this.setData(jindo.$('foo'), '저장할 데이터');
+	    }
+	});
+
+그리고 Flash 10 이후부터 보안상의 문제로 모든 플래시 객체는 사용자 이벤트에 의해 직접 실행되어야만 한다. 따라서 클립보드에 데이터를 저장을 하기 위해서는 Flash 객체를 실제로 클릭해야한다. 이 때문에 클립보드 컴포넌트도 사용법도 이전 버전과 약간의 차이가 생겼다. 즉, 사용자의 클릭 이벤트를 직접 얻기 위해 DOM 엘리먼트를 인자로 받는다.
+
+	이전버전: setData("저장할 데이터");
+	현재버전: setData(jindo.$('element'), "저장할 데이터"); 
+
+#### Feature
+
+* Clipboard의 값을 설정하는데에 Flash 객체를 사용한다.
+* Flash 10 이후부터 보안상의 문제로 Clipboard 값을 설정하기 위해서는 반드시 사용자 이벤트에 의해 실행되어야한다.
+* 따라서 Clipboard에 값을 세팅하기위해 Flash 오브젝트를 실제로 클릭해야 한다.

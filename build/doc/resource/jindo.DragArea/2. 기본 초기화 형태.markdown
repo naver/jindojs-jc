@@ -1,0 +1,18 @@
+#### HTML
+	<div class="dragarea">
+	    <div class="draggable">Drag me</div>
+	</div>
+
+드래그할 영역에 'draggable' 이라는 클래스 이름을 지정해준다. 'draggable' 이라는 이름은 컴포넌트 초기화시 옵션(sClassName)을 이용해 다른 이름으로 변경 가능하다.
+
+#### CSS
+	.dragarea { width:400px; height:200px; left:50px; top:50px; padding:10px; border: solid 4px #444; position:absolute;}
+	.draggable { position:absolute; width:50px; height:50px; background-color:#ccc; left:50px; top:50px; padding:10px; border:1px solid #000; cursor:move; }
+
+드래그될 엘리먼트는 css position값이 absolute이어야 한다.
+
+#### Javascript
+
+	var oDragArea = new jindo.DragArea(document);
+
+document 하위에 존재하는 모든 draggable 요소를 드래그 할수있도록 만든다.

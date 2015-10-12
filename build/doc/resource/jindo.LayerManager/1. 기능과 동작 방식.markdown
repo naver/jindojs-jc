@@ -1,0 +1,11 @@
+LayerManager 컴포넌트는 특정 상황에서 노출되는 레이어를 지정된 영역이 아닌 영역에 클릭 또는 마우스오버이벤트가 발생할 경우 숨기도록 지정하는 컴포넌트이다. 사이트의 네비게이션에서 하위메뉴 펼침이나 등의 효과를 구현할 때 자주 이용 되는 컴포넌트다. 특정 엘리먼트를 클릭하거나 마우스오버 했을 경우에 레이어가 떠 있어야 하고, 그렇지 않을 경우 사라지는 효과를 낼 수 있다.
+
+<img src="layermanager_001.png" border="0" style="border:1px solid #aaa; margin:15px;">
+
+<img src="layermanager_002.png" border="0" style="border:1px solid #aaa; margin:15px;">
+
+위의 이미지의와 같이 원으로 표시된 영역을 클릭하거나 마우스오버하면 분야별 속보창이나 그린팩토리 정보 레이어가 떠 있어야 하고, 그 밖의 영역을 클릭하거나 마우스오버하면 정보 레이어가 닫히도록 구현할 경우 아래와 같이 선언하면 된다.
+
+	new jindo.LayerManager(jindo.$("infoLayer") /* 정보 레이어 */).link(jindo.$("markerA") /* A 마커 */);
+
+link method는 초기화 후에도 사용할 수 있으며 unlink를 통해서 엘리먼트의 연결을 끊을 수도 있습니다.

@@ -1,0 +1,11 @@
+#### HTML
+
+	<input type="text" id="input" /> 
+
+##Javascript
+
+	var oFormatter = new jindo.Formatter(jindo.$('input')).attach({
+	    'beforeChange' : function(oCustomEvent) {
+	        oCustomEvent.sText = oCustomEvent.sText.replace(new RegExp('[^0-9' + oCustomEvent.sStartMark + oCustomEvent.sEndMark + ']', 'g'), '');
+	    }
+	});

@@ -1,0 +1,125 @@
+jindo.BrowseButton 컴포넌트는 다음과 같은 기능을 제공한다.
+
+* 찾아보기 버튼을 다른 디자인으로 변경하여 사용할 수 있다
+* 마우스 커서의 over/out 이벤트 발생을 감지할 수 있다
+* 선택된 파일이 변경되는 것을 감지할 수 있다
+
+#### jindo.BrowseButton의 동작 방식
+
+File Input 컨트롤 버튼의 디자인을 변경하기 위해 다음과 같이 css를 정의하더라도 버튼의 디자인은 변경되지 않는다.
+
+	#file_input {
+	    border : 2px outset #000;
+	    background-color : #FFF;   
+	}
+	#file_input {
+	    background : url('/images/button.gif') 100% 0px no-repeat;
+	}
+
+버튼의 디자인을 변경하기 위해서는 File Input외에 디자인을 적용할 버튼 엘리먼트를 추가하고 그 버튼을 클릭했을때 File Input을 클릭한 것처럼 제어해주는 방법을 생각해 볼 수 있다.
+
+	#file_input {position:absolute; visibility:hidden;}
+	
+	<form action="" method="post" enctype="multipart/form-data">
+	 
+	    <input type="file" id="file_input" name="file_input" value="찾아보기" />
+	    <span id="file_name"></span>
+	    <button type="button" id="file_button">찾아보기</button>
+	    <button type="submit">전송</button>
+	 
+	</form>
+	
+	var elFile = document.getElementById('file_input');
+	var elFileName = document.getElementById('file_name');
+	var elButton = document.getElementById('file_button');
+	 
+	elButton.onclick = function(){
+	    elFile.click();
+	};
+	
+	elFile.onchange = function(){
+	    elFileName.innerHTML = elFile.value;
+	};
+	
+위의 예제는 브라우저에 따라 보안상의 이유로 제대로 동작하지 않는다.
+따라서 다음 예제와 같이 디자인된 찾아보기 버튼 위로 File Input 컨트롤을 투명하게 덮어서 사용자가 찾아보기 버튼을 직접 클릭하도록 변경해야한다.
+	
+	#browse {
+		width:72px;
+		overflow:hidden;
+	}
+	
+	.browse-button {
+		display:block;
+		width:68px;
+		height:15px;
+		background-color:#FFF;
+		border:2px outset #000;
+		pdding-top:3px;
+		text-align:center;
+		font-size:12px;
+		font-weight:bold;
+	}
+	
+	.browse-file-input {
+		position:relative;
+		top:-6px;
+		height:18px;
+		margin-top:-20px;
+		opacity:0!important;
+		-ms-opacity:0!important;
+		filter:alpha(opacity=0)!important;
+		-ms-filter:alpha(opacity=0)!important;
+	}
+	
+	.browse-output {
+		position:relative;
+		height:24px;
+		top:-20px;
+		left:75px;
+		border:1px solid #000;
+		padding:2px 5px 1px;
+	}
+	
+	.browse-over {
+		background-color:#000;
+		color:#FFF;
+	}
+	
+	.submit {
+		display:block;
+	}
+	
+	<form action="" method="post" enctype="multipart/form-data">
+	 
+	    <div id="browse">
+	        <a id="file_button" class="browse-button">Browse</a>
+	        <input type="file" class="browse-file-input" id="file_input" name="file_input" size="1" value="찾아보기" />
+	    </div>
+	    <span id="file_name" class="browse-output"></span>
+	    <button type="submit" class="submit">전송</button>
+	 
+	</form>
+	
+	var elFileInput = document.getElementById('file_input');
+	var elButton = document.getElementById('file_button');
+	var elFileName = document.getElementById('file_name');
+	 
+	elFileInput.onchange = function(a){
+	    elFileName.innerHTML = elFileInput.value;
+	};
+	
+	elFileInput.onmouseover = function(){
+	    elButton.className = 'attach-button over';
+	};
+	
+	elFileInput.onmouseout = function(){
+	    elButton.className = 'attach-button';
+	};
+	
+변경된 위의 예제를 실행하면 디자인된 찾아보기 버튼 위로 File Input 컨트롤이 투명하게 위치해 있는 것을 확인 할 수 있다.
+그런데 한가지 문제가 있다. 일반적으로 File Input 컨트롤 버튼의 크기는 조절되지 않기 때문에 디자인된 버튼의 크기가 File Input 컨트롤 버튼보다도 큰 경우에는 아래의 이미지처럼 버튼의 일부영역에서만 제대로 동작하게 된다.  
+
+![](example_01.png "")
+
+jindo.BrowseButton 컴포넌트는 버튼영역 내에서 마우스의 움직임을 감지하여 File Input 컨트롤의 찾아보기 버튼이 마우스 커서 아래에 위치하게하여 항상 클릭될 수 있게한다.

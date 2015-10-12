@@ -1,0 +1,7 @@
+#### HTML
+
+	<div id="layer">test</div>
+
+#### Javascript
+
+	var oLayerEffect = new jindo.LayerEffect(jindo.$("layer"));

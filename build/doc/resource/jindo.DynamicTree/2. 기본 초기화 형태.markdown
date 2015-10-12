@@ -1,0 +1,43 @@
+#### HTML
+
+	<ul id="tree" class="tree"> <!-- 기준 엘리먼트 -->
+	    <li class="tree-node tree-root-node">
+	    <div class="tree-has-child" style="display:none;">
+	        <button class="tree-button">+</button>
+	        <span class="tree-label" unselectable="on">루트노드</span>
+	    </div>
+	    <ul>
+	        <li class="tree-node"> <!-- 자식노드를 가지지 않는 노드 -->
+	            <div>
+	                <button class="tree-button">+</button>
+	                <span class="tree-label" unselectable="on">자식없음</span>
+	            </div>
+	        </li>
+	        <li class="tree-node tree-collapsed"> <!-- 자식노드를 가지는 노드 -->
+	            <div class="tree-has-child">
+	                <button class="tree-button">+</button>
+	                <span class="tree-label" unselectable="on">자식있음</span>
+	            </div>
+	        </li>
+	 
+	        <li class="tree-node tree-last-node"> <!-- 마지막 노드 -->
+	            <div>
+	                <button class="tree-button">+</button>
+	                <span class="tree-label" unselectable="on">자식없음</span>
+	            </div>
+	        </li>
+	    </ul>
+	</li>
+	</ul>
+
+* 자식노드를 가지는 노드는 Tree 컴포넌트와 달리 내부에 ul엘리먼트를 가지지 않는다.
+
+#### CSS
+
+DynamicTree의 CSS는 Tree 컴포넌트와 동일하게 지정한다.
+
+#### Javascript
+
+	var oDynamicTree = new jindo.DynamicTree(jindo.$('tree'), {
+	    sUrl : "동적노드 URL"
+	});

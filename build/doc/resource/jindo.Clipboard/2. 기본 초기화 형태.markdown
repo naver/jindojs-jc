@@ -1,0 +1,5 @@
+#### Javascript
+
+	var oClipboard = new jindo.Clipboard('플래시저장위치/clipboard.swf');
+	
+플래시 객체는 반드시 DOM이 완성된 다음에 초기화 되어야한다. 따라서 body 태그 하단에서 초기화를 하던지, onload 상태에서 초기화를 해야만 한다.

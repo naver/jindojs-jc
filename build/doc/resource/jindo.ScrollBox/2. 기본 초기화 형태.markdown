@@ -1,0 +1,79 @@
+#### HTML
+
+	<div id="scrollbox" class="scrollbar-noscript">
+	    <div class="scrollbar-box">
+	        <div class="scrollbar-content">
+	            표시될 내용
+	        </div>
+	    </div>
+	     
+	    <div class="scrollbar-v">
+	        <div class="scrollbar-button-up"></div>
+	        <div class="scrollbar-track">
+	            <div class="scrollbar-thumb"><img src="images/blank.gif" class="scrollbar-thumb-head" /><img src="images/blank.gif" class="scrollbar-thumb-body" /><img src="images/blank.gif" class="scrollbar-thumb-foot" /></div>
+	        </div>
+	        <div class="scrollbar-button-down"></div>
+	    </div>
+	     
+	    <div class="scrollbar-h">
+	        <div class="scrollbar-button-left"></div>
+	        <div class="scrollbar-track">
+	            <div class="scrollbar-thumb"><img src="images/blank.gif" class="scrollbar-thumb-head" /><img src="images/blank.gif" class="scrollbar-thumb-body" /><img src="images/blank.gif" class="scrollbar-thumb-foot" /></div>
+	        </div>
+	        <div class="scrollbar-button-right"></div>
+	    </div>
+	</div>
+                
++ thumb의 크기를 자동 조절하고 싶은 경우에 thumb의 자식으로 "thumb-head", "thumb-body", "thumb-foot"  클래스명을 가지는 엘리먼트가 있어야한다. 
++ 실제 크기 조절은 thumb-body 엘리먼트만 적용되며 thumb-head, thumb-foot 엘리먼트는 크기가 고정이고 없어도 무방하다.
+ 
+#### CSS
+	
+	#scrollbox { background-color:#ccc; position:relative;  width:200px; height:200px; }
+	.scrollbar-box { position:absolute; overflow:hidden; top:0px; left:0px; width:200px; height:200px; }
+	.scrollbar-content { position:absolute; top:0px; left:0px; width:785px; } /* 요 내용부분의 크기만 설정해주면 됨.*/
+	 
+	.scrollbar-h { position:absolute; /*top:185px; top값은 자동으로 조절*/ /*width:200px;*/ left:0px;   height:15px; display:none; }
+	.scrollbar-h .scrollbar-track { background-color:#eee; position:absolute; /*left:15px;*/ height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-thumb { display:block; position:absolute; height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-thumb-head { width:6px; height:15px; background:url(img/bar_hleft.gif) no-repeat; }
+	.scrollbar-h .scrollbar-thumb-body { width:18px; height:15px; background:url(img/bar_hmid.gif) no-repeat center top; }
+	.scrollbar-h .scrollbar-thumb-foot { width:6px; height:15px; background:url(img/bar_hright.gif) no-repeat; }
+	.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-head { background-position:0 -15px;}
+	.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-body { background-position:center -15px;}
+	.scrollbar-h .scrollbar-thumb-hold .scrollbar-thumb-foot { background-position:right -15px;}
+	.scrollbar-h .scrollbar-button-left { background:url(img/btn_hleft_off.gif) no-repeat; position:absolute; left:0; width:15px; height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-button-left-hold { background:url(img/btn_hleft_on.gif) no-repeat; }
+	.scrollbar-h .scrollbar-button-right { background:url(img/btn_hright_off.gif) no-repeat; position:absolute; right:0px; width:15px; height:15px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-h .scrollbar-button-right-hold { background:url(img/btn_hright_on.gif) no-repeat; }
+	.scrollbar-show { display:block; }
+	.scrollbar-disabled .scrollbar-track { background-color:#bbb; }
+	.scrollbar-disabled .scrollbar-thumb { display:none; }
+	.scrollbar-disabled .scrollbar-button-left { }
+	.scrollbar-disabled .scrollbar-button-right { }
+	 
+	.scrollbar-v { position:absolute; top:0px; right:0px; width:15px; display:none; }
+	.scrollbar-v .scrollbar-track { background-color:#eee; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-v .scrollbar-thumb { display:block; width:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ }
+	.scrollbar-v .scrollbar-thumb-head { width:15px; height:6px; background:url(img/bar_vtop.gif) no-repeat; }
+	.scrollbar-v .scrollbar-thumb-body { width:15px; height:18px; background:url(img/bar_vmid.gif) no-repeat left center; }
+	.scrollbar-v .scrollbar-thumb-foot { width:15px; height:6px; background:url(img/bar_vbot.gif) no-repeat; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-head { background-position:-15px top; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-body { background-position:-15px center; }
+	.scrollbar-v .scrollbar-thumb-hold .scrollbar-thumb-foot { background-position:-15px bottom; }
+	.scrollbar-v .scrollbar-button-up { width:15px;height:15px; position:relative; top:0px; overflow:hidden; /*ie6 height*/ background:url(img/btn_vtop_off.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-up-hold { background:url(img/btn_vtop_on.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-down { width:15px;height:15px; position:relative; overflow:hidden; /*ie6 height*/ background:url(img/btn_vbot_off.gif) no-repeat; }
+	.scrollbar-v .scrollbar-button-down-hold { background:url(img/btn_vbot_on.gif) no-repeat; }
+	.scrollbar-show { display:block; }
+	.scrollbar-disabled .scrollbar-track { background-color:#bbb;}
+	.scrollbar-disabled .scrollbar-thumb { display:none; }
+	.scrollbar-disabled .scrollbar-button-up { }
+	.scrollbar-disabled .scrollbar-button-down { }
+	 
+	.scrollbar-noscript .scrollbar-box {overflow:auto;}
+	.scrollbar-noscript .scrollbar-h, .scrollbar-noscript .scrollbar-v, scrollbar-noscript .scrollbar-disabled {display:none;}
+
+#### Javascript
+
+	var oScrollBox = new jindo.ScrollBox(jindo.$("scrollbox"));

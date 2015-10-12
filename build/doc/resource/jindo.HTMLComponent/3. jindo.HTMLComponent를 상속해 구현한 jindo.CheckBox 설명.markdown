@@ -1,0 +1,12 @@
+jindo.CheckBox는 input[type=checkbox] 또는 input[type=radio]인 엘리먼트에 디자인을 적용하는 HTML 컴포넌트이다. 일반적인 input[type=check] 엘리먼트는 css로 스타일을 변경하는데에 한계를 가지고 있다. 이 컴포넌트는 input[type=check] 엘리먼트 외에 UI 마크업을 가지고 이 부분에서 받은 마우스클릭 이벤트로 input엘리먼트에 값을 변화시킨다. 
+jindo.CheckBox 컴포넌트를 적용하기 위한 마크업 구조는 다음과 같다.
+
+	<span class="ajax_checkbox">
+	    <span class="checkbox-mark"></span><input type="checkbox" name="c" id="c1" />
+	</span><label for="c1">체크박스</label>
+	 
+	<script>
+	    var oCheckBox = new jindo.CheckBox(jindo.$$.getSingle(".ajax_checkbox"));
+	</script>
+
+사용자가 span.ajax_checkbox 엘리먼트를 클릭하게되면 input[type=checkbox] 엘리먼트의 값을 토글시키고 _onPaint()에서 현재 input[type=checkbox]의 값에 맞는 디자인이 적용될수 있도록 span.ajax_checkbox나 span.checkbox-mark의 클래스명을 바꾼다.

@@ -1,0 +1,57 @@
+#### HTML
+
+	<div id="scrollbar" class="scrollbar-noscript">
+	    <div class="scrollbar-box">
+	        <div class="scrollbar-content">
+	            표시될 내용
+	        </div>
+	    </div>
+	     
+	    <div class="scrollbar-v">
+	        <div class="scrollbar-button-up"></div>
+	        <div class="scrollbar-track">
+	            <div class="scrollbar-thumb"></div>
+	        </div>
+	        <div class="scrollbar-button-down"></div>
+	    </div>
+	     
+	    <div class="scrollbar-h">
+	        <div class="scrollbar-button-left"></div>
+	        <div class="scrollbar-track">
+	            <div class="scrollbar-thumb"></div>
+	        </div>
+	        <div class="scrollbar-button-right"></div>
+	    </div>
+	</div>
+                
++ 스크롤 될 영역은 "box" 클래스명을 가진다.
++ 표시될 내용은 "box" 내부에 위치하며 "content" 클래스명을 가진다.
++ 가로스크롤바는 "h", 세로스크롤바는 "v" 클래스명을 가진다.
++ 스크롤바는 드래그될 수 있는 범위를 지정하는 track 엘리먼트를 가져야하며 "track" 클래스명을 가진다.
++ 트랙 엘리먼트는 드래그할 수 있는 thumb 엘리먼트를 가져야하며 "thumb" 클래스명을 가진다.
++ 가로 스크롤의 경우 좌,우 스크롤 이동버튼은 각각 "button-left", "button-right" 클래스명을 가진다.
++ 세로 스크롤의 경우 상,하 스크롤 이동버튼은 각각 "button-up", "button-down" 클래스명을 가진다.
++ 스크립트가 로드된 이후에는 기준 엘리먼트의 "noscript" 클래스명이 제거된다. (자바스크립트를 사용할 수 없는 상황에서는 시스템 스크롤바 사용)
++ "track", "thumb", "button-up", "button-down", "button-left", "button-right"는 마우스 오버, 다운시 각각 "-over", "-hold" 클래스명이 추가된다. (예:"thumb-over", "button-down-hold") 
+
+#### CSS
+
+	#scroll {background-color:#ccc; position:relative; width:215px; height:200px;}
+	.scrollbar-box {position:absolute; overflow:hidden; top:0px; left:0px; width:200px; height:200px;}
+	.scrollbar-content {position:absolute;top:0px;left:0px;width:200px;}
+	.scrollbar-v {position:absolute; top:0px; left:200px; width:15px; height:200px;}
+	.scrollbar-track {background-color:#eee; width:15px;height:170px; position:relative; top:0px;}
+	.scrollbar-track-hold {background-color:#ddd;}
+	.scrollbar-thumb {background-color:skyblue;width:15px;height:30px; position:relative; top:0px; overflow:hidden;}
+	.scrollbar-thumb-hold {background-color:blue;}
+	.scrollbar-button-up {background-color:orange;width:15px;height:15px; position:relative; top:0px; overflow:hidden;}
+	.scrollbar-button-up-hold {background-color:red;}
+	.scrollbar-button-down {background-color:orange; width:15px;height:15px; position:relative; top:0px;overflow:hidden;}
+	.scrollbar-button-down-hold {background-color:red;}
+	 
+	.scrollbar-noscript .scrollbar-box {width:215px; overflow-y:auto;}
+	.scrollbar-noscript .scrollbar-v {display:none;}
+                
+#### Javascript
+
+	var oScrollBar = new jindo.ScrollBar(jindo.$("scrollbar"));

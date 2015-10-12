@@ -1,0 +1,35 @@
+#### HTML
+
+	<div id="rolling_chart">
+	    <ol>
+	        <li>
+	            <ul class="rollingchart-item">
+	                <li>1</li>
+	            </ul>
+	        </li>
+	        <li>
+	            <ul class="rollingchart-item">
+	                    <li>2</li>
+	            </ul>
+	        </li>
+	        <li>
+	            <ul class="rollingchart-item">
+	                <li>3</li>
+	            </ul>
+	        </li>
+	        <li>
+	            <ul class="rollingchart-item">
+	                <li>4</li>
+	            </ul>
+	        </li>
+	        <li>
+	            <ul class="rollingchart-item">
+	                <li>5</li>
+	            </ul>
+	        </li>
+	    </ol>
+	</div>   
+                
+* 목록은 ol 태그 아래에 li 엘리먼트로 존재한다.
+* 각각의 li 엘리먼트 아래에는 롤링이 발생할 "item" 클래스명을 가지는 ul 엘리먼트가 존재한다.
+* 각각의 "item" 하나의 독립 Rolling 마크업구조처럼 ul 하위의 li 엘리먼트가 존재한다.

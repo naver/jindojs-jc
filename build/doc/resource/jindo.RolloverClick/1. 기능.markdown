@@ -1,0 +1,7 @@
+RolloverClick은 RolloverArea의 기능에서 mousedown, mouseup 대신 click과 dbclick을 체크하는 컴포넌트이다.
+내부적으로 RolloverArea의 기능을 사용하기 때문에 이 컴포넌트의 문서를 우선 보길 권장한다. 
+
+이 컴포넌트는 RollverArea에 없는 click과 dbclick 이벤트를 체크한다.
+click은 기본적으로 "click"이벤트에 추가되지만 변경하고 싶을 경우 "mousedown" 또는 "mouseup"에서 체크할수 있다. 
+
+"dbclick"이벤트는 bCheckDblClick 옵션을 true로 지정해 사용할수 있으며, dblclick 커스텀이벤트를 사용해 컨트롤 할 수가 있다.

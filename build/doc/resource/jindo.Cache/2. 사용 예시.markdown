@@ -1,0 +1,58 @@
+#### Create Instance
+
+	// 인스턴스 생성 옵션
+	oCache = new jindo.Cache({
+		"nCacheLimit" : 100,  // 최대 저장할 수 있는 데이터의 수 (기본값 50)
+		"nExpireTime" : 600   // 캐쉬의 기본 유효 시간 (기본값 0)
+	});
+	
+	// 일반적인 인스턴스 생성
+	oCache = new jindo.Cache();
+	
+#### Add Data
+
+	// 문자열 키를 이용하여 데이터 캐싱
+	oCache.add("string_key", [0, 1, 2]);
+	
+	// HashTable 형태의 객체 키를 이용하여 데이터 캐싱
+	oCache.add({"key1" : "a", "key2" : "b"}, [0, 1, 2]);
+	
+	// 데이터 캐싱 시에, 해당 데이터의 유효 시간을 설정
+	// (120초 후에는 컴포넌트 내부에서 데이터 삭제)
+	oCache.add({"key1" : "a", "key2" : "b"}, [0, 1, 2], 120);
+	
+#### Get Data
+
+	// 데이터 추가
+	oCache.add({"key1" : "a", "key2" : "b"}, [0, 1, 2]);
+	
+	// 데이터를 추가할 때 전달했던 키를 동일하게 전달
+	// vResult is [0, 1, 2]
+	var vResult = oCache.get({"key1" : "a", "key2" : "b"});
+
+#### Check Data
+
+	// 데이터 추가
+	oCache.add({"key1" : "a", "key2" : "b"}, [0, 1, 2]);
+	
+	// 데이터를 추가할 때 전달했던 키를 동일하게 전달
+	// bResult is true, bResult2 is false
+	var bResult = oCache.check({"key1" : "a", "key2" : "b"});
+	var bResult2 = oCache.check({"key1" : 1, "key2" : 2});
+	
+#### Remove Data
+
+	// 데이터 추가
+	oCache.add({"key1" : "a", "key2" : "b"}, [0, 1, 2]);
+	
+	// 데이터를 추가할 때 전달했던 키를 동일하게 전달하여 내부 데이터 삭제
+	oCache.remove({"key1" : "a", "key2" : "b"});
+	
+#### Clear Data
+
+	// 데이터 추가
+	oCache.add({"key1" : "a", "key2" : "b"}, [0, 1, 2]);
+	oCache.add({"key1" : "1", "key2" : "2"}, [0, 0, 0]);
+	
+	// clear() 메소드를 호출하여, 추가된 모든 데이터를 삭제 함
+	oCache.clear();

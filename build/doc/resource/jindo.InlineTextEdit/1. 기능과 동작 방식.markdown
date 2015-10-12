@@ -1,0 +1,1 @@
+jindo.InlineTextEdit 컴포넌트는 문서내의 Text 노드를 Text Input으로 변환시켜 즉시 수정할 수 있게합니다.

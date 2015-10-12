@@ -1,0 +1,62 @@
+#### HTML
+
+	<ul id="tree" class="tree">
+	    <li class="tree-node tree-root-node tree-last-node">
+	        <div class="tree-has-child" style="display:none;"><!-- 루트노드를 보이고 싶지 않으면 선언 -->
+	            <span class="tree-label" unselectable="on">루트노드</span>
+	        </div>
+	        <ul>
+	            <li class="tree-node">
+	            <div class="tree-has-child">
+	                <button class="tree-button">+</button><span class="tree-label" unselectable="on">포유류</span>
+	            </div>
+	            <ul>
+	                <li class="tree-node">
+	                    <div>
+	                        <button class="tree-button">+</button><span class="tree-label" unselectable="on">고양이</span>
+	                    </div>
+	                </li>
+	                <li class="tree-node tree-last-node">
+	                    <div>
+	                        <button class="tree-button">+</button><span class="tree-label" unselectable="on">강아지</span>
+	                    </div>
+	                </li>
+	            </ul>
+	        </li>
+	        <li class="tree-node tree-last-node tree-collapsed">
+	            <div class="tree-has-child">
+	                <button class="tree-button">+</button><span class="tree-label" unselectable="on">조류</span>
+	            </div>
+	            <ul>
+	                <li class="tree-node">
+	                    <div>
+	                        <button class="tree-button">+</button><span class="tree-label" unselectable="on">까치</span>
+	                    </div>
+	                </li>
+	            </ul>
+	        </li>
+	    </ul>
+	    </li>
+	</ul>
+                
+#### CSS
+
+	.tree { font-family:나눔고딕; font-size:14px; list-style:none; margin:0; padding:0; background:none;}
+	.tree ul { margin-left:11px; padding-left:7px; list-style:none; background:url(img/line_tree_vr.gif) repeat-y 6px 0; }
+	.tree .tree-node { margin-left:-1px; background:url(img/line_tree_hr.gif) no-repeat 0 5px; }
+	.tree .tree-node div { position:relative; }
+	.tree .tree-node.tree-last-node { background:url(img/line_tree_last_hr.gif) no-repeat 0 5px; }
+	.tree .tree-node.tree-last-node.tree-root-node { background:none; }
+	.tree .tree-collapsed .tree-has-child .tree-button { background-position:0 -9px !important; }
+	.tree .tree-collapsed ul { display:none; }
+	.tree .tree-node .tree-has-child .tree-button { background:url(img/button.gif) no-repeat 0 0 transparent; overflow:hidden; display:inline-block; cursor:pointer; _cursor:hand; }
+	.tree .tree-node .tree-button { background-color:transparent; border:0; margin:0; width:9px; height:9px; font-size:0; color:transparent; line-height:200%; position:relative; top:-5px; margin:0 -2px 0 -4px; }
+	.tree .tree-node .tree-label { margin-left:5px; background-color:#fff; cursor:pointer; -moz-user-select:none; }
+	.tree .tree-node .tree-has-child .tree-label { margin-left:5px; }
+	.tree .tree-node .tree-selected .tree-label { background-color:#888; color:#fff; }
+	.tree .tree-node .tree-button { _text-indent:-9px; _margin-left:5px; }
+	*:first-child+html .tree .tree-node .tree-button { _text-indent:-9px; _margin-left:5px; }
+
+#### Javascript
+
+	var oTree = new jindo.Tree(jindo.$('tree'));

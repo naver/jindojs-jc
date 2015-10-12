@@ -1,0 +1,5 @@
+#### Javascript
+
+	var oInlineTextEdit = new jindo.InlineTextEdit();
+
+oInlineTextEdit.edit(엘리먼트); 형태로 주로 사용한다.
