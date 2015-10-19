@@ -37,7 +37,7 @@ bower install jindojs-jc
 
 - **DragArea**: Make HTML element draggable.
 - **DropArea**: Make HTML element droppable.
-- **FileUploader**: Provide easy way of file upload via <iframe>, without page refresh.
+- **FileUploader**: Provide easy way of file upload via `<iframe>`, without page refresh.
 - **Clipboard**: Set values on system clipboard using flash object.
 - **FloatingLayer**: Fix the position of a layer, even the page was scrolled its position.
 
