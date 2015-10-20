@@ -218,14 +218,24 @@ jindo.AjaxHistory = jindo.$Class({
 	},
 
 	/**
+		encode여부를 확인한다.
+        @method _isEncoded
+        @private
+		@return {Boolean} 인코딩 여부
+	**/
+	_isEncoded : function(str){
+		return decodeURIComponent(str) !== str;
+	},
+	
+	/**
 		현재 설정되어 있는 Hash String을 리턴
         @method _getLocationHash
         @private
 		@return {String} 현재 설정된 Hash String
 	**/
 	_getLocationHash : function(){
-		var oAgent = jindo.$Agent().navigator();
-		return oAgent.firefox ? encodeURIComponent(location.hash.substring(1)) : (location.hash.substring(1)||"%7B%7D");
+		var hash = location.hash.substring(1);
+		return this._isEncoded(hash) ? (hash||"%7B%7D") : encodeURIComponent(hash);
 	},
 
 	/**

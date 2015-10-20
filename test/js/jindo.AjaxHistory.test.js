@@ -58,6 +58,11 @@ window.onload = function(){
 		deepEqual(htResult2, {}, "파라미터를 넘기지 않을 경우, 빈 객체가 리턴되어야 한다.");
 	});
 
+	test("_isEncoded 메서드는 인코딩되어 있으면 true, 아니면 false을 반환한다.", function(){
+		equal(oAjaxHistory._isEncoded("{a:1}"), false);
+		equal(oAjaxHistory._isEncoded(encodeURIComponent("{a:1}")), true);
+	});
+
 	test("데이터 비교 테스트", function(){
 		var bResult = oAjaxHistory._compareData();
 		ok(bResult === false, "파라미터를 넘기지 않을 경우, false가 리턴되어야 한다.");
